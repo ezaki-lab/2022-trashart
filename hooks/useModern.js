@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-// スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート;
+// スマホ表示の最適化、ユーザーのカラーテーマの適応をサポートをするフック
 const useModern = () => {
   // vhの比率を調整
   const handleResized = () => {

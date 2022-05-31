@@ -4,6 +4,7 @@ import useModern from '../hooks/useModern';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
+  // スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート
   useModern();
 
   return (
