@@ -33,8 +33,8 @@ jobs:
     - name: Sync files
       uses: burnett01/rsync-deployments@5.2
       with:
-        # switches: -avzr --delete --exclude="frontend" --exclude="venv" --include="" --filter=""
-        path: common/
+        switches: -avzr --delete --exclude="" --include="" --filter=""
+        path: out/
         remote_path: ${{ secrets.REMOTE_PATH }}
         remote_host: ${{ secrets.REMOTE_HOST }}
         remote_port: ${{ secrets.REMOTE_PORT }}
