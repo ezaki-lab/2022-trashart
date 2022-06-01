@@ -24,6 +24,9 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Edit next.config.js
+      run: node .github/editConfig.js
+
     - name: Build for production
       run: npx next build
 
