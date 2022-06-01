@@ -22,7 +22,7 @@ jobs:
         node-version: 16.15.0
 
     - name: Build for production
-      run: npm run build
+      run: npx next build
 
     - name: Export into Static Files
       run: npx next export
