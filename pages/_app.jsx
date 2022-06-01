@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
 import useModern from '../hooks/useModern';
+import AppBar from '../components/appBar';
+import BottomAppBar from '../components/bottomAppBar';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
@@ -17,7 +19,11 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
 
       <div className="w-screen h-screen text-black text-lg">
-        <Component {...pageProps} />
+        <AppBar />
+        <div className="p-3 pt-16">
+          <Component {...pageProps} />
+        </div>
+        <BottomAppBar />
       </div>
     </RecoilRoot>
   );
