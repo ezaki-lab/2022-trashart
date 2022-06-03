@@ -1,0 +1,9 @@
+{
+  "ext": "*",
+  "ignore": [
+    "node_modules/*",
+    ".next/*",
+    ".vscode",
+    "out/"
+  ]
+}
