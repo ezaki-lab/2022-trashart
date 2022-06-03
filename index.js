@@ -19,7 +19,6 @@ const exec = util.promisify(childProcess.exec);
     const server = express({});
 
     server.all("*", (req, res) => {
-      console.log(req.url);
       return handle(req, res);
     });
     server.listen(port, (err) => {
