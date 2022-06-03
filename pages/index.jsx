@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import { useRecoilState } from 'recoil';
 import * as atom from '../common/atom';
 import Main from '../components/main';
+import Linking from '../components/linking';
 
 const title = 'ホーム';
 const description = 'アート製作を通じた海洋ごみ処理';
@@ -29,9 +29,9 @@ const Home = () => {
           value={user}
           onChange={handleChange}
         />
-        <Link href="/next">
-          <a>次のページへ</a>
-        </Link>
+        <Linking href="/next">
+          次のページへ
+        </Linking>
       </div>
     </Main>
   );

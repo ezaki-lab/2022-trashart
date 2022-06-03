@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 import * as atom from '../common/atom';
 import Main from '../components/main';
+import Linking from '../components/linking';
 
 const title = '次のページ';
 const description = 'サンプルです。';
@@ -16,9 +16,9 @@ const Tsugi = () => {
     >
       <div className="flex flex-col">
         <ul>
-          <Link href="/">
-            <a>次のページです</a>
-          </Link>
+          <Linking href="/">
+            次のページです
+          </Linking>
         </ul>
         <ul>
           {user}
