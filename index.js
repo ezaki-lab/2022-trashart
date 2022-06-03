@@ -13,7 +13,7 @@ const exec = util.promisify(childProcess.exec);
   const dev = false;
   const app = next({ dev });
   const handle = app.getRequestHandler();
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 7777;
 
   app.prepare().then(() => {
     const server = express({});

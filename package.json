@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "open": "nodemon ./index.js"
   },
   "dependencies": {
     "daisyui": "^2.15.2",

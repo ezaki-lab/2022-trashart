@@ -27,17 +27,10 @@ jobs:
     - name: Edit next.config.js
       run: node .github/editConfig.js
 
-    - name: Build for production
-      run: npx next build
-
-    - name: Export into Static Files
-      run: npx next export
-
     - name: Sync files
       uses: burnett01/rsync-deployments@5.2
       with:
-        switches: -avzr --delete --exclude="" --include="" --filter=""
-        path: out/
+        switches: -avzr --delete --exclude=".git" --exclude=".github" --exclude=".next" --exclude=".vscode" --exclude="node_modules" --include="" --filter=""
         remote_path: ${{ secrets.REMOTE_PATH }}
         remote_host: ${{ secrets.REMOTE_HOST }}
         remote_port: ${{ secrets.REMOTE_PORT }}
