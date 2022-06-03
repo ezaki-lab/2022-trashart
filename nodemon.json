@@ -3,7 +3,7 @@
   "ignore": [
     "node_modules/*",
     ".next/*",
-    ".vscode",
-    "out/"
+    ".vscode/*",
+    "out/*"
   ]
 }
