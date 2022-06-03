@@ -24,6 +24,9 @@ jobs:
     - name: Edit next.config.js
       run: node .github/editConfig.js
 
+    - name: Edit .env.local
+      run: node .github/editEnv.js
+
     - name: Sync files
       uses: burnett01/rsync-deployments@5.2
       with:
