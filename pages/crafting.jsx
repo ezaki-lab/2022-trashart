@@ -2,14 +2,14 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Main from '../components/main';
 
-const title = 'ホーム';
-const description = 'アート製作を通じた海洋ごみ処理';
+const title = '製作';
+const description = '製作しましょう！';
 
-const Home = () => {
+const Crafting = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/social');
+    router.push('/separate');
   }, []);
 
   return (
@@ -21,4 +21,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Crafting;
