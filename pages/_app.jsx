@@ -4,7 +4,6 @@ import { RecoilRoot } from 'recoil';
 import { Transition } from 'react-transition-group';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
-import usePreload from '../hooks/usePreload';
 import AppBar from '../components/appBar';
 import BottomAppBar from '../components/bottomAppBar';
 import '../styles/globals.css';

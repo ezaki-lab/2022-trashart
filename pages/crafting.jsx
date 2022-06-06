@@ -9,7 +9,7 @@ const Crafting = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/separate');
+    router.push(`${process.env.NEXT_PUBLIC_ASSET_PREFIX}/separate`);
   }, []);
 
   return (

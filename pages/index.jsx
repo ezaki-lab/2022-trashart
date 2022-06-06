@@ -9,7 +9,7 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/social');
+    router.push(`${process.env.NEXT_PUBLIC_ASSET_PREFIX}/social`);
   }, []);
 
   return (
