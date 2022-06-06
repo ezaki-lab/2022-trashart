@@ -21,11 +21,11 @@ jobs:
       with:
         node-version: 16.15.0
 
-    - name: Edit next.config.js
-      run: node .github/editConfig.js
-
     - name: Edit .env.local
       run: node .github/editEnv.js
+
+    - name: Edit next.config.js
+      run: node .github/editConfig.js
 
     - name: Sync files
       uses: burnett01/rsync-deployments@5.2

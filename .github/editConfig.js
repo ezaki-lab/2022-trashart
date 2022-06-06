@@ -1,9 +1,9 @@
 const fs = require('fs');
 const target = './next.config.js';
 
-// basePathを /~trashart に変更する
+// コメントアウトを解除する
 let text = fs.readFileSync(target, 'utf-8');
-text = text.replace('// assetPrefix: \'/\'', 'assetPrefix: \'/~trashart\'');
+text = text.replace('// ', '');
 
 fs.writeFileSync(target, text, (err) => {
   if (err) throw err;
