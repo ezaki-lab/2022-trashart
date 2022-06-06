@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 // 識別用のルートを取得
 const useIdRoute = () => {
   const headsCrafting = [
+    'crafting',
     'separate',
     'create',
     'share'
