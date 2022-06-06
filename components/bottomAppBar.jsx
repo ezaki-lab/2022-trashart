@@ -1,25 +1,25 @@
 import usePreload from '../hooks/usePreload';
 import CenterText from './centerText';
 import Linking from './linking';
-// import url from '../utils/url';
+import url from '../utils/url';
 
 const BottomAppBar = ({ route }) => {
   const icons = {
     social: {
-      inactive: '/icons/ic_fluent_album_24_regular.svg',
-      active: '/icons/ic_fluent_album_24_filled.svg'
+      inactive: url('/icons/ic_fluent_album_24_regular.svg'),
+      active: url('/icons/ic_fluent_album_24_filled.svg')
     },
     crafting: {
-      inactive: '/icons/ic_fluent_pair_24_regular.svg',
-      active: '/icons/ic_fluent_pair_24_filled.svg'
+      inactive: url('/icons/ic_fluent_pair_24_regular.svg'),
+      active: url('/icons/ic_fluent_pair_24_filled.svg')
     }
   };
 
   // アイコンを予め読み込んでいく
-  usePreload('/icons/ic_fluent_album_24_regular.svg');
-  usePreload('/icons/ic_fluent_album_24_filled.svg');
-  usePreload('/icons/ic_fluent_pair_24_regular.svg');
-  usePreload('/icons/ic_fluent_pair_24_filled.svg');
+  usePreload(url('/icons/ic_fluent_album_24_regular.svg'));
+  usePreload(url('/icons/ic_fluent_album_24_filled.svg'));
+  usePreload(url('/icons/ic_fluent_pair_24_regular.svg'));
+  usePreload(url('/icons/ic_fluent_pair_24_filled.svg'));
 
   return (
     <nav className="w-full h-16 bg-sky-100 text-center text-2xl leading-[3rem] flex flex-row justify-around fixed bottom-0">
