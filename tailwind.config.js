@@ -8,6 +8,11 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['Blinker', 'Noto Sans JP', 'Meiryo', 'sans-serif']
+      },
+      colors: {
+        'separating': '#0992a8',
+        'crafting': '#fc9114',
+        'sharing': '#ff543d'
       }
     }
   },

@@ -4,7 +4,8 @@ import { RecoilRoot } from 'recoil';
 import { Transition } from 'react-transition-group';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
-import AppBar from '../components/appBar';
+import SocialAppBar from '../components/appBar/social';
+import CraftingAppBar from '../components/appBar/crafting';
 import BottomAppBar from '../components/bottomAppBar';
 import '../styles/globals.css';
 import SplashScreen from '../components/splashScreen';
@@ -33,7 +34,10 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
 
       <div className="w-screen h-screen text-black bg-white text-lg">
-        <AppBar />
+        {route === '/social'
+          ? <SocialAppBar />
+          : <CraftingAppBar />
+        }
         <div className="p-3 pt-16">
           <Component {...pageProps} />
         </div>

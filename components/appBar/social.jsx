@@ -1,4 +1,4 @@
-const AppBar = () => {
+const SocialAppBar = () => {
   return (
     <nav className="w-full h-12 bg-sky-300 text-center text-2xl leading-[3rem] fixed top-0">
       TRASHART
@@ -6,4 +6,4 @@ const AppBar = () => {
   );
 };
 
-export default AppBar;
+export default SocialAppBar;
