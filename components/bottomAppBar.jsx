@@ -54,6 +54,7 @@ const Item = ({ label, href, now, icon }) => {
               src={href !== now ? icon.inactive : icon.active}
               alt={label}
               width="35rem"
+              className="pointer-events-none"
             />
           </CenterText>
         </div>

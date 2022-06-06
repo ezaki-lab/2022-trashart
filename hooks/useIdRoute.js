@@ -6,7 +6,7 @@ const useIdRoute = () => {
   const headsCrafting = [
     'crafting',
     'separate',
-    'create',
+    'craft',
     'share'
   ];
 

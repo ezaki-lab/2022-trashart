@@ -1,52 +1,74 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import url from '../../utils/url';
+import Linking from '../linking';
 
 const CraftingAppBar = () => {
   const router = useRouter();
 
-  const [color, setColor] = useState('bg-white');
+  const [textColor, setTextColor] = useState('text-white');
+  const [bgColor, setBgColor] = useState('bg-white');
 
   useEffect(() => {
     switch (router.route) {
       case '/separate':
-        setColor('bg-separating');
+        setTextColor('text-separating');
+        setBgColor('bg-separating');
         break;
       case '/craft':
-        setColor('bg-crafting');
+        setTextColor('text-crafting');
+        setBgColor('bg-crafting');
         break;
       case '/share':
-        setColor('bg-sharing');
+        setTextColor('text-sharing');
+        setBgColor('bg-sharing');
         break;
       default:
-        setColor('bg-white');
+        setTextColor('text-white');
+        setBgColor('bg-white');
     }
   }, [router.route]);
 
   return (
     <div className="w-full h-10 fixed top-0">
-      <nav className={`m-3 h-full ${color} rounded-lg leading-[2.5rem] text-center text-xl text-white transition-all px-4 flex flex-row justify-around`}>
-        <div className="w-[4.5rem] relative">
-          <div className="w-full h-6 bg-white rounded-lg absolute top-2" />
-          <div className="w-full text-separating text-center absolute top-0">
-            分別
-          </div>
-        </div>
+      <nav className={`m-3 h-full ${bgColor} rounded-lg text-center text-xl text-white transition-all px-4 flex flex-row justify-around`}>
+        <Item
+          label="分別"
+          href="/separate"
+          now={router.route}
+          textColor={textColor}
+        />
         <CaretRight />
-        <div className="w-[4.5rem] relative">
-          {/* <div className="w-full h-8 bg-white rounded-xl absolute top-2" /> */}
-          <div className="w-full text-white text-center absolute top-0">
-            製作
-          </div>
-        </div>
+        <Item
+          label="製作"
+          href="/craft"
+          now={router.route}
+          textColor={textColor}
+        />
         <CaretRight />
-        <div className="w-[4.5rem] relative">
-          {/* <div className="w-full h-8 bg-white rounded-xl absolute top-2" /> */}
-          <div className="w-full text-white text-center absolute top-0">
-            共有
-          </div>
-        </div>
+        <Item
+          label="共有"
+          href="/share"
+          now={router.route}
+          textColor={textColor}
+        />
       </nav>
+    </div>
+  );
+};
+
+const Item = ({ label, href, now, textColor }) => {
+  return (
+    <div className="mt-[0.4rem]">
+      <Linking href={href}>
+        <button className={
+          href !== now
+            ? `text-white px-2`
+            : `${textColor} bg-white px-2 rounded-lg`
+        }>
+          {label}
+        </button>
+      </Linking>
     </div>
   );
 };
@@ -59,7 +81,7 @@ const CaretRight = () => {
         src={url('/icons/ic_fluent_caret_right_24_filled.svg')}
         alt={"right"}
         width="30rem"
-        className="mt-[0.35rem]"
+        className="mt-[0.35rem] pointer-events-none"
       />
     </div>
   );
