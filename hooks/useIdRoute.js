@@ -1,27 +1,26 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import useHeadRoute from './useHeadRoute';
 
 // 識別用のルートを取得
 const useIdRoute = () => {
-  const headsCrafting = [
-    'crafting',
-    'separate',
-    'craft',
-    'share'
+  const headsCraft = [
+    '/separate',
+    '/craft',
+    '/crafting',
+    '/share'
   ];
 
-  const router = useRouter();
+  const headRoute = useHeadRoute();
 
   const [route, setRoute] = useState('/social');
 
   useEffect(() => {
-    const head = router.route.split('/')[1];
-    if (headsCrafting.includes(head)) {
-      setRoute('/crafting');
+    if (headsCraft.includes(headRoute)) {
+      setRoute('/craft');
     } else {
       setRoute('/social');
     }
-  }, [router.route]);
+  }, [headRoute]);
 
   return route;
 };

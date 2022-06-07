@@ -31,7 +31,7 @@ const BottomAppBar = ({ route }) => {
       />
       <Item
         label="製作"
-        href="/crafting"
+        href="/craft"
         now={route}
         icon={icons.crafting}
       />

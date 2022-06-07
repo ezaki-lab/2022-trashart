@@ -9,8 +9,34 @@ const Craft = () => {
       title={title}
       description={description}
     >
-      製作
+      <div className="w-full h-[calc(100vh-11rem)] p-3 border-4 border-crafting rounded-lg">
+        <h1 className="text-2xl text-center">
+          ジャンルを選ぼう！
+        </h1>
+        <input
+          type="text"
+          placeholder="検索"
+          className="my-4 input w-full text-lg text-white placeholder-white bg-crafting"
+        />
+        <ul className="w-full h-[calc(100vh-24rem)] grid grid-cols-2 gap-4 overflow-y-scroll">
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+        </ul>
+        <button className="my-4 w-full text-lg btn border-none text-white bg-crafting hover:bg-orange-700 shadow-xl">
+          いちから作る
+        </button>
+      </div>
     </Main>
+  );
+};
+
+const Item = () => {
+  return (
+    <li className="w-full h-44 border-4 border-crafting rounded-lg shadow-lg">
+    </li>
   );
 };
 

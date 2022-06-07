@@ -1,21 +1,25 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import url from '../../utils/url';
+import useHeadRoute from '../../hooks/useHeadRoute';
 import Linking from '../linking';
+import url from '../../utils/url';
 
-const CraftingAppBar = () => {
-  const router = useRouter();
+const CraftAppBar = () => {
+  const route = useHeadRoute();
 
   const [textColor, setTextColor] = useState('text-white');
   const [bgColor, setBgColor] = useState('bg-white');
 
   useEffect(() => {
-    switch (router.route) {
+    switch (route) {
       case '/separate':
         setTextColor('text-separating');
         setBgColor('bg-separating');
         break;
       case '/craft':
+        setTextColor('text-crafting');
+        setBgColor('bg-crafting');
+        break;
+      case '/crafting':
         setTextColor('text-crafting');
         setBgColor('bg-crafting');
         break;
@@ -27,7 +31,7 @@ const CraftingAppBar = () => {
         setTextColor('text-white');
         setBgColor('bg-white');
     }
-  }, [router.route]);
+  }, [route]);
 
   return (
     <div className="w-full h-10 fixed top-0">
@@ -35,21 +39,21 @@ const CraftingAppBar = () => {
         <Item
           label="分別"
           href="/separate"
-          now={router.route}
+          now={route}
           textColor={textColor}
         />
         <CaretRight />
         <Item
           label="製作"
           href="/craft"
-          now={router.route}
+          now={route === '/crafting' ? '/craft' : route}
           textColor={textColor}
         />
         <CaretRight />
         <Item
           label="共有"
           href="/share"
-          now={router.route}
+          now={route}
           textColor={textColor}
         />
       </nav>
@@ -60,15 +64,20 @@ const CraftingAppBar = () => {
 const Item = ({ label, href, now, textColor }) => {
   return (
     <div className="mt-[0.4rem]">
-      <Linking href={href}>
-        <button className={
-          href !== now
-            ? `text-white px-2`
-            : `${textColor} bg-white px-2 rounded-lg`
-        }>
-          {label}
-        </button>
-      </Linking>
+      {href !== now
+        ? (
+          <Linking href={href}>
+            <button className="text-white px-2">
+              {label}
+            </button>
+          </Linking>
+        )
+        : (
+          <div className={`${textColor} bg-white px-2 rounded-lg`}>
+            {label}
+          </div>
+        )
+      }
     </div>
   );
 };
@@ -87,4 +96,4 @@ const CaretRight = () => {
   );
 };
 
-export default CraftingAppBar;
+export default CraftAppBar;

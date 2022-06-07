@@ -5,7 +5,7 @@ import { Transition } from 'react-transition-group';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
 import SocialAppBar from '../components/appBar/social';
-import CraftingAppBar from '../components/appBar/crafting';
+import CraftAppBar from '../components/appBar/craft';
 import BottomAppBar from '../components/bottomAppBar';
 import '../styles/globals.css';
 import SplashScreen from '../components/splashScreen';
@@ -36,9 +36,9 @@ const MyApp = ({ Component, pageProps }) => {
       <div className="w-screen h-screen text-black bg-white text-lg">
         {route === '/social'
           ? <SocialAppBar />
-          : <CraftingAppBar />
+          : <CraftAppBar />
         }
-        <div className="p-3 pt-16">
+        <div className="p-3 pt-20">
           <Component {...pageProps} />
         </div>
         <BottomAppBar route={route} />
