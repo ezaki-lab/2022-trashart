@@ -1,4 +1,5 @@
 import Main from '../components/main';
+import Linking from '../components/linking';
 
 const title = '製作';
 const description = '製作をしましょう！';
@@ -35,7 +36,17 @@ const Craft = () => {
 
 const Item = () => {
   return (
-    <li className="w-full h-44 border-4 border-crafting rounded-lg shadow-lg">
+    <li>
+      <Linking href="/craft/hoge">
+        <div className="w-full h-44 border-4 border-crafting rounded-lg shadow-lg">
+          <div className="w-full h-32 bg-gray-300" />
+          <div className="p-2 text-center">
+            <h3>
+              動物
+            </h3>
+          </div>
+        </div>
+      </Linking>
     </li>
   );
 };
