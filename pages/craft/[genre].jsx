@@ -72,7 +72,7 @@ const Item = () => {
   const router = useRouter();
 
   const handleCreate = () => {
-    router.push('/crafting/new', url('/crafting/new'));
+    router.push('/crafting/[id]?id=new', url('/crafting/new'));
   };
 
   return (

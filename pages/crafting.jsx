@@ -5,7 +5,7 @@ const title = '製作';
 const description = '製作しましょう！';
 
 const Crafting = () => {
-  useRedirect('/crafting/new');
+  useRedirect('/crafting/[id]?id=new', '/crafting/new');
 
   return (
     <Main

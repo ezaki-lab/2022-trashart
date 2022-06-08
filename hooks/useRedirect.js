@@ -2,11 +2,15 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import url from '../utils/url';
 
-const useRedirect = (href) => {
+const useRedirect = (href, rootHref = "") => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push(href, url(href));
+    if (rootHref === "") {
+      router.push(href, url(href));
+    } else {
+      router.push(href, url(rootHref));
+    }
   }, []);
 };
 

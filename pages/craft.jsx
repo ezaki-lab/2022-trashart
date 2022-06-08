@@ -37,7 +37,7 @@ const Craft = () => {
 const Item = () => {
   return (
     <li>
-      <Linking href="/craft/hoge">
+      <Linking href="/craft/[genre]?genre=hoge" rootHref="/~trashart/craft/hoge">
         <div className="w-full h-44 border-4 border-crafting rounded-lg shadow-lg">
           <div className="w-full h-32 bg-gray-300" />
           <div className="p-2 text-center">
