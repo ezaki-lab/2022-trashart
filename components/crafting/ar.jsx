@@ -22,7 +22,8 @@ const Ar = () => {
   return (
     <ARCanvas
       sessionInit={{ requiredFeatures: ['hit-test'] }}
-      pixelRatio={window.devicePixelRatio}>
+      pixelRatio={window.devicePixelRatio}
+    >
       <ambientLight />
       <group>
         {new Array(512).fill(0).map((v, i) => {

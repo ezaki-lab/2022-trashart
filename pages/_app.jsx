@@ -38,9 +38,7 @@ const MyApp = ({ Component, pageProps }) => {
           ? <SocialAppBar />
           : <CraftAppBar />
         }
-        <div className="p-3 pt-20">
-          <Component {...pageProps} />
-        </div>
+        <Component {...pageProps} />
         <BottomAppBar route={route} />
       </div>
 

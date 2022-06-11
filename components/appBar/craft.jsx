@@ -34,7 +34,7 @@ const CraftAppBar = () => {
   }, [route]);
 
   return (
-    <div className="w-full h-10 fixed top-0">
+    <div className="w-full h-10 fixed top-0 z-10">
       <nav className={`m-3 h-full ${bgColor} rounded-lg text-center text-xl text-white transition-all px-4 flex flex-row justify-around`}>
         <Item
           label="分別"

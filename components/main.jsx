@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-const Main = ({ children, title, description }) => {
+const Main = ({ children, title, description, padding = true }) => {
   return (
     <>
       <Head>
@@ -9,7 +9,9 @@ const Main = ({ children, title, description }) => {
         <meta property="og:description" content={description} />
       </Head>
 
-      {children}
+      <div className={padding ? "p-3 pt-20" : null}>
+        {children}
+      </div>
     </>
   );
 };
