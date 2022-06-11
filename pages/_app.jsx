@@ -33,7 +33,7 @@ const MyApp = ({ Component, pageProps }) => {
         <meta property="og:locale" content="ja_JP" />
       </Head>
 
-      <div className="w-screen h-screen text-black bg-white text-lg">
+      <div className="w-screen h-screen text-black text-lg">
         {route === '/social'
           ? <SocialAppBar />
           : <CraftAppBar />

@@ -10,7 +10,7 @@ const Craft = () => {
       title={title}
       description={description}
     >
-      <div className="w-full h-[calc(100vh-11rem)] p-3 border-4 border-crafting rounded-lg">
+      <div className="w-full h-[calc(100vh-11rem)] p-3 bg-white border-4 border-crafting rounded-lg">
         <h1 className="text-2xl text-center">
           ジャンルを選ぼう！
         </h1>
