@@ -9,7 +9,7 @@ const BottomAppBar = ({ route }) => {
       inactive: url('/icons/ic_fluent_album_24_regular.svg'),
       active: url('/icons/ic_fluent_album_24_filled.svg')
     },
-    crafting: {
+    craft: {
       inactive: url('/icons/ic_fluent_pair_24_regular.svg'),
       active: url('/icons/ic_fluent_pair_24_filled.svg')
     }
@@ -33,7 +33,7 @@ const BottomAppBar = ({ route }) => {
         label="製作"
         href="/craft"
         now={route}
-        icon={icons.crafting}
+        icon={icons.craft}
       />
     </nav>
   );
