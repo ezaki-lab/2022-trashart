@@ -10,6 +10,7 @@
     "open": "nodemon ./index.js"
   },
   "dependencies": {
+    "@react-three/xr": "^3.5.0",
     "daisyui": "^2.15.2",
     "dayjs": "^1.11.2",
     "express": "^4.18.1",

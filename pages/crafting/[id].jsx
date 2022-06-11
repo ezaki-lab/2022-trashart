@@ -1,7 +1,13 @@
+import dynamic from 'next/dynamic';
 import Main from '../../components/main';
 
 const title = '製作';
 const description = '製作しましょう！';
+
+const Ar = dynamic(
+  () => import('../../components/crafting/ar'),
+  { ssr: false }
+);
 
 const Crafting = () => {
   return (
@@ -9,7 +15,7 @@ const Crafting = () => {
       title={title}
       description={description}
     >
-      製作しようね！
+      <Ar />
     </Main>
   );
 };
