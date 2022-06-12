@@ -15,7 +15,7 @@ const Craft = () => {
       title={title}
       description={description}
     >
-      <div className="w-full h-[calc(100vh-11rem)] bg-white p-3 border-4 border-crafting rounded-lg">
+      <div className="w-full h-[calc(100vh-15rem)] bg-white p-3 border-4 border-crafting rounded-lg">
         <h1 className="text-2xl text-center">
           作りたい作品を選ぼう！
         </h1>
@@ -24,7 +24,7 @@ const Craft = () => {
           placeholder="検索"
           className="my-4 input w-full text-lg text-white placeholder-white bg-crafting"
         />
-        <div className="w-full h-[calc(100vh-24.5rem)] overflow-y-scroll">
+        <div className="w-full h-[calc(100vh-28rem)] overflow-y-scroll">
           <div>
             <h2 className="my-2 text-xl">
               ちいさめ

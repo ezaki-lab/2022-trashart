@@ -10,7 +10,7 @@ const Craft = () => {
       title={title}
       description={description}
     >
-      <div className="w-full h-[calc(100vh-11rem)] p-3 bg-white border-4 border-crafting rounded-lg">
+      <div className="w-full h-[calc(100vh-15rem)] p-3 bg-white border-4 border-crafting rounded-lg">
         <h1 className="text-2xl text-center">
           ジャンルを選ぼう！
         </h1>
@@ -19,7 +19,7 @@ const Craft = () => {
           placeholder="検索"
           className="my-4 input w-full text-lg text-white placeholder-white bg-crafting"
         />
-        <ul className="w-full h-[calc(100vh-24rem)] grid grid-cols-2 gap-4 overflow-y-scroll">
+        <ul className="w-full h-[calc(100vh-28rem)] grid grid-cols-2 gap-4 overflow-y-scroll">
           <Item />
           <Item />
           <Item />
@@ -38,7 +38,7 @@ const Item = () => {
   return (
     <li>
       <Linking href="/craft/[genre]?genre=hoge" rootHref="/~trashart/craft/hoge">
-        <div className="w-full h-44 border-4 border-crafting rounded-lg shadow-lg">
+        <div className="w-full h-44 border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
           <div className="w-full h-32 bg-gray-300" />
           <div className="p-2 text-center">
             <h3>

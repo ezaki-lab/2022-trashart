@@ -7,10 +7,10 @@ const Nav = () => {
     if ('xr' in navigator) {
       setIsAvailableAr(true);
     }
-  }, [navigator]);
+  }, []);
 
   return (
-    <div className="w-full h-20 flex absolute bottom-0">
+    <div className="w-full h-20 flex fixed bottom-16">
       {isAvailableAr
         ? (
           <button
