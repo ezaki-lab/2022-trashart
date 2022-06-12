@@ -5,7 +5,7 @@ import { randomChoice } from '../utils/random';
 const SplashScreen = ({ style }) => {
   return (
     <div
-      className="w-full h-full bg-white fixed top-0"
+      className="w-full h-full bg-white fixed top-0 z-20"
       style={style}
     >
       <div className="w-full h-full flex flex-wrap items-end content-start">

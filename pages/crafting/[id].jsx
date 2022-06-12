@@ -32,13 +32,25 @@ const Crafting = () => {
       padding={false}
     >
       <div
-        className="w-full h-[calc(100vh-4rem)]"
+        className="w-full h-[calc(100vh-4rem)] relative"
         ref={canvasObj}
       >
         <Canvas
           width={width}
           height={height}
         />
+        <div className="w-full h-20 flex absolute bottom-0">
+          <button
+            className="text-lg btn border-none text-white bg-crafting hover:bg-orange-700 shadow-lg m-auto"
+          >
+            ARで置いてみる
+          </button>
+          <button
+            className="px-5 text-lg btn border-none text-white bg-crafting hover:bg-orange-700 shadow-lg m-auto"
+          >
+            完成
+          </button>
+        </div>
       </div>
     </Main>
   );
