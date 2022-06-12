@@ -26,11 +26,6 @@ const Nav = () => {
             ARはできません
           </div>
         )}
-      <button
-        className="px-5 text-lg btn border-none text-white bg-crafting hover:bg-orange-700 shadow-lg m-auto"
-      >
-        完成
-      </button>
     </div>
   );
 };
