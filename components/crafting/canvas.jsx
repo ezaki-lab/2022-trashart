@@ -1,122 +1,49 @@
-import { useCallback, useState, memo } from 'react';
-import { Stage, Layer, Image as KonvaImage } from 'react-konva';
+import { useCallback, useRef, useState, memo } from 'react';
+import { Stage, Layer, Line, Image as KonvaImage } from 'react-konva';
 import useImage from 'use-image';
 import usePreload from '../../hooks/usePreload';
-import CenterText from '../../components/centerText';
+import CenterText from '../centerText';
+import ColorPicker from '../colorPicker';
 import url from '../../utils/url';
 
 const Canvas = ({ width, height }) => {
-  const [isZooming, setIsZooming] = useState(false);
-  const [imageX, setImageX] = useState(0);
-  const [imageY, setImageY] = useState(0);
+  const [penColor, setPenColor] = useState('#000000');
+  const [tool, setTool] = useState('pen');
 
-  const [image] = useImage('/sample.png', 'anonymous');
+  const [image] = useImage(url('/sample.png'), 'anonymous');
 
-  const [pencilColor, setPencilColor] = useState('#000000');
-  const [isActivePencil, setIsActivePencil] = useState(true);
-  const [isActiveEraser, setIsActiveEraser] = useState(false);
+  const [lines, setLines] = useState([]);
+  const isDrawing = useRef(false);
 
-  let lastCenter = null;
-  let lastDistance = 0;
-
-  // ピタゴラスの定理で2点間の距離を求める
-  const getDistance = (pos1, pos2) => {
-    return Math.sqrt(
-      Math.pow(pos2.x - pos1.x, 2)
-      + Math.pow(pos2.y - pos1.y, 2)
-    );
+  const handleMouseDown = (e) => {
+    isDrawing.current = true;
+    const pos = e.target.getStage().getPointerPosition();
+    // 線を追加
+    setLines([...lines, {
+      tool,
+      penColor,
+      points: [pos.x, pos.y]
+    }]);
   };
 
-  // 2点の中点を求める
-  const getCenter = (pos1, pos2) => {
-    return {
-      x: (pos1.x + pos2.x) / 2,
-      y: (pos1.y + pos2.y) / 2
-    };
-  };
-
-  // 2点指で操作されているなら
-  const handleMultiTouchMove = (e) => {
-    e.evt.preventDefault();
-
-    const finger1 = e.evt.touches[0];
-    const finger2 = e.evt.touches[1];
-    const stage = e.target.getStage();
-
-    // 2本指の位置が取得できるなら
-    if (finger1 && finger2) {
-      setIsZooming(true);
-
-      const pos1 = {
-        x: finger1.clientX,
-        y: finger1.clientY
-      };
-      const pos2 = {
-        x: finger2.clientX,
-        y: finger2.clientY
-      };
-
-      if (!lastCenter) {
-        lastCenter = getCenter(pos1, pos2);
-        return;
-      }
-      const newCenter = getCenter(pos1, pos2);
-
-      const newDistance = getDistance(pos1, pos2);
-
-      if (!lastDistance) {
-        lastDistance = newDistance;
-      }
-
-      // 新しい中心点座標
-      const pointTo = {
-        x: (newCenter.x - stage.x()) / stage.scaleX(),
-        y: (newCenter.y - stage.y()) / stage.scaleX()
-      };
-
-      // 画像の拡大倍率をステージの倍率に調整
-      // 最小スケールが規定スケールより小さくなければ、適応
-      const scale = (stage.scaleX() * (newDistance / lastDistance) >= width / 1920)
-        ? stage.scaleX() * (newDistance / lastDistance)
-        : width / 1920;
-      stage.scaleX(scale);
-      stage.scaleY(scale);
-
-      // どれだけ移動したか (変位)
-      const dx = newCenter.x - lastCenter.x;
-      const dy = newCenter.y - lastCenter.y;
-
-      // 新しいステージの座標
-      const newPos = {
-        x: newCenter.x - pointTo.x * scale + dx,
-        y: newCenter.y - pointTo.y * scale + dy
-      };
-
-      stage.position(newPos);
-      stage.batchDraw();
-
-      lastDistance = newDistance;
-      lastCenter = newCenter;
+  const handleMouseMove = (e) => {
+    if (!isDrawing.current) {
+      return;
     }
-  };
 
-  const handleMultiTouchEnd = (e) => {
-    lastCenter = null;
-    lastDistance = 0;
-    setIsZooming(false);
-  };
-
-  const handleDragStart = (e) => {
     const stage = e.target.getStage();
-    // ズームと一緒にドラッグはできないようにする
-    if (isZooming) {
-      stage.stopDrag();
-    }
+    const point = stage.getPointerPosition();
+    let lastLine = lines.at(-1);
+    // ポイントを追加
+    lastLine.points = lastLine.points.concat([point.x, point.y]);
+
+    // 最後を入れ替える
+    lines.splice(lines.length - 1, 1, lastLine);
+    setLines(lines.concat());
   };
 
-  const handleDragEnd = (e) => {
-    setImageX(e.target.x());
-    setImageY(e.target.y());
+  const handleMouseUp = () => {
+    isDrawing.current = false;
   };
 
   return (
@@ -124,38 +51,48 @@ const Canvas = ({ width, height }) => {
       <Stage
         width={width}
         height={height}
-        onTouchMove={handleMultiTouchMove}
-        onTouchEnd={handleMultiTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMousemove={handleMouseMove}
+        onMouseup={handleMouseUp}
       >
         <Layer>
-          <KonvaImage
+          {image && <KonvaImage
             image={image}
-            width={800}
-            height={666}
-            x={imageX}
-            y={imageY}
-            draggable
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-          />
+            width={width}
+            height={width * image.height / image.width}
+            y={(height / 2) - ((width * image.height / image.width) / 2)}
+          />}
+          {lines.map((line, i) => (
+            <Line
+              key={i}
+              points={line.points}
+              stroke={line.penColor}
+              strokeWidth={10}
+              tension={0.5}
+              lineCap="round"
+              globalCompositeOperation={
+                line.tool === 'eraser' ? 'destination-out' : 'source-over'
+              }
+            />
+          ))}
         </Layer>
       </Stage>
 
-      <ToolArea
-        pencilColor={pencilColor}
-        setPencilColor={setPencilColor}
-        isActivePencil={isActivePencil}
-        setIsActivePencil={setIsActivePencil}
-        isActiveEraser={isActiveEraser}
-        setIsActiveEraser={setIsActiveEraser}
+      <ToolBox
+        penColor={penColor}
+        setPenColor={setPenColor}
+        tool={tool}
+        setTool={setTool}
       />
     </>
   );
 };
 
-const ToolArea = ({ pencilColor, setPencilColor, isActivePencil, setIsActivePencil, isActiveEraser, setIsActiveEraser }) => {
+const ToolBox = ({ penColor, setPenColor, tool, setTool }) => {
+  const [isShowColorPicker, setIsShowColorPicker] = useState(false);
+
   const icons = {
-    pencil: {
+    pen: {
       inactive: url('/icons/ic_fluent_calligraphy_pen_24_regular.svg'),
       active: url('/icons/ic_fluent_calligraphy_pen_24_filled.svg')
     },
@@ -171,28 +108,46 @@ const ToolArea = ({ pencilColor, setPencilColor, isActivePencil, setIsActivePenc
   usePreload(url('/icons/ic_fluent_eraser_24_regular.svg'));
   usePreload(url('/icons/ic_fluent_eraser_24_filled.svg'));
 
-  const handlePencilClick = useCallback(() => {
-    setIsActivePencil(!isActivePencil);
-    setIsActiveEraser(!isActiveEraser);
-  }, [isActivePencil, isActiveEraser]);
+  const handleColorPickerClick = () => {
+    setIsShowColorPicker(true);
+  };
+
+  const handleColorPickerInactive = () => {
+    setIsShowColorPicker(false);
+  };
+
+  const handleColorPickerPicked = (color) => {
+    setPenColor(color);
+  };
+
+  const handlePenClick = useCallback(() => {
+    setTool('pen');
+  }, [tool]);
 
   const handleEraserClick = useCallback(() => {
-    setIsActivePencil(!isActivePencil);
-    setIsActiveEraser(!isActiveEraser);
-  }, [isActivePencil, isActiveEraser]);
+    setTool('eraser');
+  }, [tool]);
 
   return (
     <div className="w-full h-20 pl-5 flex items-center absolute top-16">
-      <button
-        className="w-10 h-10 border-4 border-white bg-black rounded-full shadow-lg"
+      <div>
+        <button
+          className="w-10 h-10 border-4 border-white rounded-full shadow-lg"
+          style={{ backgroundColor: penColor }}
+          onClick={handleColorPickerClick}
+        />
+        {isShowColorPicker && <ColorPicker
+          onPicked={handleColorPickerPicked}
+          onInactive={handleColorPickerInactive}
+        />}
+      </div>
+      <ButtonItem
+        active={tool === 'pen'}
+        icon={icons.pen}
+        onClick={handlePenClick}
       />
       <ButtonItem
-        active={isActivePencil}
-        icon={icons.pencil}
-        onClick={handlePencilClick}
-      />
-      <ButtonItem
-        active={isActiveEraser}
+        active={tool === 'eraser'}
         icon={icons.eraser}
         onClick={handleEraserClick}
       />
@@ -208,7 +163,7 @@ const ButtonItem = ({ active, icon, onClick }) => {
           ? "w-12 h-12 ml-3 bg-sky-100 rounded-xl"
           : "w-12 h-12 ml-3"
       }
-      onClick={onClick}
+      onClick={!active ? onClick : null}
     >
       <CenterText>
         {/* eslint-disable-next-line @next/next/no-img-element */}
