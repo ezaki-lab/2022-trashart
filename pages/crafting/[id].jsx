@@ -51,7 +51,7 @@ const Crafting = () => {
         />
 
         {isAr && <div className="w-full h-full bg-sky-100 absolute top-0 left-0">
-          <Ar />
+          <Ar setIsAr={setIsAr} />
         </div>}
 
         <Nav

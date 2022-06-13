@@ -1,6 +1,8 @@
 // 参考: https://codesandbox.io/s/7push?file=/src/BallPit.js:686-891
 
+import { useEffect, useRef } from 'react';
 import { ARCanvas } from '@react-three/xr';
+import sleep from '../../utils/sleep';
 
 const polarRandom = () => (0.5 - Math.random()) * 2;
 const randomRange = (min, max) => min + (Math.random() * max - min);
@@ -18,7 +20,52 @@ const colors = [
 
 const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-const Ar = () => {
+const waitForARButton = async () => {
+  while (true) {
+    const element = document.getElementById('ARButton');
+    if (element !== null) {
+      return element;
+    }
+    await sleep(10);
+  };
+};
+
+const waitForAREndButton = async () => {
+  while (true) {
+    const elements = document.getElementsByTagName('svg');
+    for (const element of elements) {
+      const width = element.getAttribute('width');
+      const height = element.getAttribute('height');
+      if (width === "38" && height === "38") {
+        return element;
+      }
+    }
+
+    await sleep(10);
+  };
+};
+
+const Ar = ({ setIsAr }) => {
+  const ArButton = useRef();
+  const ArEndButton = useRef();
+
+  useEffect(() => {
+    // TODO: 1回目のスタート/エンドは上手くいくが、2回目以降はうまくいかないので修正する
+    (async () => {
+      ArButton.current = await waitForARButton();
+      await sleep(10);
+
+      ArButton.current.style = 'display: none';
+
+      ArButton.current.click();
+
+      ArEndButton.current = await waitForAREndButton();
+      ArEndButton.current.addEventListener('click', () => {
+        setIsAr(false);
+      });
+    })();
+  }, [setIsAr]);
+
   return (
     <ARCanvas
       sessionInit={{ requiredFeatures: ['hit-test'] }}
