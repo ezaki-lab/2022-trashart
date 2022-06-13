@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Main from '../../components/main';
 
 const title = '製作';
@@ -24,10 +24,16 @@ const Crafting = () => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
+  const [isAr, setIsAr] = useState(false);
+
   useEffect(() => {
     setWidth(canvasObj.current.clientWidth);
     setHeight(canvasObj.current.clientHeight);
   }, [canvasObj.current]);
+
+  const handleClickAr = useCallback(() => {
+    setIsAr(true);
+  }, []);
 
   return (
     <Main
@@ -43,7 +49,14 @@ const Crafting = () => {
           width={width}
           height={height}
         />
-        <Nav />
+
+        {isAr && <div className="w-full h-full bg-sky-100 absolute top-0 left-0">
+          <Ar />
+        </div>}
+
+        <Nav
+          onClickAr={handleClickAr}
+        />
       </div>
     </Main>
   );

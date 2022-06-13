@@ -132,7 +132,7 @@ const ToolBox = ({ penColor, setPenColor, tool, setTool }) => {
   }, [tool]);
 
   return (
-    <div className="w-full h-20 pl-5 flex items-center absolute top-16">
+    <div className="w-48 h-20 pl-5 flex items-center absolute top-16">
       <div>
         <button
           className="w-10 h-10 border-4 border-white rounded-full shadow-lg"

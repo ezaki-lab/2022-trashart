@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const Nav = () => {
+const Nav = ({ onClickAr }) => {
   const [isAvailableAr, setIsAvailableAr] = useState(false);
 
   useEffect(() => {
@@ -15,6 +15,7 @@ const Nav = () => {
         ? (
           <button
             className="text-lg btn border-none text-white bg-crafting hover:bg-orange-700 shadow-lg m-auto"
+            onClick={onClickAr}
           >
             ARで置いてみる
           </button>
