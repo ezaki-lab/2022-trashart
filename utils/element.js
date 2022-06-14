@@ -1,3 +1,5 @@
+import sleep from './sleep';
+
 export const getElementByIdAfterShown = async (id) => {
   while (true) {
     const element = document.getElementById(id);
