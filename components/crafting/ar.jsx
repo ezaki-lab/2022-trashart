@@ -1,6 +1,6 @@
 // 参考: https://codesandbox.io/s/7push?file=/src/BallPit.js:686-891
 
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ARCanvas } from '@react-three/xr';
 import sleep from '../../utils/sleep';
 
@@ -30,19 +30,15 @@ const waitForARButton = async () => {
   };
 };
 
-const waitForAREndButton = async () => {
-  while (true) {
-    const elements = document.getElementsByTagName('svg');
-    for (const element of elements) {
-      const width = element.getAttribute('width');
-      const height = element.getAttribute('height');
-      if (width === "38" && height === "38") {
-        return element;
-      }
+const getAREndButton = () => {
+  const elements = document.getElementsByTagName('svg');
+  for (const element of elements) {
+    const width = element.getAttribute('width');
+    const height = element.getAttribute('height');
+    if (width === '38' && height === '38') {
+      return element;
     }
-
-    await sleep(10);
-  };
+  }
 };
 
 const Ar = ({ setIsAr }) => {
@@ -50,20 +46,26 @@ const Ar = ({ setIsAr }) => {
   const ArEndButton = useRef();
 
   useEffect(() => {
-    // TODO: 1回目のスタート/エンドは上手くいくが、2回目以降はうまくいかないので修正する
     (async () => {
       ArButton.current = await waitForARButton();
       await sleep(10);
 
       ArButton.current.style = 'display: none';
-
       ArButton.current.click();
 
-      ArEndButton.current = await waitForAREndButton();
-      ArEndButton.current.addEventListener('click', () => {
-        setIsAr(false);
-      });
+      ArEndButton.current = getAREndButton();
+      ArEndButton.current.addEventListener('click', endAr);
     })();
+
+    return () => {
+      ArEndButton.current.removeEventListener('click', endAr);
+      ArButton.current.remove();
+      ArEndButton.current.parentElement.remove();
+    };
+  }, [endAr]);
+
+  const endAr = useCallback(() => {
+    setIsAr(false);
   }, [setIsAr]);
 
   return (
