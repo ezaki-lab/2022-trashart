@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Loop from './loop';
-import { randomChoice } from '../utils/random';
+import { pickRandom } from '../utils/random';
 
 const SplashScreen = ({ style }) => {
   return (
@@ -36,7 +36,7 @@ const RandomTile = () => {
   useEffect(() => {
     const id = setInterval(() => {
       if (Math.random() > 0.7) {
-        setColor(randomChoice(colors));
+        setColor(pickRandom(colors));
       }
     }, 200);
 

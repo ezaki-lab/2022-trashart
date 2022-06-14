@@ -1,8 +1,10 @@
 // 参考: https://codesandbox.io/s/7push?file=/src/BallPit.js:686-891
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { ARCanvas } from '@react-three/xr';
 import sleep from '../../utils/sleep';
+import { pickRandom } from '../../utils/random';
+import { getElementByIdAfterShown, getOneElementByTagAttrs } from '../../utils/element';
 
 const polarRandom = () => (0.5 - Math.random()) * 2;
 const randomRange = (min, max) => min + (Math.random() * max - min);
@@ -18,46 +20,30 @@ const colors = [
   '#CD6961',
 ];
 
-const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-const waitForARButton = async () => {
-  while (true) {
-    const element = document.getElementById('ARButton');
-    if (element !== null) {
-      return element;
-    }
-    await sleep(10);
-  };
-};
-
-const getAREndButton = () => {
-  const elements = document.getElementsByTagName('svg');
-  for (const element of elements) {
-    const width = element.getAttribute('width');
-    const height = element.getAttribute('height');
-    if (width === '38' && height === '38') {
-      return element;
-    }
-  }
-};
-
 const Ar = ({ setIsAr }) => {
   const ArButton = useRef();
   const ArEndButton = useRef();
 
   useEffect(() => {
     (async () => {
-      ArButton.current = await waitForARButton();
+      // ARボタンが出現したら要素を取得
+      ArButton.current = await getElementByIdAfterShown('ARButton');
       await sleep(10);
 
+      // ARボタンを非表示にして、押したときの処理をする
       ArButton.current.style = 'display: none';
       ArButton.current.click();
 
-      ArEndButton.current = getAREndButton();
+      // AR終了ボタンをクリックしたら、ARコンポーネントを取り除く
+      ArEndButton.current = getOneElementByTagAttrs('svg', [
+        { name: 'width', value: '38' },
+        { name: 'height', value: '38' }
+      ]);
       ArEndButton.current.addEventListener('click', endAr);
     })();
 
     return () => {
+      // AR関連の要素を削除
       ArEndButton.current.removeEventListener('click', endAr);
       ArButton.current.remove();
       ArEndButton.current.parentElement.remove();
