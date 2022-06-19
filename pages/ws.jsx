@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import urlJoin from 'url-join';
 import useSocketIo from '../hooks/useSocketIo';
 import Main from '../components/main';
 
@@ -44,12 +45,22 @@ const WsTest = () => {
       title={title}
       description={description}
     >
-      <h1>{count}人の世界</h1>
-      <div>
-        <textarea
-          value={textareaText}
-          onInput={handleInput}
-        />
+      <h1 className="text-xl font-medium">
+        {count}人が接続中です
+      </h1>
+      <textarea
+        className="mt-5 w-full h-40 p-3 border-2 border-sky-300 rounded-xl"
+        value={textareaText}
+        onInput={handleInput}
+      />
+      <div className="mt-5 flex flex-row items-center">
+        <div className="mr-4 w-3 h-3 rounded-full bg-lime-500" />
+        {urlJoin(
+          process.env.NEXT_PUBLIC_SOCKET_IO_URI,
+          process.env.NEXT_PUBLIC_SOCKET_IO_PATH,
+          'test',
+          'socket.io'
+        )}
       </div>
     </Main>
   );
