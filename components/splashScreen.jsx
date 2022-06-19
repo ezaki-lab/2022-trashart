@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import Loop from './loop';
 import { pickRandom } from '../utils/random';
 
-const SplashScreen = ({ style }) => {
+const SplashScreen = ({ style }, ref) => {
   return (
     <div
       className="w-full h-full bg-white fixed top-0 z-20"
       style={style}
+      ref={ref}
     >
       <div className="w-full h-full flex flex-wrap items-end content-start">
         <Loop times={5 * 12}>
@@ -50,4 +51,4 @@ const RandomTile = () => {
   );
 };
 
-export default SplashScreen;
+export default forwardRef(SplashScreen);

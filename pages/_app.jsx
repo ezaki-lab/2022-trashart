@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { RecoilRoot } from 'recoil';
 import { Transition } from 'react-transition-group';
 import useModern from '../hooks/useModern';
@@ -15,6 +15,8 @@ const MyApp = ({ Component, pageProps }) => {
   useModern();
   // 識別用のルートを取得
   const route = useIdRoute();
+
+  const splashScreenRef = useRef(null);
 
   const [ready, setReady] = useState(false);
 
@@ -42,16 +44,17 @@ const MyApp = ({ Component, pageProps }) => {
         <BottomAppBar route={route} />
       </div>
 
-      {/* <Transition
+      <Transition
         in={!ready}
         timeout={{ enter: 250, exit: 500 }}
         mountOnEnter
         unmountOnExit
+        nodeRef={splashScreenRef}
       >
         {(state) =>
-          <SplashScreen style={transitionStyle[state]} />
+          <SplashScreen style={transitionStyle[state]} ref={splashScreenRef} />
         }
-      </Transition> */}
+      </Transition>
     </RecoilRoot>
   );
 };
