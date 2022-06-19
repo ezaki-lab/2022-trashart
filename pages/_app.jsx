@@ -42,7 +42,7 @@ const MyApp = ({ Component, pageProps }) => {
         <BottomAppBar route={route} />
       </div>
 
-      <Transition
+      {/* <Transition
         in={!ready}
         timeout={{ enter: 250, exit: 500 }}
         mountOnEnter
@@ -51,7 +51,7 @@ const MyApp = ({ Component, pageProps }) => {
         {(state) =>
           <SplashScreen style={transitionStyle[state]} />
         }
-      </Transition>
+      </Transition> */}
     </RecoilRoot>
   );
 };
