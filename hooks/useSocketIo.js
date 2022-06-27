@@ -16,7 +16,7 @@ const useSocketIo = (namespace = '') => {
       'socket.io'
     );
 
-    setSocket(io(uri, { path: path }));
+    setSocket(io(uri, { path: path, transports: ['polling'] }));
   }, [namespace]);
 
   return socket;
