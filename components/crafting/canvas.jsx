@@ -6,7 +6,7 @@ import CenterText from '../centerText';
 import ColorPicker from '../colorPicker';
 import url from '../../utils/url';
 
-const Canvas = ({ width, height }) => {
+const Canvas = ({ width, height, canvasRef }) => {
   const [penColor, setPenColor] = useState('#000000');
   const [tool, setTool] = useState('pen');
 
@@ -57,6 +57,7 @@ const Canvas = ({ width, height }) => {
         onTouchStart={handleMouseDown}
         onTouchMove={handleMouseMove}
         onTouchEnd={handleMouseUp}
+        ref={canvasRef}
       >
         <Layer>
           {image && <KonvaImage

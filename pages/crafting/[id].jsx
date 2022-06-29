@@ -19,7 +19,11 @@ const Nav = dynamic(
 );
 
 const Crafting = () => {
-  const canvasObj = useRef();
+  const displayObj = useRef(null);
+  const canvasObj = useRef(null);
+
+  const [craftingId, setCraftingId] = useState('');
+  const [blueprintUrl, setBlueprintUrl] = useState('');
 
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -27,13 +31,43 @@ const Crafting = () => {
   const [isAr, setIsAr] = useState(false);
 
   useEffect(() => {
-    setWidth(canvasObj.current.clientWidth);
-    setHeight(canvasObj.current.clientHeight);
-  }, [canvasObj.current]);
+    fetch('https://ezaki-lab.cloud/~trashart/api/craftings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'base_id': ''
+      })
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setCraftingId(json['id']);
+      });
+  }, []);
+
+  useEffect(() => {
+    setWidth(displayObj.current.clientWidth);
+    setHeight(displayObj.current.clientHeight);
+  }, [displayObj.current]);
 
   const handleClickAr = useCallback(() => {
     setIsAr(true);
-  }, []);
+
+    fetch(`https://ezaki-lab.cloud/~trashart/api/craftings/${craftingId}/blueprint`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'data': canvasObj.current.toDataURL()
+      })
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setBlueprintUrl(json['url']);
+      });
+  }, [canvasObj.current]);
 
   return (
     <Main
@@ -43,15 +77,19 @@ const Crafting = () => {
     >
       <div
         className="w-full h-[calc(100vh-4rem)] relative"
-        ref={canvasObj}
+        ref={displayObj}
       >
         <Canvas
           width={width}
           height={height}
+          canvasRef={canvasObj}
         />
 
         {isAr && <div className="w-full h-full bg-sky-100 absolute top-0 left-0">
-          <Ar setIsAr={setIsAr} />
+          <Ar
+            setIsAr={setIsAr}
+            blueprintUrl={blueprintUrl}
+          />
         </div>}
 
         <Nav

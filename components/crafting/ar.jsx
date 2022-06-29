@@ -1,14 +1,16 @@
 // 参考: https://codesandbox.io/s/7push?file=/src/BallPit.js:686-891
 
 import { useCallback, useEffect, useRef } from 'react';
-import { ARCanvas } from '@react-three/xr';
+import { Image as DreiImage } from '@react-three/drei';
+import { ARCanvas } from '../../lib/react-xr';
+// import { ARCanvas } from '@react-three/xr';
 import sleep from '../../utils/sleep';
 import { pickRandom } from '../../utils/random';
 import { getElementByIdAfterShown, getOneElementByTagAttrs } from '../../utils/element';
 
 const polarRandom = () => (0.5 - Math.random()) * 2;
 const randomRange = (min, max) => min + (Math.random() * max - min);
-const polarRange = (min, max) => min + (polarRandom() * max - min);
+// const polarRange = (min, max) => min + (polarRandom() * max - min);
 
 const colors = [
   '#25282F',
@@ -20,39 +22,54 @@ const colors = [
   '#CD6961',
 ];
 
-const Ar = ({ setIsAr }) => {
-  const ArButton = useRef();
-  const ArEndButton = useRef();
+const Ar = ({ setIsAr, blueprintUrl }) => {
+  // const ArButton = useRef();
+  // const ArEndButton = useRef();
+
+  // useEffect(() => {
+  //   console.log('こんにちは！');
+  //   (async () => {
+  //     // ARボタンが出現したら要素を取得
+  //     ArButton.current = await getElementByIdAfterShown('ARButton');
+  //     await sleep(10);
+
+  //     // ARボタンを非表示にして、押したときの処理をする
+  //     ArButton.current.style = 'display: none';
+  //     ArButton.current.click();
+
+  //     // AR終了ボタンをクリックしたら、ARコンポーネントを取り除く
+  //     ArEndButton.current = getOneElementByTagAttrs('svg', [
+  //       { name: 'width', value: '38' },
+  //       { name: 'height', value: '38' }
+  //     ]);
+  //     ArEndButton.current.addEventListener('click', endAr);
+  //   })();
+
+  //   return () => {
+  //     // AR関連の要素を削除
+  //     console.log('現在のArEndButton');
+  //     console.log(ArEndButton.current);
+  //     console.log('現在のArButton');
+  //     console.log(ArButton.current);
+
+  //     try {
+  //       ArEndButton.current.removeEventListener('click', endAr);
+  //       ArEndButton.current.parentElement.remove();
+  //       ArButton.current.remove();
+  //     } catch (e) {
+  //       console.log('できませんでした');
+  //     }
+  //   };
+  // }, [endAr]);
 
   useEffect(() => {
-    (async () => {
-      // ARボタンが出現したら要素を取得
-      ArButton.current = await getElementByIdAfterShown('ARButton');
-      await sleep(10);
+    console.log(blueprintUrl);
+  }, [blueprintUrl]);
 
-      // ARボタンを非表示にして、押したときの処理をする
-      ArButton.current.style = 'display: none';
-      ArButton.current.click();
-
-      // AR終了ボタンをクリックしたら、ARコンポーネントを取り除く
-      ArEndButton.current = getOneElementByTagAttrs('svg', [
-        { name: 'width', value: '38' },
-        { name: 'height', value: '38' }
-      ]);
-      ArEndButton.current.addEventListener('click', endAr);
-    })();
-
-    return () => {
-      // AR関連の要素を削除
-      ArEndButton.current.removeEventListener('click', endAr);
-      ArButton.current.remove();
-      ArEndButton.current.parentElement.remove();
-    };
-  }, [endAr]);
-
-  const endAr = useCallback(() => {
-    setIsAr(false);
-  }, [setIsAr]);
+  // const endAr = useCallback(() => {
+  //   console.log('実行されましたよ☆');
+  //   setIsAr(false);
+  // }, [setIsAr]);
 
   return (
     <ARCanvas
@@ -60,7 +77,28 @@ const Ar = ({ setIsAr }) => {
       pixelRatio={window.devicePixelRatio}
     >
       <ambientLight />
-      <group>
+      {blueprintUrl !== '' && <DreiImage
+        url={blueprintUrl}
+        rotate={[0, 0, Math.PI / 2]}
+        position={[0, 0, 0]}
+      />}
+      <Ball
+        position={[0, 0, 0]}
+      />
+      {/* 1mぐらい離れたところに描画される */}
+      <Ball
+        position={[3, 3, 0]}
+      />
+      <Ball
+        position={[-3, 3, 0]}
+      />
+      <Ball
+        position={[3, -3, 0]}
+      />
+      <Ball
+        position={[-3, -3, 0]}
+      />
+      {/* <group>
         {new Array(512).fill(0).map((v, i) => {
           return (
             <Ball
@@ -69,7 +107,7 @@ const Ar = ({ setIsAr }) => {
             />
           );
         })}
-      </group>
+      </group> */}
     </ARCanvas>
   );
 };
