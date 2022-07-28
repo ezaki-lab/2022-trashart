@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react';
-import Loop from './loop';
+import Loop from '../components/loop';
 import { pickRandom } from '../utils/random';
 
 const SplashScreen = ({ style }, ref) => {

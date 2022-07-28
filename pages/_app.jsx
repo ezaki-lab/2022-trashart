@@ -4,11 +4,11 @@ import { RecoilRoot } from 'recoil';
 import { Transition } from 'react-transition-group';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
-import SocialAppBar from '../components/appBar/social';
-import CraftAppBar from '../components/appBar/craft';
-import BottomAppBar from '../components/bottomAppBar';
+import SocialAppBar from '../lib/appBar/social';
+import CraftAppBar from '../lib/appBar/craft';
+import BottomAppBar from '../lib/bottomAppBar';
+import SplashScreen from '../lib/splashScreen';
 import '../styles/globals.css';
-import SplashScreen from '../components/splashScreen';
 
 const MyApp = ({ Component, pageProps }) => {
   // スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート
@@ -44,7 +44,7 @@ const MyApp = ({ Component, pageProps }) => {
         <BottomAppBar route={route} />
       </div>
 
-      <Transition
+      {/* <Transition
         in={!ready}
         timeout={{ enter: 250, exit: 500 }}
         mountOnEnter
@@ -54,7 +54,7 @@ const MyApp = ({ Component, pageProps }) => {
         {(state) =>
           <SplashScreen style={transitionStyle[state]} ref={splashScreenRef} />
         }
-      </Transition>
+      </Transition> */}
     </RecoilRoot>
   );
 };

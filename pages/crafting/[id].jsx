@@ -6,15 +6,15 @@ const title = '製作';
 const description = '製作しましょう！';
 
 const Canvas = dynamic(
-  () => import('../../components/crafting/canvas'),
+  () => import('../../lib/crafting/canvas'),
   { ssr: false }
 );
 const Ar = dynamic(
-  () => import('../../components/crafting/ar'),
+  () => import('../../lib/crafting/ar'),
   { ssr: false }
 );
 const Nav = dynamic(
-  () => import('../../components/crafting/nav'),
+  () => import('../../lib/crafting/nav'),
   { ssr: false }
 );
 

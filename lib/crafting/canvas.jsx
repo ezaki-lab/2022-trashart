@@ -2,8 +2,8 @@ import { useCallback, useRef, useState, memo } from 'react';
 import { Stage, Layer, Line, Image as KonvaImage } from 'react-konva';
 import useImage from 'use-image';
 import usePreload from '../../hooks/usePreload';
-import CenterText from '../centerText';
-import ColorPicker from '../colorPicker';
+import CenterText from '../../components/centerText';
+import ColorPicker from '../../components/colorPicker';
 import url from '../../utils/url';
 
 const Canvas = ({ width, height, canvasRef }) => {

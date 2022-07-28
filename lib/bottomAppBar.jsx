@@ -1,6 +1,6 @@
 import usePreload from '../hooks/usePreload';
-import CenterText from './centerText';
-import Linking from './linking';
+import CenterText from '../components/centerText';
+import Linking from '../components/linking';
 import url from '../utils/url';
 
 const BottomAppBar = ({ route }) => {

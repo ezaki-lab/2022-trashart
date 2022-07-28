@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import useHeadRoute from '../../hooks/useHeadRoute';
-import Linking from '../linking';
+import Linking from '../../components/linking';
 import url from '../../utils/url';
 
 const CraftAppBar = () => {
