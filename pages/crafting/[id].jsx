@@ -9,10 +9,6 @@ const Canvas = dynamic(
   () => import('../../lib/crafting/canvas'),
   { ssr: false }
 );
-const Ar = dynamic(
-  () => import('../../lib/crafting/ar'),
-  { ssr: false }
-);
 const Nav = dynamic(
   () => import('../../lib/crafting/nav'),
   { ssr: false }
@@ -27,8 +23,6 @@ const Crafting = () => {
 
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
-
-  const [isAr, setIsAr] = useState(false);
 
   useEffect(() => {
     fetch('https://ezaki-lab.cloud/~trashart/api/craftings', {
@@ -84,13 +78,6 @@ const Crafting = () => {
           height={height}
           canvasRef={canvasObj}
         />
-
-        {isAr && <div className="w-full h-full bg-sky-100 absolute top-0 left-0">
-          <Ar
-            setIsAr={setIsAr}
-            blueprintUrl={blueprintUrl}
-          />
-        </div>}
 
         <Nav
           onClickAr={handleClickAr}

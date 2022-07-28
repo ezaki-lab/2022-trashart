@@ -164,8 +164,8 @@ const ButtonItem = ({ active, icon, onClick }) => {
     <button
       className={
         active
-          ? "w-12 h-12 ml-3 bg-sky-100 rounded-xl"
-          : "w-12 h-12 ml-3"
+          ? 'w-12 h-12 ml-3 bg-sky-100 rounded-xl'
+          : 'w-12 h-12 ml-3'
       }
       onClick={!active ? onClick : null}
     >
