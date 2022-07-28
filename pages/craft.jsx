@@ -17,7 +17,7 @@ const Craft = () => {
         <input
           type="text"
           placeholder="検索"
-          className="my-4 input w-full text-lg text-white placeholder-white bg-crafting"
+          className="my-4 px-4 py-2 w-full text-lg text-white placeholder-white rounded-xl bg-crafting"
         />
         <ul className="w-full h-[calc(100vh-28rem)] grid grid-cols-2 gap-4 overflow-y-scroll">
           <Item />
@@ -26,7 +26,7 @@ const Craft = () => {
           <Item />
           <Item />
         </ul>
-        <button className="my-4 w-full text-lg btn border-none text-white bg-crafting hover:bg-orange-700 shadow-xl">
+        <button className="my-4 px-4 py-2 w-full text-lg font-medium text-white rounded-xl bg-crafting hover:bg-orange-700 shadow-xl">
           いちから作る
         </button>
       </div>

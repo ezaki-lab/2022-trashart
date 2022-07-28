@@ -1,8 +1,9 @@
 module.exports = {
   content: [
-    "./pages/**/*.{js,jsx}",
     "./components/**/*.{js,jsx}",
-    "./hooks/**/*.{js,jsx}"
+    "./hooks/**/*.{js,jsx}",
+    "./lib/**/*.{js,jsx}",
+    "./pages/**/*.{js,jsx}",
   ],
   theme: {
     extend: {
@@ -15,6 +16,5 @@ module.exports = {
         'sharing': '#ff543d'
       }
     }
-  },
-  plugins: [require("daisyui")]
+  }
 };

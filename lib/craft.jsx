@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import useHeadRoute from '../../hooks/useHeadRoute';
-import Linking from '../linking';
+import Linking from '../../components/linking';
 import url from '../../utils/url';
 
 const CraftAppBar = () => {
@@ -88,7 +88,7 @@ const CaretRight = () => {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={url('/icons/ic_fluent_caret_right_24_filled.svg')}
-        alt={"right"}
+        alt="right"
         width="30rem"
         className="mt-[0.35rem] pointer-events-none"
       />

@@ -22,7 +22,7 @@ const Craft = () => {
         <input
           type="text"
           placeholder="検索"
-          className="my-4 input w-full text-lg text-white placeholder-white bg-crafting"
+          className="my-4 px-4 py-2 w-full text-lg text-white placeholder-white rounded-xl bg-crafting"
         />
         <div className="w-full h-[calc(100vh-28rem)] overflow-y-scroll">
           <div>
@@ -60,7 +60,7 @@ const Craft = () => {
             </div>
           </div>
         </div>
-        <button className="my-4 w-full text-lg btn border-none text-white bg-crafting hover:bg-orange-700 shadow-xl">
+        <button className="my-4 px-4 py-2 w-full text-lg font-medium text-white rounded-xl bg-crafting hover:bg-orange-700 shadow-xl">
           いちから作る
         </button>
       </div>
@@ -96,7 +96,7 @@ const Item = () => {
             </li>
           </ul>
           <button
-            className="mt-3 w-full text-lg btn btn-sm border-none text-white bg-purple-500 hover:bg-purple-700 shadow-lg"
+            className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
             onClick={handleCreate}
           >
             製作する

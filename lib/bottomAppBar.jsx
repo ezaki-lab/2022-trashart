@@ -1,6 +1,6 @@
 import usePreload from '../hooks/usePreload';
-import CenterText from './centerText';
-import Linking from './linking';
+import CenterText from '../components/centerText';
+import Linking from '../components/linking';
 import url from '../utils/url';
 
 const BottomAppBar = ({ route }) => {
@@ -45,8 +45,8 @@ const Item = ({ label, href, now, icon }) => {
       <button>
         <div className={
           href !== now
-            ? "mt-1 px-3"
-            : "mt-1 px-3 bg-sky-300 rounded-xl"
+            ? 'mt-1 px-3'
+            : 'mt-1 px-3 bg-sky-300 rounded-xl'
         }>
           <CenterText>
             {/* eslint-disable-next-line @next/next/no-img-element */}

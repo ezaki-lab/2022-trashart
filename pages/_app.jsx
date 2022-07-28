@@ -1,22 +1,20 @@
 import Head from 'next/head';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RecoilRoot } from 'recoil';
-import { Transition } from 'react-transition-group';
+import { Transition } from '@headlessui/react';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
-import SocialAppBar from '../components/appBar/social';
-import CraftAppBar from '../components/appBar/craft';
-import BottomAppBar from '../components/bottomAppBar';
+import SocialAppBar from '../lib/appBar/social';
+import CraftAppBar from '../lib/appBar/craft';
+import BottomAppBar from '../lib/bottomAppBar';
+import SplashScreen from '../lib/splashScreen';
 import '../styles/globals.css';
-import SplashScreen from '../components/splashScreen';
 
 const MyApp = ({ Component, pageProps }) => {
   // スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート
   useModern();
   // 識別用のルートを取得
   const route = useIdRoute();
-
-  const splashScreenRef = useRef(null);
 
   const [ready, setReady] = useState(false);
 
@@ -45,42 +43,16 @@ const MyApp = ({ Component, pageProps }) => {
       </div>
 
       <Transition
-        in={!ready}
-        timeout={{ enter: 250, exit: 500 }}
-        mountOnEnter
-        unmountOnExit
-        nodeRef={splashScreenRef}
+        appear
+        show={!ready}
+        leave="transition-opacity ease-out duration-500"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
       >
-        {(state) =>
-          <SplashScreen style={transitionStyle[state]} ref={splashScreenRef} />
-        }
+        <SplashScreen />
       </Transition>
     </RecoilRoot>
   );
-};
-
-// スプラッシュスクリーンの画面推移の設定
-const transitionStyle = {
-  entering: {
-    transition: 'all 0.25s ease',
-    opacity: '1'
-  },
-  entered: {
-    transition: 'all 0.5s ease',
-    opacity: '1'
-  },
-  exiting: {
-    transition: 'all 0.5s ease',
-    opacity: '0'
-  },
-  exited: {
-    transition: 'all 0.5s ease',
-    opacity: '0'
-  },
-  unmounted: {
-    transition: 'all 0.5s ease',
-    opacity: '0'
-  }
 };
 
 export default MyApp;

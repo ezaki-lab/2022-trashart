@@ -2,11 +2,11 @@ import { useCallback, useRef, useState, memo } from 'react';
 import { Stage, Layer, Line, Image as KonvaImage } from 'react-konva';
 import useImage from 'use-image';
 import usePreload from '../../hooks/usePreload';
-import CenterText from '../centerText';
-import ColorPicker from '../colorPicker';
+import CenterText from '../../components/centerText';
+import ColorPicker from '../../components/colorPicker';
 import url from '../../utils/url';
 
-const Canvas = ({ width, height }) => {
+const Canvas = ({ width, height, canvasRef }) => {
   const [penColor, setPenColor] = useState('#000000');
   const [tool, setTool] = useState('pen');
 
@@ -57,6 +57,7 @@ const Canvas = ({ width, height }) => {
         onTouchStart={handleMouseDown}
         onTouchMove={handleMouseMove}
         onTouchEnd={handleMouseUp}
+        ref={canvasRef}
       >
         <Layer>
           {image && <KonvaImage
@@ -163,8 +164,8 @@ const ButtonItem = ({ active, icon, onClick }) => {
     <button
       className={
         active
-          ? "w-12 h-12 ml-3 bg-sky-100 rounded-xl"
-          : "w-12 h-12 ml-3"
+          ? 'w-12 h-12 ml-3 bg-sky-100 rounded-xl'
+          : 'w-12 h-12 ml-3'
       }
       onClick={!active ? onClick : null}
     >
