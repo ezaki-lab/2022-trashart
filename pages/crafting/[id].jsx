@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Main from '../../components/main';
+import Camera from '../../lib/crafting/camera';
 
 const title = '製作';
 const description = '製作しましょう！';
@@ -15,6 +17,9 @@ const Nav = dynamic(
 );
 
 const Crafting = () => {
+  const router = useRouter();
+  const query = router.query;
+
   const displayObj = useRef(null);
   const canvasObj = useRef(null);
 
@@ -25,20 +30,24 @@ const Crafting = () => {
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    fetch('https://ezaki-lab.cloud/~trashart/api/craftings', {
+    if (query.id === undefined) {
+      return;
+    }
+
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'base_id': ''
+        'base_id': query.id
       })
     })
       .then((res) => res.json())
       .then((json) => {
         setCraftingId(json['id']);
       });
-  }, []);
+  }, [query.id]);
 
   useEffect(() => {
     setWidth(displayObj.current.clientWidth);
@@ -48,7 +57,7 @@ const Crafting = () => {
   const handleClickAr = useCallback(() => {
     setIsAr(true);
 
-    fetch(`https://ezaki-lab.cloud/~trashart/api/craftings/${craftingId}/blueprint`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/craftings/${craftingId}/blueprint`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -73,7 +82,11 @@ const Crafting = () => {
         className="w-full h-[calc(100vh-4rem)] relative"
         ref={displayObj}
       >
-        <Canvas
+        {craftingId !== '' &&
+          <Camera id={craftingId} />
+        }
+
+        {/* <Canvas
           width={width}
           height={height}
           canvasRef={canvasObj}
@@ -81,7 +94,7 @@ const Crafting = () => {
 
         <Nav
           onClickAr={handleClickAr}
-        />
+        /> */}
       </div>
     </Main>
   );

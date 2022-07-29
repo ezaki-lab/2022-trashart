@@ -7,8 +7,14 @@ const title = 'ジャンル';
 const description = 'ジャンルを選びましょう！';
 
 const Craft = () => {
+  const router = useRouter();
+
   const [littles, setLittles] = useState(['hoge', 'hoge', 'hoge', 'hoge']);
   const [bigs, setBigs] = useState(['hoge', 'hoge', 'hoge']);
+
+  const handleCreate = (base_id) => {
+    router.push(`/crafting/[id]?id=${base_id}`, url(`/crafting/${base_id}`));
+  };
 
   return (
     <Main
@@ -33,12 +39,153 @@ const Craft = () => {
               <ul
                 className="h-full flex flex-row justify-between"
                 style={{
-                  width: `${littles.length * 11.5}rem`
+                  width: `${6 * 11.5}rem`
                 }}
               >
-                {littles.map((item, index) =>
+                {/* {littles.map((item, index) =>
                   <Item key={index} />
-                )}
+                )} */}
+
+                {/* 以下は仮置き */}
+
+                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-20 bg-gray-300" />
+                  <div className="p-2">
+                    <h3>
+                      イルカ
+                    </h3>
+                    <div className="w-full text-sm">
+                      2時間
+                      <ul className="mt-1 h-5 whitespace-nowrap flex flex-row overflow-scroll">
+                        <li className="px-2 mr-2 bg-gray-200 rounded-full">
+                          シーガラス
+                        </li>
+                      </ul>
+                      <button
+                        className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
+                        onClick={handleCreate('1d557c21d8238d47ecb1dcfb')}
+                      >
+                        製作する
+                      </button>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-20 bg-gray-300" />
+                  <div className="p-2">
+                    <h3>
+                      カメ
+                    </h3>
+                    <div className="w-full text-sm">
+                      3時間
+                      <ul className="mt-1 h-5 whitespace-nowrap flex flex-row overflow-scroll">
+                        <li className="px-2 mr-2 bg-gray-200 rounded-full">
+                          PP
+                        </li>
+                      </ul>
+                      <button
+                        className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
+                        onClick={handleCreate('1e429a12f32e233a7ca06f1d')}
+                      >
+                        製作する
+                      </button>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-20 bg-gray-300" />
+                  <div className="p-2">
+                    <h3>
+                      海中生物
+                    </h3>
+                    <div className="w-full text-sm">
+                      3時間
+                      <ul className="mt-1 h-5 whitespace-nowrap flex flex-row overflow-scroll">
+                        <li className="px-2 mr-2 bg-gray-200 rounded-full">
+                          PS
+                        </li>
+                      </ul>
+                      <button
+                        className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
+                        onClick={handleCreate('8ec8e95a279e5ebef39f601b')}
+                      >
+                        製作する
+                      </button>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-20 bg-gray-300" />
+                  <div className="p-2">
+                    <h3>
+                      タイ
+                    </h3>
+                    <div className="w-full text-sm">
+                      2時間
+                      <ul className="mt-1 h-5 whitespace-nowrap flex flex-row overflow-scroll">
+                        <li className="px-2 mr-2 bg-gray-200 rounded-full">
+                          PET
+                        </li>
+                      </ul>
+                      <button
+                        className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
+                        onClick={handleCreate('339014c515e93bac0c4f3f91')}
+                      >
+                        製作する
+                      </button>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-20 bg-gray-300" />
+                  <div className="p-2">
+                    <h3>
+                      フグ
+                    </h3>
+                    <div className="w-full text-sm">
+                      3時間
+                      <ul className="mt-1 h-5 whitespace-nowrap flex flex-row overflow-scroll">
+                        <li className="px-2 mr-2 bg-gray-200 rounded-full">
+                          PP
+                        </li>
+                      </ul>
+                      <button
+                        className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
+                        onClick={handleCreate('d23d5f32ec0735542673595b')}
+                      >
+                        製作する
+                      </button>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-20 bg-gray-300" />
+                  <div className="p-2">
+                    <h3>
+                      ペンギン
+                    </h3>
+                    <div className="w-full text-sm">
+                      3時間
+                      <ul className="mt-1 h-5 whitespace-nowrap flex flex-row overflow-scroll">
+                        <li className="px-2 mr-2 bg-gray-200 rounded-full">
+                          PS
+                        </li>
+                      </ul>
+                      <button
+                        className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
+                        onClick={handleCreate('c17cd2c0c1bbc01856cc852f')}
+                      >
+                        製作する
+                      </button>
+                    </div>
+                  </div>
+                </li>
+
               </ul>
             </div>
           </div>
