@@ -63,7 +63,7 @@ const Craft = () => {
                       </ul>
                       <button
                         className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
-                        onClick={handleCreate('1d557c21d8238d47ecb1dcfb')}
+                        onClick={() => { handleCreate('1d557c21d8238d47ecb1dcfb'); }}
                       >
                         製作する
                       </button>
@@ -86,7 +86,7 @@ const Craft = () => {
                       </ul>
                       <button
                         className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
-                        onClick={handleCreate('1e429a12f32e233a7ca06f1d')}
+                        onClick={() => { handleCreate('1e429a12f32e233a7ca06f1d'); }}
                       >
                         製作する
                       </button>
@@ -109,7 +109,7 @@ const Craft = () => {
                       </ul>
                       <button
                         className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
-                        onClick={handleCreate('8ec8e95a279e5ebef39f601b')}
+                        onClick={() => { handleCreate('8ec8e95a279e5ebef39f601b'); }}
                       >
                         製作する
                       </button>
@@ -132,7 +132,7 @@ const Craft = () => {
                       </ul>
                       <button
                         className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
-                        onClick={handleCreate('339014c515e93bac0c4f3f91')}
+                        onClick={() => { handleCreate('339014c515e93bac0c4f3f91'); }}
                       >
                         製作する
                       </button>
@@ -155,7 +155,7 @@ const Craft = () => {
                       </ul>
                       <button
                         className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
-                        onClick={handleCreate('d23d5f32ec0735542673595b')}
+                        onClick={() => { handleCreate('d23d5f32ec0735542673595b'); }}
                       >
                         製作する
                       </button>
@@ -178,7 +178,7 @@ const Craft = () => {
                       </ul>
                       <button
                         className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
-                        onClick={handleCreate('c17cd2c0c1bbc01856cc852f')}
+                        onClick={() => { handleCreate('c17cd2c0c1bbc01856cc852f'); }}
                       >
                         製作する
                       </button>
