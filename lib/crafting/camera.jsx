@@ -13,13 +13,13 @@ const Camera = ({ id }) => {
 
   return (
     <>
-      <WebCamera />
+      <WebCamera facingMode="environment" />
 
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={blueprintUrl}
         alt="設計図"
-        width={width - 100}
+        width={width}
         className="opacity-50 pointer-events-none absolute m-auto inset-0"
       />
     </>
