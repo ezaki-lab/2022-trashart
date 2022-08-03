@@ -4,7 +4,7 @@ const Main = ({ children, title, description, padding = true }) => {
   return (
     <>
       <Head>
-        <title>{`${title} - TRASHART`}</title>
+        <title>{`${title} - MARINE TRASHART`}</title>
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
       </Head>
