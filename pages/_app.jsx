@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { RecoilRoot } from 'recoil';
+import { useHydrateAtoms } from "jotai/utils";
 import { Transition } from '@headlessui/react';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
@@ -8,9 +8,13 @@ import SocialAppBar from '../lib/appBar/social';
 import CraftAppBar from '../lib/appBar/craft';
 import BottomAppBar from '../lib/bottomAppBar';
 import SplashScreen from '../lib/splashScreen';
+import { userAtom } from '../common/stores';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
+  const { initialState } = pageProps;
+  useHydrateAtoms(initialState ? [[userAtom, initialState]] : []);
+
   // スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート
   useModern();
   // 識別用のルートを取得
@@ -25,7 +29,7 @@ const MyApp = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <RecoilRoot>
+    <>
       <Head>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="robots" content="noindex" />
@@ -51,7 +55,7 @@ const MyApp = ({ Component, pageProps }) => {
       >
         <SplashScreen />
       </Transition>
-    </RecoilRoot>
+    </>
   );
 };
 

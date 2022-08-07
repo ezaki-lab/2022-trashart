@@ -1,5 +1,5 @@
-import { useRecoilValue } from 'recoil';
-import * as atom from '../common/atom';
+import { useAtom } from 'jotai';
+import { userAtom } from '../common/stores';
 import Main from '../components/main';
 import Linking from '../components/linking';
 
@@ -7,7 +7,7 @@ const title = '次のページ';
 const description = 'サンプルです。';
 
 const Tsugi = () => {
-  const user = useRecoilValue(atom.user);
+  const [user, setUser] = useAtom(userAtom);
 
   return (
     <Main

@@ -1,13 +1,13 @@
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import Main from '../components/main';
 import Linking from '../components/linking';
-import * as atom from '../common/atom';
+import { userAtom } from '../common/stores';
 
 const title = '投稿';
 const description = '投稿された作品を見ましょう！';
 
 const Social = () => {
-  const [user, setUser] = useRecoilState(atom.user);
+  const [user, setUser] = useAtom(userAtom);
 
   const handleChange = (e) => {
     setUser(e.target.value);
