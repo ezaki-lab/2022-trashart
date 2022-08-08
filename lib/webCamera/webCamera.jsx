@@ -5,11 +5,10 @@ const WebCamera = ({
   aspectRatio = 'cover',
   numberOfCamerasCallback = () => null,
   errorMessages = {
-    noCameraAccessible: 'No camera device accessible. Please connect your camera or try a different browser.',
-    permissionDenied: 'Permission denied. Please refresh and give camera permission.',
-    switchCamera:
-      'It is not possible to switch camera to different one because there is only one video device accessible.',
-    canvas: 'Canvas is not supported.',
+    noCameraAccessible: '使用できるカメラがありません。他のブラウザーで試すか、カメラを追加してください。',
+    permissionDenied: 'カメラの権限がないです。許可してください。',
+    switchCamera: 'カメラを切り替えることができませんでした。',
+    canvas: 'キャンバスはサポートされていません。',
   },
 },
   ref,
