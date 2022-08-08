@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Camera as WebCamera } from 'react-camera-pro';
+import WebCamera from '../webCamera/webCamera';
 import { useWindowSize } from 'react-use';
 
 const Camera = ({ id }) => {
