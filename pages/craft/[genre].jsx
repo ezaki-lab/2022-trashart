@@ -39,7 +39,7 @@ const Craft = () => {
               <ul
                 className="h-full flex flex-row justify-between"
                 style={{
-                  width: `${6 * 11.5}rem`   //6 * 11.5
+                  width: `${14 * 11.5}rem`   //6 * 11.5
                 }}
               >
                 {/* {littles.map((item, index) =>
@@ -381,7 +381,7 @@ const Craft = () => {
               <ul
                 className="h-full flex flex-row justify-between"
                 style={{
-                  width: `${bigs.length * 11.5}rem`
+                  width: `${7 * 11.5}rem`
                 }}
               >
 
