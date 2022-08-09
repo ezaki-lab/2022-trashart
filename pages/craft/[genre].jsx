@@ -186,6 +186,76 @@ const Craft = () => {
                   </div>
                 </li>
 
+                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-20 bg-gray-300" />
+                  <div className="p-2">
+                    <h3>
+                      ハリセンボン
+                    </h3>
+                    <div className="w-full text-sm">
+                      3時間
+                      <ul className="mt-1 h-5 whitespace-nowrap flex flex-row overflow-scroll">
+                        <li className="px-2 mr-2 bg-gray-200 rounded-full">
+                          PS
+                        </li>
+                      </ul>
+                      <button
+                        className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
+                        onClick={() => { handleCreate('0b4d1b76fa1f70609dacc6b4'); }}
+                      >
+                        製作する
+                      </button>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-20 bg-gray-300" />
+                  <div className="p-2">
+                    <h3>
+                      サメ
+                    </h3>
+                    <div className="w-full text-sm">
+                      3時間
+                      <ul className="mt-1 h-5 whitespace-nowrap flex flex-row overflow-scroll">
+                        <li className="px-2 mr-2 bg-gray-200 rounded-full">
+                          PS
+                        </li>
+                      </ul>
+                      <button
+                        className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
+                        onClick={() => { handleCreate('101dca18d5da501e11e608d8'); }}
+                      >
+                        製作する
+                      </button>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                  <div className="w-full h-20 bg-gray-300" />
+                  <div className="p-2">
+                    <h3>
+                      タコ
+                    </h3>
+                    <div className="w-full text-sm">
+                      3時間
+                      <ul className="mt-1 h-5 whitespace-nowrap flex flex-row overflow-scroll">
+                        <li className="px-2 mr-2 bg-gray-200 rounded-full">
+                          PS
+                        </li>
+                      </ul>
+                      <button
+                        className="mt-3 w-full text-lg font-medium text-white rounded-xl bg-purple-500 hover:bg-purple-700 shadow-lg"
+                        onClick={() => { handleCreate('101dca18d5da501e11e608d8'); }}
+                      >
+                        製作する
+                      </button>
+                    </div>
+                  </div>
+                </li>
+                
+
               </ul>
             </div>
           </div>
