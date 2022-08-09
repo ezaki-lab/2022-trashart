@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { useHydrateAtoms } from "jotai/utils";
+import { useHydrateAtoms } from 'jotai/utils';
 import { Transition } from '@headlessui/react';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
