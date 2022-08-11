@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
 const Counter = ({ value, onMinus, onPlus }) => {
