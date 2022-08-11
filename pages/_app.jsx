@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useHydrateAtoms } from 'jotai/utils';
 import { Transition } from '@headlessui/react';
+import useHttps from '../hooks/useHttps';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
 import SocialAppBar from '../lib/appBar/social';
@@ -12,6 +13,9 @@ import { userAtom } from '../common/stores';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
+  // localhost以外ではHTTPSを強制する
+  useHttps();
+
   const { initialState } = pageProps;
   useHydrateAtoms(initialState ? [[userAtom, initialState]] : []);
 
