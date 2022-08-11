@@ -9,7 +9,16 @@ const Separate = () => {
       title={title}
       description={description}
     >
-      分別
+      <h1 className="text-2xl">
+        ごみをカウントしましょう
+      </h1>
+
+      <h2>流木</h2>
+      <h2>アルミ缶</h2>
+      <h2>スプレー缶</h2>
+      <h2>ポリエチレン（ビニール袋など）</h2>
+      <h2>ポリエチレンテレフタレート（ペットボトル、パックなど）</h2>
+      <h2>ポリプロピレン（かごなど）</h2>
     </Main>
   );
 };

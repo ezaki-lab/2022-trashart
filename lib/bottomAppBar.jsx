@@ -26,12 +26,14 @@ const BottomAppBar = ({ route }) => {
       <Item
         label="投稿"
         href="/social"
+        idRoute="/social"
         now={route}
         icon={icons.social}
       />
       <Item
         label="製作"
-        href="/craft"
+        href="/separate"
+        idRoute="/craft"
         now={route}
         icon={icons.craft}
       />
@@ -39,19 +41,19 @@ const BottomAppBar = ({ route }) => {
   );
 };
 
-const Item = ({ label, href, now, icon }) => {
+const Item = ({ label, href, idRoute, now, icon }) => {
   return (
     <Linking href={href}>
       <button>
         <div className={
-          href !== now
+          idRoute !== now
             ? 'mt-1 px-3'
             : 'mt-1 px-3 bg-sky-300 rounded-xl'
         }>
           <CenterText>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={href !== now ? icon.inactive : icon.active}
+              src={idRoute !== now ? icon.inactive : icon.active}
               alt={label}
               width="35rem"
               className="pointer-events-none"
