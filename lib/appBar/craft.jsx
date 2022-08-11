@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { AiOutlineCaretRight } from 'react-icons/ai';
 import useHeadRoute from '../../hooks/useHeadRoute';
 import Linking from '../../components/linking';
-import url from '../../utils/url';
+import CenterText from '../../components/centerText';
 
 const CraftAppBar = () => {
   const route = useHeadRoute();
@@ -42,14 +43,22 @@ const CraftAppBar = () => {
           now={route}
           textColor={textColor}
         />
-        <CaretRight />
+
+        <CenterText>
+          <AiOutlineCaretRight size="1.8rem" />
+        </CenterText>
+
         <Item
           label="製作"
           href="/craft"
           now={route === '/crafting' ? '/craft' : route}
           textColor={textColor}
         />
-        <CaretRight />
+
+        <CenterText>
+          <AiOutlineCaretRight size="1.8rem" />
+        </CenterText>
+
         <Item
           label="共有"
           href="/share"
@@ -78,20 +87,6 @@ const Item = ({ label, href, now, textColor }) => {
           </div>
         )
       }
-    </div>
-  );
-};
-
-const CaretRight = () => {
-  return (
-    <div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={url('/icons/ic_fluent_caret_right_24_filled.svg')}
-        alt="right"
-        width="30rem"
-        className="mt-[0.35rem] pointer-events-none"
-      />
     </div>
   );
 };
