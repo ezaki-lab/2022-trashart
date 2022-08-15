@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-const Main = ({ children, title, description, padding = true }) => {
+const Session = ({ children, title, description, padding = true }) => {
   return (
     <>
       <Head>
@@ -12,11 +12,11 @@ const Main = ({ children, title, description, padding = true }) => {
         <meta property="og:description" content={description} />
       </Head>
 
-      <div className={padding ? 'p-3' : null}>
+      <div className={padding ? 'p-3 pt-20' : null}>
         {children}
       </div>
     </>
   );
 };
 
-export default Main;
+export default Session;

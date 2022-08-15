@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Main from '../../components/main';
+import Session from '../../lib/session';
 import url from '../../utils/url';
 
 const title = 'ジャンル';
@@ -17,18 +17,18 @@ const Craft = () => {
   };
 
   return (
-    <Main
+    <Session
       title={title}
       description={description}
     >
-      <div className="w-full h-[calc(100vh-15rem)] bg-white p-3 border-4 border-crafting rounded-lg">
+      <div className="w-full h-[calc(100vh-15rem)] bg-white p-3 border-4 border-crafting-500 rounded-lg">
         <h1 className="text-2xl text-center">
           作りたい作品を選ぼう！
         </h1>
         <input
           type="text"
           placeholder="検索"
-          className="my-4 px-4 py-2 w-full text-lg text-white placeholder-white rounded-xl bg-crafting"
+          className="my-4 px-4 py-2 w-full text-lg text-white placeholder-white rounded-xl bg-crafting-500"
         />
         <div className="w-full h-[calc(100vh-28rem)] overflow-y-scroll">
           <div>
@@ -48,7 +48,7 @@ const Craft = () => {
 
                 {/* 以下は仮置き */}
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -71,7 +71,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -94,7 +94,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -117,7 +117,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -140,7 +140,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -163,7 +163,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -186,7 +186,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -209,7 +209,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -232,11 +232,11 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
-                     せみ
+                      せみ
                     </h3>
                     <div className="w-full text-sm">
                       3時間
@@ -255,7 +255,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -278,7 +278,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -301,7 +301,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -324,7 +324,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -347,11 +347,11 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
-                    クワガタ
+                      クワガタ
                     </h3>
                     <div className="w-full text-sm">
                       3時間
@@ -385,7 +385,7 @@ const Craft = () => {
                 }}
               >
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -408,7 +408,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -431,7 +431,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -454,7 +454,7 @@ const Craft = () => {
                   </div>
                 </li>
 
-                <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+                <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
                   <div className="w-full h-20 bg-gray-300" />
                   <div className="p-2">
                     <h3>
@@ -475,7 +475,7 @@ const Craft = () => {
                       </button>
                     </div>
                   </div>
-                </li> 
+                </li>
 
                 {bigs.map((item, index) =>
                   <Item key={index} />
@@ -484,11 +484,11 @@ const Craft = () => {
             </div>
           </div>
         </div>
-        <button className="my-4 px-4 py-2 w-full text-lg font-medium text-white rounded-xl bg-crafting hover:bg-orange-700 shadow-xl">
+        <button className="my-4 px-4 py-2 w-full text-lg font-medium text-white rounded-xl bg-crafting-500 hover:bg-orange-700 shadow-xl">
           いちから作る
         </button>
       </div>
-    </Main>
+    </Session>
   );
 };
 
@@ -500,7 +500,7 @@ const Item = () => {
   };
 
   return (
-    <li className="w-44 h-full border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
+    <li className="w-44 h-full border-4 border-crafting-500 rounded-lg shadow-lg overflow-hidden">
       <div className="w-full h-20 bg-gray-300" />
       <div className="p-2">
         <h3>
@@ -529,9 +529,9 @@ const Item = () => {
       </div>
     </li>
 
-    
 
-    
+
+
   );
 };
 

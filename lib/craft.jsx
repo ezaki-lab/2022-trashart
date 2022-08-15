@@ -12,20 +12,20 @@ const CraftAppBar = () => {
   useEffect(() => {
     switch (route) {
       case '/separate':
-        setTextColor('text-separating');
-        setBgColor('bg-separating');
+        setTextColor('text-separating-500');
+        setBgColor('bg-separating-500');
         break;
       case '/craft':
-        setTextColor('text-crafting');
-        setBgColor('bg-crafting');
+        setTextColor('text-crafting-500');
+        setBgColor('bg-crafting-500');
         break;
       case '/crafting':
-        setTextColor('text-crafting');
-        setBgColor('bg-crafting');
+        setTextColor('text-crafting-500');
+        setBgColor('bg-crafting-500');
         break;
       case '/share':
-        setTextColor('text-sharing');
-        setBgColor('bg-sharing');
+        setTextColor('text-sharing-500');
+        setBgColor('bg-sharing-500');
         break;
       default:
         setTextColor('text-white');

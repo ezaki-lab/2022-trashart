@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Main from '../../components/main';
+import Session from '../../lib/session';
 import Camera from '../../lib/crafting/camera';
 
 const title = '製作';
@@ -73,7 +73,7 @@ const Crafting = () => {
   }, [canvasObj.current]);
 
   return (
-    <Main
+    <Session
       title={title}
       description={description}
       padding={false}
@@ -96,7 +96,7 @@ const Crafting = () => {
           onClickAr={handleClickAr}
         /> */}
       </div>
-    </Main>
+    </Session>
   );
 };
 

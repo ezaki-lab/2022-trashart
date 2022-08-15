@@ -42,12 +42,12 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
 
       <div className="w-screen h-screen text-black text-lg">
-        {route === '/social'
+        {/* {route === '/social'
           ? <SocialAppBar />
           : <CraftAppBar />
-        }
+        } */}
         <Component {...pageProps} />
-        <BottomAppBar route={route} />
+        {/* <BottomAppBar route={route} /> */}
       </div>
 
       <Transition
