@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import url from '../utils/url';
 
-const Linking = ({ href, rootHref = "", children }) => {
-  if (rootHref === "") {
+const Linking = ({ href, className = '', rootHref = '', children }) => {
+  if (rootHref === '') {
     return (
       <Link
         href={href}
         as={url(href)}
       >
-        <a>
+        <a className={className !== '' ? className : null}>
           {children}
         </a>
       </Link>
@@ -20,7 +20,7 @@ const Linking = ({ href, rootHref = "", children }) => {
         as={url(rootHref)}
         passHref
       >
-        <a>
+        <a className={className !== '' ? className : null}>
           {children}
         </a>
       </Link>

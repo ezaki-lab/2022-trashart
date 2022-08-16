@@ -9,17 +9,27 @@ const Home = () => {
     <Main
       title={title}
       description={description}
+      className="p-3 flex flex-col items-center"
     >
-      <h1 className="text-2xl font-bold text-green-500 mb-3">
-        MARINE TRASHART
-      </h1>
-      「MARINE TRASHART」はアート作品を作るために浜辺のごみを拾うことによって、
-      ごみ問題解決に繋げることを支援します。
-      <div className="mt-3">
-        <Linking href="/next">
-          次のページへ
-        </Linking>
+      <div className="w-full h-16 flex flex-col items-end">
+        <button
+          className="w-16 h-16 bg-gray-300 rounded-full"
+        />
       </div>
+
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/logo.svg"
+        alt="ロゴ"
+        className="mt-16 w-5/6"
+      />
+
+      <Linking
+        href="/pick"
+        className="mt-10 px-20 py-5 text-white text-2xl font-bold bg-sky-400 rounded-2xl shadow-xl"
+      >
+        はじめる
+      </Linking>
     </Main>
   );
 };

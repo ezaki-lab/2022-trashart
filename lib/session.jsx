@@ -1,6 +1,7 @@
 import Head from 'next/head';
+import SessionAppBar from './sessionAppBar';
 
-const Session = ({ children, title, description, padding = true }) => {
+const Session = ({ children, title, description, className = '' }) => {
   return (
     <>
       <Head>
@@ -12,7 +13,9 @@ const Session = ({ children, title, description, padding = true }) => {
         <meta property="og:description" content={description} />
       </Head>
 
-      <div className={padding ? 'p-3 pt-20' : null}>
+      <SessionAppBar />
+
+      <div className={className !== '' ? className : 'p-3 pt-2'}>
         {children}
       </div>
     </>
