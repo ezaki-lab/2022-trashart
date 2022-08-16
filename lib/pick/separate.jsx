@@ -1,14 +1,14 @@
 import { MdMemory } from 'react-icons/md';
 import { Headline1 } from '../../components/headline';
 
-const Separate = ({ textColor, iconColor }) => {
+const Separate = () => {
   return (
     <section className="w-full h-1/2">
       <Headline1
         label="プラスチックごみ分類"
-        textColor={textColor}
+        textColor="text-picking-500"
         icon={<MdMemory />}
-        iconColor={iconColor}
+        iconColor="rgb(12, 203, 232)"
       />
 
       <div className="mt-2 w-full h-3/4 bg-black rounded-2xl relative">

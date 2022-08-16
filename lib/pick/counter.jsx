@@ -15,7 +15,7 @@ const shapes = [
   '小物', '直線', 'カーブ', '角', '平面', '特殊'
 ];
 
-const Counter = ({ textColor, borderColor, iconColor }) => {
+const Counter = () => {
   const handleSelectColor = useCallback((color) => {
     console.log('selected color:', color);
   }, []);
@@ -28,12 +28,12 @@ const Counter = ({ textColor, borderColor, iconColor }) => {
     <section className="w-full h-1/2">
       <Headline1
         label="素材カウンター"
-        textColor={textColor}
+        textColor="text-picking-500"
         icon={<BsCalculatorFill />}
-        iconColor={iconColor}
+        iconColor="rgb(12, 203, 232)"
       />
 
-      <div className={`px-2 mt-3 w-full h-12 bg-white border-2 ${borderColor} rounded-2xl flex flex-row justify-around`}>
+      <section className="px-2 mt-3 w-full h-12 bg-white border-2 border-picking-500 rounded-2xl flex flex-row justify-around">
         {bgColors.map((color, index) =>
           <ColorPallet
             color={color}
@@ -41,19 +41,19 @@ const Counter = ({ textColor, borderColor, iconColor }) => {
             onSelected={() => { handleSelectColor(colors[index]); }}
           />
         )}
-      </div>
+      </section>
 
-      <div className={`p-2 mt-3 w-full h-36 bg-white border-2 ${borderColor} rounded-2xl grid grid-cols-3 gap-2`}>
+      <section className="p-2 mt-3 w-full h-36 bg-white border-2 border-picking-500 rounded-2xl grid grid-cols-3 gap-2">
         {shapes.map((shape, index) =>
           <button
-            className={`p-1 text-sm ${textColor} border-2 ${borderColor} rounded-2xl shadow-lg`}
+            className="p-1 text-sm text-picking-500 border-2 border-picking-500 rounded-2xl shadow-lg"
             onClick={() => { handleSelectShape(shape); }}
             key={shape}
           >
             <div className="w-full flex flex-col items-center">
               <BsStarFill
                 size="1.5rem"
-                color={iconColor}
+                color="rgb(12, 203, 232)"
               />
             </div>
             <div className="w-full text-center">
@@ -61,7 +61,7 @@ const Counter = ({ textColor, borderColor, iconColor }) => {
             </div>
           </button>
         )}
-      </div>
+      </section>
     </section>
   );
 };
