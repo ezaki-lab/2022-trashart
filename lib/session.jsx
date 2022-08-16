@@ -15,7 +15,7 @@ const Session = ({ children, title, description, className = '' }) => {
 
       <SessionAppBar />
 
-      <div className={className !== '' ? className : 'p-3 pt-2'}>
+      <div className={className !== '' ? className : 'p-5 pt-32'}>
         {children}
       </div>
     </>

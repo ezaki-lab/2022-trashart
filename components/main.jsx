@@ -12,7 +12,7 @@ const Main = ({ children, title, description, className = '' }) => {
         <meta property="og:description" content={description} />
       </Head>
 
-      <div className={className !== '' ? className : 'p-3'}>
+      <div className={className !== '' ? className : 'p-5'}>
         {children}
       </div>
     </>

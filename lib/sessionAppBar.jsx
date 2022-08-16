@@ -2,45 +2,33 @@ import { MdNavigateNext, MdOutlineYard, MdYard } from 'react-icons/md';
 import { BsArchive, BsArchiveFill } from 'react-icons/bs';
 import { HiOutlineShare, HiShare } from 'react-icons/hi';
 import useHeadRoute from '../hooks/useHeadRoute';
+import useSessionColor from '../hooks/useSessionColor';
 import Linking from '../components/linking';
 import CenterText from '../components/centerText';
 
+const iconProps = {
+  size: '1.75rem',
+  color: 'rgb(209, 213, 219)'
+};
+
+const iconActiveProps = {
+  size: '1.75rem',
+  color: 'white'
+};
+
 const SessionAppBar = () => {
   const route = useHeadRoute();
-
-  const bgColor = {
-    '/pick': 'bg-picking-500',
-    '/craft': 'bg-crafting-500',
-    '/crafting': 'bg-crafting-500',
-    '/share': 'bg-sharing-500'
-  };
-
-  const borderColor = {
-    '/pick': 'border-picking-500',
-    '/craft': 'border-crafting-500',
-    '/crafting': 'border-crafting-500',
-    '/share': 'border-sharing-500'
-  };
-
-  const iconProps = {
-    size: '1.75rem',
-    color: 'rgb(209, 213, 219)'
-  };
-
-  const iconActiveProps = {
-    size: '1.75rem',
-    color: 'white'
-  };
+  const { bgColor, borderColor } = useSessionColor();
 
   return (
-    <nav className={`m-3 w-[calc(100%-1.5rem)] h-20 py-1 bg-gray-50 rounded-2xl text-center text-xl transition-colors px-4 border-4 ${borderColor[route]} flex flex-row justify-around fixed top-0 z-10`}>
+    <nav className={`m-3 w-[calc(100%-1.5rem)] h-20 py-1 bg-gray-50 rounded-2xl text-center text-xl transition-colors px-4 border-4 ${borderColor} flex flex-row justify-around fixed top-0 z-10`}>
       <Item
         label="回収"
         href="/pick"
         active={'/pick' === route}
         icon={<BsArchive {...iconProps} />}
         iconActive={<BsArchiveFill {...iconActiveProps} />}
-        bgColor={bgColor[route]}
+        bgColor={bgColor}
       />
 
       <NavigateNext />
@@ -51,7 +39,7 @@ const SessionAppBar = () => {
         active={'/craft' === route || '/crafting' === route}
         icon={<MdOutlineYard {...iconProps} />}
         iconActive={<MdYard {...iconActiveProps} />}
-        bgColor={bgColor[route]}
+        bgColor={bgColor}
       />
 
       <NavigateNext />
@@ -62,7 +50,7 @@ const SessionAppBar = () => {
         active={'/share' === route}
         icon={<HiOutlineShare {...iconProps} />}
         iconActive={<HiShare {...iconActiveProps} />}
-        bgColor={bgColor[route]}
+        bgColor={bgColor}
       />
     </nav>
   );
