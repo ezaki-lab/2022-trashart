@@ -24,7 +24,7 @@ const MaterialList = ({ handleBack }) => {
         textColor={textColor}
         borderColor={borderColor}
         iconColor={iconColor}
-        className="mt-5"
+        className="mt-7"
       />
 
       <MaterialTable
@@ -40,7 +40,7 @@ const MaterialList = ({ handleBack }) => {
 const BackButton = ({ bgColor, onClick }) => {
   return (
     <button
-      className={`px-7 py-1 text-white text-sm font-medium ${bgColor} rounded-2xl shadow-lg absolute top-28 right-5`}
+      className={`px-7 py-1 text-white text-sm font-medium ${bgColor} rounded-2xl shadow-lg absolute top-[6.25rem] right-5`}
       onClick={onClick}
     >
       <div className="w-full flex flex-col items-center">

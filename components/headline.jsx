@@ -18,4 +18,12 @@ const Headline1 = ({ label, textColor, icon, iconColor }) => {
   );
 };
 
-export { Headline1 };
+const Headline2 = ({ label, textColor }) => {
+  return (
+    <h2 className={`${textColor} text-xl font-medium`}>
+      {label}
+    </h2>
+  );
+};
+
+export { Headline1, Headline2 };

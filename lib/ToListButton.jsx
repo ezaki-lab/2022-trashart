@@ -5,7 +5,7 @@ const ToListButton = ({ bgColor, onClick, posClassName = '' }) => {
     <button
       className={
         posClassName === ''
-          ? `px-7 py-1 text-white text-sm font-medium ${bgColor} rounded-2xl shadow-lg absolute top-28 right-5`
+          ? `px-7 py-1 text-white text-sm font-medium ${bgColor} rounded-2xl shadow-lg absolute top-[6.25rem] right-5`
           : `px-7 py-1 text-white text-sm font-medium ${bgColor} rounded-2xl shadow-lg ${posClassName}`
       }
       onClick={onClick}
