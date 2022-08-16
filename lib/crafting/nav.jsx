@@ -14,7 +14,7 @@ const Nav = ({ onClickAr }) => {
       {isAvailableAr
         ? (
           <button
-            className="text-lg btn border-none text-white bg-crafting hover:bg-orange-700 shadow-lg m-auto"
+            className="text-lg btn border-none text-white bg-crafting-500 hover:bg-orange-700 shadow-lg m-auto"
             onClick={onClickAr}
           >
             ARで置いてみる

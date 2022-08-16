@@ -1,61 +1,49 @@
-import usePreload from '../hooks/usePreload';
+import { AiFillBuild, AiOutlineBuild } from 'react-icons/ai';
+import { MdOutlineArticle, MdArticle } from 'react-icons/md';
 import CenterText from '../components/centerText';
 import Linking from '../components/linking';
-import url from '../utils/url';
 
 const BottomAppBar = ({ route }) => {
-  const icons = {
-    social: {
-      inactive: url('/icons/ic_fluent_album_24_regular.svg'),
-      active: url('/icons/ic_fluent_album_24_filled.svg')
-    },
-    craft: {
-      inactive: url('/icons/ic_fluent_pair_24_regular.svg'),
-      active: url('/icons/ic_fluent_pair_24_filled.svg')
-    }
+  const iconProps = {
+    size: '2rem',
+    color: 'rgb(33, 33, 33)'
   };
-
-  // アイコンを予め読み込んでいく
-  usePreload(url('/icons/ic_fluent_album_24_regular.svg'));
-  usePreload(url('/icons/ic_fluent_album_24_filled.svg'));
-  usePreload(url('/icons/ic_fluent_pair_24_regular.svg'));
-  usePreload(url('/icons/ic_fluent_pair_24_filled.svg'));
+  const iconActiveProps = {
+    size: '2rem',
+    color: 'rgb(33, 33, 33)'
+  };
 
   return (
     <nav className="w-full h-16 bg-sky-100 text-center text-2xl leading-[3rem] flex flex-row justify-around fixed bottom-0">
       <Item
         label="投稿"
         href="/social"
-        now={route}
-        icon={icons.social}
+        active={'/social' === route}
+        icon={<MdOutlineArticle {...iconProps} />}
+        iconActive={<MdArticle {...iconActiveProps} />}
       />
       <Item
         label="製作"
-        href="/craft"
-        now={route}
-        icon={icons.craft}
+        href="/separate"
+        active={'/craft' === route}
+        icon={<AiOutlineBuild {...iconProps} />}
+        iconActive={<AiFillBuild {...iconActiveProps} />}
       />
     </nav>
   );
 };
 
-const Item = ({ label, href, now, icon }) => {
+const Item = ({ label, href, active, icon, iconActive }) => {
   return (
     <Linking href={href}>
       <button>
         <div className={
-          href !== now
-            ? 'mt-1 px-3'
-            : 'mt-1 px-3 bg-sky-300 rounded-xl'
+          active
+            ? 'mt-1 px-3 bg-sky-300 rounded-xl'
+            : 'mt-1 px-3'
         }>
           <CenterText>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={href !== now ? icon.inactive : icon.active}
-              alt={label}
-              width="35rem"
-              className="pointer-events-none"
-            />
+            {active ? iconActive : icon}
           </CenterText>
         </div>
         <div className="-mt-1 text-lg">

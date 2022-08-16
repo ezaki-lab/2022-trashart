@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState, memo } from 'react';
 import { Stage, Layer, Line, Image as KonvaImage } from 'react-konva';
+import { BsPencil, BsPencilFill, BsEraser, BsEraserFill } from 'react-icons/bs';
 import useImage from 'use-image';
-import usePreload from '../../hooks/usePreload';
 import CenterText from '../../components/centerText';
 import ColorPicker from '../../components/colorPicker';
 import url from '../../utils/url';
@@ -95,22 +95,14 @@ const Canvas = ({ width, height, canvasRef }) => {
 const ToolBox = ({ penColor, setPenColor, tool, setTool }) => {
   const [isShowColorPicker, setIsShowColorPicker] = useState(false);
 
-  const icons = {
-    pen: {
-      inactive: url('/icons/ic_fluent_calligraphy_pen_24_regular.svg'),
-      active: url('/icons/ic_fluent_calligraphy_pen_24_filled.svg')
-    },
-    eraser: {
-      inactive: url('/icons/ic_fluent_eraser_24_regular.svg'),
-      active: url('/icons/ic_fluent_eraser_24_filled.svg')
-    }
+  const iconProps = {
+    size: '2rem',
+    color: 'rgb(12, 74, 110)'
   };
-
-  // アイコンを予め読み込んでいく
-  usePreload(url('/icons/ic_fluent_calligraphy_pen_24_regular.svg'));
-  usePreload(url('/icons/ic_fluent_calligraphy_pen_24_filled.svg'));
-  usePreload(url('/icons/ic_fluent_eraser_24_regular.svg'));
-  usePreload(url('/icons/ic_fluent_eraser_24_filled.svg'));
+  const iconActiveProps = {
+    size: '2rem',
+    color: 'rgb(12, 74, 110)'
+  };
 
   const handleColorPickerClick = () => {
     setIsShowColorPicker(true);
@@ -147,19 +139,21 @@ const ToolBox = ({ penColor, setPenColor, tool, setTool }) => {
       </div>
       <ButtonItem
         active={tool === 'pen'}
-        icon={icons.pen}
+        icon={<BsPencil {...iconProps} />}
+        iconActive={<BsPencilFill {...iconActiveProps} />}
         onClick={handlePenClick}
       />
       <ButtonItem
         active={tool === 'eraser'}
-        icon={icons.eraser}
+        icon={<BsEraser {...iconProps} />}
+        iconActive={<BsEraserFill {...iconActiveProps} />}
         onClick={handleEraserClick}
       />
     </div>
   );
 };
 
-const ButtonItem = ({ active, icon, onClick }) => {
+const ButtonItem = ({ active, icon, iconActive, onClick }) => {
   return (
     <button
       className={
@@ -170,13 +164,7 @@ const ButtonItem = ({ active, icon, onClick }) => {
       onClick={!active ? onClick : null}
     >
       <CenterText>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={active ? icon.active : icon.inactive}
-          alt="icon"
-          width="35rem"
-          className="pointer-events-none"
-        />
+        {active ? iconActive : icon}
       </CenterText>
     </button>
   );

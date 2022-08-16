@@ -1,53 +1,19 @@
-import Main from '../components/main';
-import Linking from '../components/linking';
+import Session from '../lib/session';
+import Recommend from '../lib/craft/recommend';
+import ChooseGenre from '../lib/craft/chooseGenre';
 
 const title = '製作';
 const description = '製作をしましょう！';
 
 const Craft = () => {
   return (
-    <Main
+    <Session
       title={title}
       description={description}
     >
-      <div className="w-full h-[calc(100vh-15rem)] p-3 bg-white border-4 border-crafting rounded-lg">
-        <h1 className="text-2xl text-center">
-          ジャンルを選ぼう！
-        </h1>
-        <input
-          type="text"
-          placeholder="検索"
-          className="my-4 px-4 py-2 w-full text-lg text-white placeholder-white rounded-xl bg-crafting"
-        />
-        <ul className="w-full h-[calc(100vh-28rem)] grid grid-cols-2 gap-4 overflow-y-scroll">
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-        </ul>
-        <button className="my-4 px-4 py-2 w-full text-lg font-medium text-white rounded-xl bg-crafting hover:bg-orange-700 shadow-xl">
-          いちから作る
-        </button>
-      </div>
-    </Main>
-  );
-};
-
-const Item = () => {
-  return (
-    <li>
-      <Linking href="/craft/[genre]?genre=hoge" rootHref="/craft/hoge">
-        <div className="w-full h-44 border-4 border-crafting rounded-lg shadow-lg overflow-hidden">
-          <div className="w-full h-32 bg-gray-300" />
-          <div className="p-2 text-center">
-            <h3>
-              動物
-            </h3>
-          </div>
-        </div>
-      </Linking>
-    </li>
+      <Recommend />
+      <ChooseGenre />
+    </Session>
   );
 };
 
