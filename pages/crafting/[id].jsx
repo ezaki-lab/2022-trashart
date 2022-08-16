@@ -1,8 +1,9 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Main from '../../components/main';
+import Session from '../../lib/session';
 import Camera from '../../lib/crafting/camera';
+import MaterialList from '../../lib/materialList/materialList';
 
 const title = '製作';
 const description = '製作しましょう！';
@@ -20,14 +21,17 @@ const Crafting = () => {
   const router = useRouter();
   const query = router.query;
 
+  const [mode, setMode] = useState('camera');
+
   const displayObj = useRef(null);
   const canvasObj = useRef(null);
 
   const [craftingId, setCraftingId] = useState('');
   const [blueprintUrl, setBlueprintUrl] = useState('');
 
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const handleBackFromList = useCallback(() => {
+    setMode('camera');
+  }, []);
 
   useEffect(() => {
     if (query.id === undefined) {
@@ -49,11 +53,6 @@ const Crafting = () => {
       });
   }, [query.id]);
 
-  useEffect(() => {
-    setWidth(displayObj.current.clientWidth);
-    setHeight(displayObj.current.clientHeight);
-  }, [displayObj.current]);
-
   const handleClickAr = useCallback(() => {
     setIsAr(true);
 
@@ -73,30 +72,22 @@ const Crafting = () => {
   }, [canvasObj.current]);
 
   return (
-    <Main
+    <Session
       title={title}
       description={description}
       padding={false}
     >
-      <div
-        className="w-full h-[calc(100vh-4rem)] relative"
-        ref={displayObj}
-      >
-        {craftingId !== '' &&
-          <Camera id={craftingId} />
-        }
-
-        {/* <Canvas
-          width={width}
-          height={height}
-          canvasRef={canvasObj}
+      {mode === 'camera' &&
+        <Camera
+          id={craftingId}
+          setMode={setMode}
         />
+      }
 
-        <Nav
-          onClickAr={handleClickAr}
-        /> */}
-      </div>
-    </Main>
+      {mode === 'list' &&
+        <MaterialList handleBack={handleBackFromList} />
+      }
+    </Session>
   );
 };
 

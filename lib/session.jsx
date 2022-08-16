@@ -1,6 +1,7 @@
 import Head from 'next/head';
+import SessionAppBar from './sessionAppBar';
 
-const Main = ({ children, title, description, className = '' }) => {
+const Session = ({ children, title, description, className = '' }) => {
   return (
     <>
       <Head>
@@ -12,11 +13,13 @@ const Main = ({ children, title, description, className = '' }) => {
         <meta property="og:description" content={description} />
       </Head>
 
-      <div className={className !== '' ? className : 'p-5'}>
+      <SessionAppBar />
+
+      <div className={className !== '' ? className : 'p-5 pt-28'}>
         {children}
       </div>
     </>
   );
 };
 
-export default Main;
+export default Session;

@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import { trashCountAtom } from '../common/stores';
-import Main from '../components/main';
+import Session from '../lib/session';
 import Counter from '../components/counter';
 
 const title = '分別';
@@ -24,7 +24,7 @@ const Separate = () => {
   };
 
   return (
-    <Main
+    <Session
       title={title}
       description={description}
     >
@@ -85,7 +85,7 @@ const Separate = () => {
           onPlus={() => handlePlus('pp')}
         />
       </div>
-    </Main>
+    </Session>
   );
 };
 

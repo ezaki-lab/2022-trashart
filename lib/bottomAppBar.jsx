@@ -18,14 +18,14 @@ const BottomAppBar = ({ route }) => {
       <Item
         label="投稿"
         href="/social"
-        active={"/social" === route}
+        active={'/social' === route}
         icon={<MdOutlineArticle {...iconProps} />}
         iconActive={<MdArticle {...iconActiveProps} />}
       />
       <Item
         label="製作"
         href="/separate"
-        active={"/craft" === route}
+        active={'/craft' === route}
         icon={<AiOutlineBuild {...iconProps} />}
         iconActive={<AiFillBuild {...iconActiveProps} />}
       />

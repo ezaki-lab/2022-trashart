@@ -1,11 +1,11 @@
 import useRedirect from '../hooks/useRedirect';
 import Main from '../components/main';
 
-const title = 'ホーム';
+const title = '';
 const description = 'アート製作を通じた海洋ごみ処理';
 
 const Home = () => {
-  useRedirect('/social');
+  useRedirect('/home');
 
   return (
     <Main

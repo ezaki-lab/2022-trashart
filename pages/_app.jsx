@@ -42,15 +42,15 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
 
       <div className="w-screen h-screen text-black text-lg">
-        {route === '/social'
+        {/* {route === '/social'
           ? <SocialAppBar />
           : <CraftAppBar />
-        }
+        } */}
         <Component {...pageProps} />
-        <BottomAppBar route={route} />
+        {/* <BottomAppBar route={route} /> */}
       </div>
 
-      <Transition
+      {/* <Transition
         appear
         show={!ready}
         leave="transition-opacity ease-out duration-500"
@@ -58,7 +58,7 @@ const MyApp = ({ Component, pageProps }) => {
         leaveTo="opacity-0"
       >
         <SplashScreen />
-      </Transition>
+      </Transition> */}
     </>
   );
 };
