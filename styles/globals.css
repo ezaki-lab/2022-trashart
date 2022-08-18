@@ -8,8 +8,6 @@ body {
     width: 100vw;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
-    background: radial-gradient(rgb(234, 241, 246) 0.2rem, transparent 0.2rem);
-    background-size: 3rem 3rem;
     background-color: rgb(255, 255, 255);
     overscroll-behavior-y: none;
 }
