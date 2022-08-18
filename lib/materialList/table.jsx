@@ -79,7 +79,7 @@ const Header = ({ textColor, iconColor }) => {
 
 const Row = ({ borderColor }) => {
   return (
-    <li className={`mt-2 bg-white border-2 ${borderColor} rounded-lg flex flex-row justify-around`}>
+    <li className={`mt-2 border-2 ${borderColor} rounded-lg flex flex-row justify-around`}>
       <div className="w-1/3 text-center">
         30
       </div>

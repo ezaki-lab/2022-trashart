@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import SessionAppBar from './sessionAppBar';
 
-const Session = ({ children, title, description, className = '' }) => {
+const Session = ({ children, title, description, className = '', style }) => {
   return (
     <>
       <Head>
@@ -15,7 +15,10 @@ const Session = ({ children, title, description, className = '' }) => {
 
       <SessionAppBar />
 
-      <div className={className !== '' ? className : 'p-5 pt-28'}>
+      <div
+        className={className !== '' ? className : 'p-5 pt-28'}
+        style={style}
+      >
         {children}
       </div>
     </>

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-const Main = ({ children, title, description, className = '' }) => {
+const Main = ({ children, title, description, className = '', style }) => {
   return (
     <>
       <Head>
@@ -12,7 +12,10 @@ const Main = ({ children, title, description, className = '' }) => {
         <meta property="og:description" content={description} />
       </Head>
 
-      <div className={className !== '' ? className : 'p-5'}>
+      <div
+        className={className !== '' ? className : 'p-5'}
+        style={style}
+      >
         {children}
       </div>
     </>

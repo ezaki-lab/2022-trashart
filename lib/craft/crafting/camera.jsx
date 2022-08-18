@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useWindowSize } from 'react-use';
-import WebCamera from '../webCamera/webCamera';
-import ToListButton from '../ToListButton';
+import WebCamera from '../../webCamera/webCamera';
+import ToListButton from '../../ToListButton';
 
 const Camera = ({ id, setMode }) => {
   const { width } = useWindowSize();

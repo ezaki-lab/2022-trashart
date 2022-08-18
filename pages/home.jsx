@@ -10,7 +10,11 @@ const Home = () => {
     <Main
       title={title}
       description={description}
-      className="p-3 flex flex-col items-center"
+      className="h-screen p-3 flex flex-col items-center"
+      style={{
+        background: 'radial-gradient(rgb(234, 241, 246) 0.2rem, transparent 0.2rem)',
+        backgroundSize: '3rem 3rem'
+      }}
     >
       <div className="w-full h-16 flex flex-col items-end">
         <button

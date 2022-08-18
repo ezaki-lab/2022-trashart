@@ -33,7 +33,7 @@ const Counter = () => {
         iconColor="rgb(12, 203, 232)"
       />
 
-      <section className="px-2 mt-5 w-full h-12 bg-white border-2 border-picking-500 rounded-2xl flex flex-row justify-around">
+      <section className="px-2 mt-5 w-full h-12 border-2 border-picking-500 rounded-2xl flex flex-row justify-around">
         {bgColors.map((color, index) =>
           <ColorPallet
             color={color}
@@ -43,7 +43,7 @@ const Counter = () => {
         )}
       </section>
 
-      <section className="p-2 mt-3 w-full h-36 bg-white border-2 border-picking-500 rounded-2xl grid grid-cols-3 gap-2">
+      <section className="p-2 mt-3 w-full h-36 border-2 border-picking-500 rounded-2xl grid grid-cols-3 gap-2">
         {shapes.map((shape, index) =>
           <button
             className="p-1 text-sm text-picking-500 border-2 border-picking-500 rounded-2xl shadow-lg"
