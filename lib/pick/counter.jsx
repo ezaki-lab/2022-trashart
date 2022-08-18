@@ -1,5 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import { useAtom } from 'jotai';
 import { BsCalculatorFill, BsStarFill } from 'react-icons/bs';
+import { materialsAtom } from '../../common/stores';
 import { Headline1 } from '../../components/headline';
 
 const colors = [
@@ -12,17 +14,45 @@ const bgColors = [
 ];
 
 const shapes = [
+  'small', 'straight', 'curve', 'angular', 'square', 'special'
+];
+
+const shapeNames = [
   '小物', '直線', 'カーブ', '角', '平面', '特殊'
 ];
 
 const Counter = () => {
-  const handleSelectColor = useCallback((color) => {
-    console.log('selected color:', color);
-  }, []);
+  const [materials, setMaterials] = useAtom(materialsAtom);
 
-  const handleSelectShape = useCallback((shape) => {
-    console.log('selected shape:', shape);
-  }, []);
+  const [color, setColor] = useState('');
+  const [shape, setShape] = useState('');
+
+  const count = useCallback((color, shape) => {
+    if (color === '' || shape === '') {
+      return;
+    }
+
+    const tmp = { ...materials };
+    materials[shape][color] += 1;
+    setMaterials(tmp);
+
+    console.log(tmp);
+
+    setColor('');
+    setShape('');
+  }, [materials, setMaterials]);
+
+  const handleSelectColor = useCallback((selected) => {
+    console.log('selected color:', selected);
+    setColor(selected);
+    count(selected, shape);
+  }, [setColor, count, shape]);
+
+  const handleSelectShape = useCallback((selected) => {
+    console.log('selected shape:', selected);
+    setShape(selected);
+    count(color, selected);
+  }, [setShape, count, color]);
 
   return (
     <section className="w-full h-1/2">
@@ -57,7 +87,7 @@ const Counter = () => {
               />
             </div>
             <div className="w-full text-center">
-              {shape}
+              {shapeNames[index]}
             </div>
           </button>
         )}
