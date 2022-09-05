@@ -1,19 +1,8 @@
-import {
-  FacebookShareButton,
-  HatenaShareButton,
-  LineShareButton,
-  TwitterShareButton,
-  FacebookIcon,
-  HatenaIcon,
-  LineIcon,
-  TwitterIcon,
-} from 'react-share';
-
 const ShareToSns = () => {
   return (
     <section className="mt-8">
       <div className="px-10 flex flex-row justify-around">
-        <FacebookShareButton>
+        {/* <FacebookShareButton>
           <FacebookIcon size="3rem" round />
         </FacebookShareButton>
 
@@ -30,7 +19,7 @@ const ShareToSns = () => {
           windowHeight={460}
         >
           <HatenaIcon size="3rem" round />
-        </HatenaShareButton>
+        </HatenaShareButton> */}
       </div>
 
       <div className="flex flex-col items-center">
