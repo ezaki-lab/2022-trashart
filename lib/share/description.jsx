@@ -2,7 +2,7 @@ import { Headline2 } from '../../components/headline';
 
 const Description = () => {
   return (
-    <section className="mt-4">
+    <div className="mt-6">
       <div>
         <Headline2
           label="作品名"
@@ -39,7 +39,7 @@ const Description = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

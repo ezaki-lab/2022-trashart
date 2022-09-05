@@ -1,8 +1,8 @@
 import { IconContext } from 'react-icons';
 
-const Headline1 = ({ label, textColor, icon, iconColor }) => {
+const Headline1 = ({ label, textColor, icon, iconColor, className }) => {
   return (
-    <section className="flex flex-row">
+    <section className={!className ? 'flex flex-row' : `flex flex-row ${className}`}>
       <IconContext.Provider value={{
         size: '1.2rem',
         color: iconColor,
@@ -18,7 +18,7 @@ const Headline1 = ({ label, textColor, icon, iconColor }) => {
   );
 };
 
-const Headline2 = ({ label, textColor }) => {
+const Headline2 = ({ label, textColor, className }) => {
   return (
     <h2 className={`${textColor} text-xl font-medium`}>
       {label}

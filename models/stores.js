@@ -1,6 +1,7 @@
 import { atom } from 'jotai';
 
-export const userAtom = atom('user');
+export const sectionAtom = atom('');
+export const modeAtom = atom('');
 
 export const materialsAtom = atom({
   small: {

@@ -1,16 +1,17 @@
-import { useCallback, useState } from 'react';
+import { useEffect } from 'react';
 import Session from '../lib/session';
-import General from '../lib/pick/general';
-import MaterialList from '../lib/materialList/materialList';
+import useSession from '../hooks/useSession';
+import Camera from '../lib/pick/camera/camera';
+import Result from '../lib/pick/result/result';
 
 const title = '回収';
 const description = '回収をしましょう！';
 
 const Pick = () => {
-  const [mode, setMode] = useState('general');
+  const { section, setSection } = useSession();
 
-  const handleBackFromList = useCallback(() => {
-    setMode('general');
+  useEffect(() => {
+    setSection('camera');
   }, []);
 
   return (
@@ -18,12 +19,12 @@ const Pick = () => {
       title={title}
       description={description}
     >
-      {mode === 'general' &&
-        <General setMode={setMode} />
+      {section === 'camera' &&
+        <Camera />
       }
 
-      {mode === 'list' &&
-        <MaterialList handleBack={handleBackFromList} />
+      {section === 'result' &&
+        <Result />
       }
     </Session>
   );
