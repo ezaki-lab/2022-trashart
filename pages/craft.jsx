@@ -1,27 +1,17 @@
-import { useCallback, useState } from 'react';
+import { useEffect } from 'react';
+import useSession from '../hooks/useSession';
 import Session from '../lib/session';
 import Portal from '../lib/craft/portal/portal';
-import Genre from '../lib/craft/genre/genre';
-import MaterialList from '../lib/materialList/materialList';
 import Crafting from '../lib/craft/crafting/crafting';
 
 const title = '製作';
 const description = '製作をしましょう！';
 
 const Craft = () => {
-  const [modePopped, setModePopped] = useState('');
-  const [mode, setMode] = useState('portal');
-  const [genreId, setGenreId] = useState('');
-  const [genreName, setGenreName] = useState('');
-  const [craftingId, setCraftingId] = useState('');
+  const { section, setSection } = useSession();
 
-  const changeMode = useCallback((modeTo) => {
-    setModePopped(mode);
-    setMode(modeTo);
-  }, [mode]);
-
-  const handleBackFromList = useCallback(() => {
-    setMode(modePopped);
+  useEffect(() => {
+    setSection('portal');
   }, []);
 
   return (
@@ -29,30 +19,12 @@ const Craft = () => {
       title={title}
       description={description}
     >
-      {mode === 'portal' &&
-        <Portal
-          setGenreId={setGenreId}
-          setGenreName={setGenreName}
-          setCraftingId={setCraftingId}
-          changeMode={changeMode}
-        />
+      {section === 'portal' &&
+        <Portal />
       }
 
-      {mode === 'genre' &&
-        <Genre
-          id={genreId}
-          name={genreName}
-          setCraftingId={setCraftingId}
-          changeMode={changeMode}
-        />
-      }
-
-      {mode === 'list' &&
-        <MaterialList handleBack={handleBackFromList} />
-      }
-
-      {mode === 'crafting' &&
-        <Crafting id={craftingId} />
+      {section === 'crafting' &&
+        <Crafting />
       }
     </Session>
   );

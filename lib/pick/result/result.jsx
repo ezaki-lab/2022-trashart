@@ -33,7 +33,7 @@ const Result = () => {
         <div className="mt-10">
           <Linking
             href="/craft"
-            className="px-10 py-5 text-white text-2xl font-bold bg-picking-400 rounded-2xl shadow-xl"
+            className="px-10 py-5 text-white text-2xl font-bold bg-picking-500 rounded-2xl shadow-xl"
           >
             製作するアートを選ぶ
           </Linking>
