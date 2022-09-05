@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useAtom } from 'jotai';
 import { BsCalculatorFill, BsStarFill } from 'react-icons/bs';
-import { materialsAtom } from '../../common/stores';
+import { materialsAtom } from '../../models/stores';
 import { Headline1 } from '../../components/headline';
 
 const colors = [
