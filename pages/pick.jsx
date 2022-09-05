@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import Session from '../lib/session';
 import useSession from '../hooks/useSession';
-import Result from '../lib/pick/result';
-import Camera from '../lib/pick/camera';
+import Camera from '../lib/pick/camera/camera';
+import Result from '../lib/pick/result/result';
 
 const title = '回収';
 const description = '回収をしましょう！';
