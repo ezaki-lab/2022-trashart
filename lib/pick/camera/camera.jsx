@@ -1,14 +1,20 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useAtom } from 'jotai';
 import WebCamera from '../../webCamera/webCamera';
 import useSession from '../../../hooks/useSession';
 import ModeButton from './modeButton';
 import { MdMemory } from 'react-icons/md';
 import { BsArchiveFill } from 'react-icons/bs';
 import SeparateDialog from './separateDialog';
+import { materialB64Atom } from '../../../models/stores';
 
 const Camera = () => {
   const { setSection, mode, setMode } = useSession();
   const [isShowSeparate, setIsShowSeparate] = useState(false);
+
+  const camera = useRef(null);
+
+  const [materialB64, setMaterialB64] = useAtom(materialB64Atom);
 
   useEffect(() => {
     if (mode == 'result') {
@@ -40,6 +46,8 @@ const Camera = () => {
   };
 
   const store = () => {
+    const b64 = camera.current.takePhoto();
+    setMaterialB64(b64);
     setSection('result');
   };
 
@@ -49,7 +57,7 @@ const Camera = () => {
 
   return (
     <section className="w-full h-full fixed top-0 left-0">
-      <WebCamera facingMode="environment" />
+      <WebCamera facingMode="environment" ref={camera} />
 
       <div className="w-full h-52 bg-[rgba(0,0,0,0.5)] flex flex-col items-center justify-evenly fixed bottom-0">
         <div className="mb-1 w-full flex flex-col items-center">
