@@ -51,7 +51,7 @@ const Camera = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'data': materialB64
+        'data': b64
       })
     });
   };
