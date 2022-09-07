@@ -42,7 +42,18 @@ const Camera = () => {
   }, [mode]);
 
   const separate = () => {
+    const b64 = camera.current.takePhoto();
     setIsShowSeparate(true);
+
+    fetch(process.env.NEXT_PUBLIC_API_URL + '/pick/separate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'data': materialB64
+      })
+    });
   };
 
   const store = () => {
