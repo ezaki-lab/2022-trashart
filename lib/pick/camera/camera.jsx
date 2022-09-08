@@ -43,7 +43,7 @@ const Camera = () => {
 
   const separate = () => {
     const b64 = camera.current.takePhoto();
-    // setIsShowSeparate(true);
+    setIsShowSeparate(true);
 
     fetch(process.env.NEXT_PUBLIC_API_URL + '/pick/separate', {
       method: 'POST',
