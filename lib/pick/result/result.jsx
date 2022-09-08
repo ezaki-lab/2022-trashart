@@ -84,7 +84,6 @@ const LoadedSuccessful = () => {
           : (
             <div className="w-full flex flex-wrap">
               {materials.map((material) =>
-                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={material['image_url']}
                   alt="素材画像"

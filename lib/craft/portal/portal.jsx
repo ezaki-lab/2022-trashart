@@ -15,7 +15,7 @@ const Portal = () => {
   const handleClick = useCallback((id) => {
     setSection('crafting');
     setArtId(id);
-  }, [setSection]);
+  }, [setSection, setArtId]);
 
   useEffect(() => {
     fetch(process.env.NEXT_PUBLIC_API_URL + '/arts')

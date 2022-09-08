@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 const ArtItem = ({ id, name, img, onClick, index }) => {
   return (
     <button
@@ -7,11 +5,10 @@ const ArtItem = ({ id, name, img, onClick, index }) => {
       onClick={() => { onClick(id); }}
     >
       <div className="w-full h-48 relative">
-        <Image
+        <img
           src={img}
           alt="アート画像"
-          layout="fill"
-          objectFit="cover"
+          className="w-full h-48 object-cover"
         />
         <div className="text-white text-2xl drop-shadow-lg absolute left-2 top-2">
           {index >= 9 ? index + 1 : `0${index + 1}`}

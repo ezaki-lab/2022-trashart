@@ -85,7 +85,6 @@ const Item = ({ label, href, now, textColor }) => {
 const CaretRight = () => {
   return (
     <div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={url('/icons/ic_fluent_caret_right_24_filled.svg')}
         alt="right"

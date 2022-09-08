@@ -1,5 +1,7 @@
 import { atom } from 'jotai';
 
+// _app.jsx に登録することを忘れずに！
+
 export const sectionAtom = atom('');
 export const modeAtom = atom('');
 

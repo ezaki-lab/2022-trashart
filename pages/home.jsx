@@ -25,7 +25,6 @@ const Home = () => {
         />
       </div>
 
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={url('/logo.svg')}
         alt="ロゴ"

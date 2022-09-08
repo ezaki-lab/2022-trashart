@@ -33,7 +33,6 @@ const Camera = () => {
 
       {supportImgUrl && (
         <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={supportImgUrl}
             alt="補助画像"
