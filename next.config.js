@@ -3,6 +3,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  images: {
+    domains: ['ezaki-lab.cloud']
+  },
   // assetPrefix: urlPrefix,
   // publicRuntimeConfig: { urlPrefix }
 };

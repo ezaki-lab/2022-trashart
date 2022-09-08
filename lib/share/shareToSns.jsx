@@ -4,7 +4,6 @@ const ShareToSns = () => {
   return (
     <div className="mt-8 px-10 flex flex-row justify-around">
       <button>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={url('/icons/Facebook.svg')}
           alt="Facebookロゴ"
@@ -13,7 +12,6 @@ const ShareToSns = () => {
       </button>
 
       <button>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={url('/icons/Twitter.svg')}
           alt="Twitterロゴ"

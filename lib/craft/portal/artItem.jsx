@@ -1,13 +1,17 @@
-const ArtItem = ({ name, index, onClick }) => {
+const ArtItem = ({ id, name, img, onClick, index }) => {
   return (
     <button
       className="bg-crafting-100 text-center rounded-2xl shadow-xl overflow-hidden"
-      onClick={onClick}
+      onClick={() => { onClick(id); }}
     >
       <div className="w-full h-48 relative">
-        <div className="w-full h-full bg-crafting-600" />
+        <img
+          src={img}
+          alt="アート画像"
+          className="w-full h-48 object-cover"
+        />
         <div className="text-white text-2xl drop-shadow-lg absolute left-2 top-2">
-          0{index + 1}
+          {index >= 9 ? index + 1 : `0${index + 1}`}
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { MdMemory } from 'react-icons/md';
 import { Headline1 } from '../../../components/headline';
@@ -12,9 +12,7 @@ const Result = () => {
   const [materialB64, setMaterialB64] = useAtom(materialB64Atom);
   const [materials, setMaterials] = useAtom(materialsAtom);
 
-  const retake = useCallback(() => {
-    setSection('camera');
-  }, []);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setMode('result');
@@ -36,6 +34,7 @@ const Result = () => {
       .then((json) => {
         console.log(json);
         setMaterials(json['materials']);
+        setLoaded(true);
       });
   }, []);
 
@@ -49,29 +48,56 @@ const Result = () => {
         className="mb-2"
       />
 
+      {loaded ? <Loaded /> : <Waiting />}
+    </section>
+  );
+};
+
+const Loaded = () => {
+  const [materials, setMaterials] = useAtom(materialsAtom);
+
+  return (
+    <>
+      {materials.length === 0 ? <LoadedFailure /> : <LoadedSuccessful />}
+    </>
+  );
+};
+
+const LoadedSuccessful = () => {
+  const { setSection, setMode } = useSession();
+
+  const [materials, setMaterials] = useAtom(materialsAtom);
+
+  const retake = useCallback(() => {
+    setSection('camera');
+  }, []);
+
+  return (
+    <>
       これだけの素材が集まりました。
 
-      {materials.length === 0
-        ? (
-          <div className="mt-5 w-32 h-32 bg-picking-700" />
-        )
-        : (
-          <div className="w-full flex flex-wrap">
-            {materials.map((material) =>
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={material['image_url']}
-                alt="素材画像"
-                className="p-3"
-                key={material['id']}
-              />
-            )}
-          </div>
-        )
-      }
+      <div className="px-5 -ml-5 w-screen h-[calc(100vh-20rem)] overflow-scroll">
+        {materials.length === 0
+          ? (
+            <div className="mt-5 w-32 h-32 bg-picking-700" />
+          )
+          : (
+            <div className="w-full flex flex-wrap">
+              {materials.map((material) =>
+                <img
+                  src={material['image_url']}
+                  alt="素材画像"
+                  className="p-3"
+                  key={material['id']}
+                />
+              )}
+            </div>
+          )
+        }
+      </div>
 
-      <div className="w-full h-40 fixed left-0 bottom-0">
-        <div className="mt-10">
+      <div className="mt-1 w-full h-28">
+        <div className="pt-5">
           <Linking
             href="/craft"
             className="px-10 py-5 text-white text-2xl font-bold bg-picking-500 rounded-2xl shadow-xl"
@@ -87,7 +113,41 @@ const Result = () => {
           撮り直す
         </button>
       </div>
-    </section>
+    </>
+  );
+};
+
+const LoadedFailure = () => {
+  const { setSection, setMode } = useSession();
+
+  const retake = useCallback(() => {
+    setSection('camera');
+  }, []);
+
+  return (
+    <div className="h-[calc(100vh-11rem)] flex flex-col justify-center">
+      <div className="flex flex-col items-center">
+        画像中から素材が見つかりませんでした。
+
+        <button
+          className="mt-10 px-10 py-5 text-white text-2xl font-bold bg-picking-500 rounded-2xl shadow-xl"
+          onClick={retake}
+        >
+          撮り直す
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const Waiting = () => {
+  return (
+    <div className="h-[calc(100vh-11rem)] text-gray-500 flex flex-col justify-center">
+      <div className="flex flex-col items-center">
+        <div className="mb-8 animate-spin h-20 w-20 bg-picking-200 rounded-xl" />
+        撮影した画像から素材を確認しています…
+      </div>
+    </div>
   );
 };
 

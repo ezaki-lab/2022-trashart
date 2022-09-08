@@ -9,7 +9,7 @@ import SocialAppBar from '../lib/appBar/social';
 import CraftAppBar from '../lib/appBar/craft';
 import BottomAppBar from '../lib/bottomAppBar';
 import SplashScreen from '../lib/splashScreen';
-import { sectionAtom, modeAtom, materialsAtom } from '../models/stores';
+import { sectionAtom, modeAtom, materialB64Atom, materialsAtom, artIdAtom } from '../models/stores';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
@@ -17,7 +17,7 @@ const MyApp = ({ Component, pageProps }) => {
   useHttps();
 
   const { initialState } = pageProps;
-  useHydrateAtoms(initialState ? [[sectionAtom, modeAtom, materialsAtom, initialState]] : []);
+  useHydrateAtoms(initialState ? [[sectionAtom, modeAtom, materialB64Atom, materialsAtom, artIdAtom, initialState]] : []);
 
   // スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート
   useModern();
@@ -50,7 +50,7 @@ const MyApp = ({ Component, pageProps }) => {
         {/* <BottomAppBar route={route} /> */}
       </div>
 
-      {/* <Transition
+      <Transition
         appear
         show={!ready}
         leave="transition-opacity ease-out duration-500"
@@ -58,7 +58,7 @@ const MyApp = ({ Component, pageProps }) => {
         leaveTo="opacity-0"
       >
         <SplashScreen />
-      </Transition> */}
+      </Transition>
     </>
   );
 };
