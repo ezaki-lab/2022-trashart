@@ -1,3 +1,4 @@
+import useRedirect from '../hooks/useRedirect';
 import Main from '../components/main';
 import Linking from '../components/linking';
 import url from '../utils/url';
@@ -6,6 +7,8 @@ const title = 'ホーム';
 const description = 'アート製作を通じた海洋ごみ処理';
 
 const Home = () => {
+  useRedirect('/pick');
+
   return (
     <Main
       title={title}
