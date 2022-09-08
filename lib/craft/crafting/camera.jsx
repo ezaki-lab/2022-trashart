@@ -1,26 +1,46 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useAtom } from 'jotai';
 import Linking from '../../../components/linking';
 import useSession from '../../../hooks/useSession';
 import WebCamera from '../../webCamera/webCamera';
+import { artIdAtom } from '../../../models/stores';
 
 const Camera = () => {
   const { setSection } = useSession();
+  const [artId, setArtId] = useAtom(artIdAtom);
+  const [supportImgUrl, setSupportImgUrl] = useState(null);
 
   const backPortal = useCallback(() => {
     setSection('portal');
   }, [setSection]);
 
+  useEffect(() => {
+    if (artId === '') {
+      return;
+    }
+
+    fetch(process.env.NEXT_PUBLIC_API_URL + '/arts/' + artId)
+      .then((res) => res.json())
+      .then((json) => {
+        setSupportImgUrl(json["support_image_url"]);
+      });
+  }, []);
+
+
   return (
     <div className="w-full h-full fixed top-0 left-0">
       <WebCamera facingMode="environment" />
 
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      {/* <img
-        src={blueprintUrl}
-        alt="設計図"
-        width={width}
-        className="opacity-50 pointer-events-none absolute m-auto inset-0"
-      /> */}
+      {supportImgUrl && (
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={supportImgUrl}
+            alt="補助画像"
+            className="w-full opacity-50 pointer-events-none absolute m-auto inset-0"
+          />
+        </>
+      )}
 
       <button
         className="text-white text-xl fixed left-5 top-32"
