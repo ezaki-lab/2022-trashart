@@ -23,7 +23,7 @@ const Result = () => {
       return;
     }
 
-    fetch(process.env.NEXT_PUBLIC_API_URL + `/pick/${sessionId}/store/`, {
+    fetch(process.env.NEXT_PUBLIC_API_URL + `/pick/${sessionId}/store`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
