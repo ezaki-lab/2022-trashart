@@ -4,10 +4,12 @@ import { MdMemory } from 'react-icons/md';
 import { Headline1 } from '../../../components/headline';
 import Linking from '../../../components/linking';
 import useSession from '../../../hooks/useSession';
-import { materialB64Atom, materialsAtom } from '../../../models/stores';
+import { materialB64Atom, materialsAtom, sessionIdAtom } from '../../../models/stores';
 
 const Result = () => {
   const { setSection, setMode } = useSession();
+
+  const [sessionId, setSessionId] = useAtom(sessionIdAtom);
 
   const [materialB64, setMaterialB64] = useAtom(materialB64Atom);
   const [materials, setMaterials] = useAtom(materialsAtom);
@@ -17,11 +19,11 @@ const Result = () => {
   useEffect(() => {
     setMode('result');
 
-    if (materialB64 === '') {
+    if (materialB64 === '' || sessionId === '') {
       return;
     }
 
-    fetch(process.env.NEXT_PUBLIC_API_URL + '/pick/store', {
+    fetch(process.env.NEXT_PUBLIC_API_URL + `/pick/${sessionId}/store/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

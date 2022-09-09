@@ -12,6 +12,8 @@ const Camera = () => {
   const { setSection, mode, setMode } = useSession();
   const [isShowSeparate, setIsShowSeparate] = useState(false);
 
+  const [message, setMessage] = useState('');
+
   const camera = useRef(null);
 
   const [materialB64, setMaterialB64] = useAtom(materialB64Atom);
@@ -43,7 +45,9 @@ const Camera = () => {
 
   const separate = () => {
     const b64 = camera.current.takePhoto();
-    setIsShowSeparate(true);
+    // setIsShowSeparate(true);
+
+    setMessage('サーバーに送信中…');
 
     fetch(process.env.NEXT_PUBLIC_API_URL + '/pick/separate', {
       method: 'POST',
@@ -53,7 +57,13 @@ const Camera = () => {
       body: JSON.stringify({
         'data': b64
       })
-    });
+    })
+      .then(() => {
+        setMessage('保存成功');
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
+      });
   };
 
   const store = () => {
@@ -69,6 +79,10 @@ const Camera = () => {
   return (
     <section className="w-full h-full fixed top-0 left-0">
       <WebCamera facingMode="environment" ref={camera} />
+
+      <div className="text-white w-full h-12 bg-[rgba(0,0,0,0.5)] fixed bottom-[15rem]">
+        {message}
+      </div>
 
       <div className="w-full h-52 bg-[rgba(0,0,0,0.5)] flex flex-col items-center justify-evenly fixed bottom-0">
         <div className="mb-1 w-full flex flex-col items-center">
