@@ -1,6 +1,15 @@
+import { useCallback } from 'react';
+import { useAtom } from 'jotai';
 import { Headline2 } from '../../components/headline';
+import { quoteAtom } from '../../models/stores';
 
 const Description = () => {
+  const [quote, setQuote] = useAtom(quoteAtom);
+
+  const handleChange = useCallback((e) => {
+    setQuote(e.target.value);
+  }, [setQuote]);
+
   return (
     <div className="mt-6">
       <div>
@@ -11,7 +20,9 @@ const Description = () => {
 
         <input
           type="text"
+          value={quote}
           className="mt-1 px-5 w-full h-12 text-sharing-900 bg-sharing-100 rounded-2xl"
+          onChange={handleChange}
         />
       </div>
 

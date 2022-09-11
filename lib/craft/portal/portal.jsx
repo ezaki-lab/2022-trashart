@@ -54,6 +54,7 @@ const Portal = () => {
       )
         .then((res) => {
           if (res.status === 400) {
+            console.log('なかったぜ');
             getArtsNotRecommend();
             return;
           }
@@ -126,7 +127,7 @@ const Waiting = ({ onSkip }) => {
           className="mt-10 text-crafting-600 text-xl font-bold"
           onClick={onSkip}
         >
-          オススメをスキップする
+          おすすめをスキップする
         </button>
       </div>
     </div>

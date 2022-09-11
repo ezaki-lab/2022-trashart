@@ -11,3 +11,5 @@ export const materialB64Atom = atom('');
 export const materialsAtom = atom([]);
 
 export const artIdAtom = atom('');
+
+export const quoteAtom = atom('');

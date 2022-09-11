@@ -9,7 +9,7 @@ import SocialAppBar from '../lib/appBar/social';
 import CraftAppBar from '../lib/appBar/craft';
 import BottomAppBar from '../lib/bottomAppBar';
 import SplashScreen from '../lib/splashScreen';
-import { sessionIdAtom, sectionAtom, modeAtom, materialB64Atom, materialsAtom, artIdAtom } from '../models/stores';
+import { sessionIdAtom, sectionAtom, modeAtom, materialB64Atom, materialsAtom, artIdAtom, quoteAtom } from '../models/stores';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
@@ -17,7 +17,7 @@ const MyApp = ({ Component, pageProps }) => {
   useHttps();
 
   const { initialState } = pageProps;
-  useHydrateAtoms(initialState ? [[sessionIdAtom, sectionAtom, modeAtom, materialB64Atom, materialsAtom, artIdAtom, initialState]] : []);
+  useHydrateAtoms(initialState ? [[sessionIdAtom, sectionAtom, modeAtom, materialB64Atom, materialsAtom, artIdAtom, quoteAtom, initialState]] : []);
 
   // スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート
   useModern();
