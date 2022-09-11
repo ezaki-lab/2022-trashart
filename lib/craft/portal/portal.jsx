@@ -4,36 +4,91 @@ import { MdAssistantPhoto } from 'react-icons/md';
 import { Headline1 } from '../../../components/headline';
 import useSession from '../../../hooks/useSession';
 import ArtItem from './artItem';
-import { artIdAtom } from '../../../models/stores';
+import { artIdAtom, sessionIdAtom } from '../../../models/stores';
 
 const Portal = () => {
   const { setSection } = useSession();
 
+  const [sessionId, setSessionId] = useAtom(sessionIdAtom);
+
   const [arts, setArts] = useState([]);
   const [artId, setArtId] = useAtom(artIdAtom);
+
+  const [isRecommended, setIsRecommended] = useState(false);
+
+  const recommenderCtrl = new AbortController();
 
   const handleClick = useCallback((id) => {
     setSection('crafting');
     setArtId(id);
   }, [setSection, setArtId]);
 
-  useEffect(() => {
+  const getArtsNotRecommend = () => {
     fetch(process.env.NEXT_PUBLIC_API_URL + '/arts')
       .then((res) => res.json())
       .then((json) => {
         setArts(json["arts"]);
+        setIsRecommended(false);
       });
+  };
+
+  const handleSkipped = useCallback(() => {
+    // try {
+    //   recommenderCtrl.abort();
+    // } catch (err) { }
+    getArtsNotRecommend();
+  }, []);
+
+  useEffect(() => {
+    if (sessionId === '') {
+      getArtsNotRecommend();
+      return;
+    }
+
+    try {
+      fetch(
+        process.env.NEXT_PUBLIC_API_URL + '/art-suggestions/' + sessionId,
+        {
+          signal: recommenderCtrl.signal,
+        }
+      )
+        .then((res) => {
+          if (res.status === 400) {
+            getArtsNotRecommend();
+            return;
+          }
+          return res.json();
+        })
+        .then((json) => {
+          if (json === undefined) {
+            return;
+          }
+          setArts(json["arts"]);
+          setIsRecommended(true);
+        });
+    } catch (err) { }
   }, []);
 
   return (
     <section>
       <Headline1
-        label="おすすめ"
+        label={isRecommended ? 'おすすめ' : 'アート一覧'}
         textColor="text-crafting-500"
         icon={<MdAssistantPhoto />}
         iconColor="rgb(253, 167, 69)"
       />
 
+      {arts.length === 0
+        ? <Waiting onSkip={handleSkipped} />
+        : <Loaded arts={arts} onSelect={handleClick} />
+      }
+    </section>
+  );
+};
+
+const Loaded = ({ arts, onSelect }) => {
+  return (
+    <>
       <section className="mt-3 pb-32 w-full grid grid-cols-2 gap-3">
         {arts.length !== 0 && (
           <>
@@ -42,7 +97,7 @@ const Portal = () => {
                 id={art.id}
                 name={art.name}
                 img={art.original_image_url}
-                onClick={handleClick}
+                onClick={onSelect}
                 index={index}
                 key={art.id}
               />
@@ -56,7 +111,25 @@ const Portal = () => {
       >
         新しい画像からアート製作する
       </button>
-    </section>
+    </>
+  );
+};
+
+const Waiting = ({ onSkip }) => {
+  return (
+    <div className="h-[calc(100vh-11rem)] text-gray-500 flex flex-col justify-center">
+      <div className="flex flex-col items-center">
+        <div className="mb-8 animate-spin h-20 w-20 bg-crafting-200 rounded-xl" />
+        取得した素材から、おすすめのアートを選定しています…
+
+        <button
+          className="mt-10 text-crafting-600 text-xl font-bold"
+          onClick={onSkip}
+        >
+          オススメをスキップする
+        </button>
+      </div>
+    </div>
   );
 };
 
