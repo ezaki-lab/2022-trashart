@@ -45,7 +45,7 @@ const Camera = () => {
 
   const separate = () => {
     const b64 = camera.current.takePhoto();
-    setIsShowSeparate(true);
+    // setIsShowSeparate(true);
 
     setMessage('サーバーに送信中…');
 

@@ -8,7 +8,7 @@ const exec = util.promisify(childProcess.exec);
 
 (async () => {
   // サーバーを開ける前にビルドする
-  await exec('npx next build');
+  // await exec('npx next build');
 
   const dev = false;
   const app = next({ dev });
