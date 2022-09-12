@@ -14,7 +14,16 @@ const Home = (props) => {
       description={description}
     >
       <Head>
-        {props.twImgUrl !== null && <meta name="twitter:image" content={props.twImgUrl} />}
+        {props.twImgUrl !== null && (
+          <>
+            <meta content="summary_large_image" name="twitter:card" />
+            <meta content="MARINE TRASHART で作りました" name="twitter:title" />
+            <meta content="" name="twitter:description" />
+            <meta name="twitter:image" content={props.twImgUrl} />
+            <meta content={props.twImgUrl} property="og:image" />
+            <link as="image" crossOrigin="anonymous" href={props.twImgUrl} rel="preload" />
+          </>
+        )}
       </Head>
     </Main>
   );

@@ -4,14 +4,14 @@ import { MdAssistantPhoto } from 'react-icons/md';
 import { Headline1 } from '../../../components/headline';
 import useSession from '../../../hooks/useSession';
 import ArtItem from './artItem';
-import { artIdAtom, sessionIdAtom } from '../../../models/stores';
+import { artsAtom, artIdAtom, sessionIdAtom } from '../../../models/stores';
 
 const Portal = () => {
   const { setSection } = useSession();
 
   const [sessionId, setSessionId] = useAtom(sessionIdAtom);
 
-  const [arts, setArts] = useState([]);
+  const [arts, setArts] = useAtom(artsAtom);
   const [artId, setArtId] = useAtom(artIdAtom);
 
   const [isRecommended, setIsRecommended] = useState(false);
@@ -42,6 +42,10 @@ const Portal = () => {
   useEffect(() => {
     if (sessionId === '') {
       getArtsNotRecommend();
+      return;
+    }
+
+    if (arts.length !== 0) {
       return;
     }
 
