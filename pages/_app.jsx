@@ -5,10 +5,8 @@ import { Transition } from '@headlessui/react';
 import useHttps from '../hooks/useHttps';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
-import SocialAppBar from '../lib/appBar/social';
-import CraftAppBar from '../lib/appBar/craft';
-import BottomAppBar from '../lib/bottomAppBar';
 import SplashScreen from '../lib/splashScreen';
+import url from '../utils/url';
 import { sessionIdAtom, sectionAtom, modeAtom, materialB64Atom, materialsAtom, artIdAtom, artsAtom, quoteAtom } from '../models/stores';
 import '../styles/globals.css';
 
@@ -35,6 +33,13 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
+        <link rel="manifest" href={url('/manifest.json')} />
+        <link rel="icon" href={url('/favicon.png')} />
+        <link rel="apple-touch-icon" sizes="192x192" href={url('/icon-192x192.png')} />
+        <link rel="apple-touch-icon" sizes="256x256" href={url('/icon-256x256.png')} />
+        <link rel="apple-touch-icon" sizes="384x384" href={url('/icon-384x384.png')} />
+        <link rel="apple-touch-icon" sizes="512x512" href={url('/icon-512x512.png')} />
+        <meta name="theme-color" content="#fc9114" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="robots" content="noindex" />
         <meta property="og:type" content="website" />
@@ -42,12 +47,7 @@ const MyApp = ({ Component, pageProps }) => {
       </Head>
 
       <div className="w-screen h-screen text-black text-lg">
-        {/* {route === '/social'
-          ? <SocialAppBar />
-          : <CraftAppBar />
-        } */}
         <Component {...pageProps} />
-        {/* <BottomAppBar route={route} /> */}
       </div>
 
       <Transition
