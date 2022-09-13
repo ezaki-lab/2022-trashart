@@ -3,9 +3,9 @@ const runtimeCaching = require('next-pwa/cache');
 // const urlPrefix = process.env.NEXT_PUBLIC_ASSET_PREFIX ? '/' + process.env.NEXT_PUBLIC_ASSET_PREFIX : '';
 
 const withPWA = require('next-pwa')({
-  scope: '/~trashart',
+  scope: urlPrefix,
   dest: 'public',
-  sw: '/~trashart/sw.js',
+  sw: urlPrefix + '/sw.js',
   disable: process.env.NODE_ENV === 'development',
   register: true,
   skipWaiting: true,
