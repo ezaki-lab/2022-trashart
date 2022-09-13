@@ -1,16 +1,19 @@
+const runtimeCaching = require('next-pwa/cache');
+
 // const urlPrefix = process.env.NEXT_PUBLIC_ASSET_PREFIX ? '/' + process.env.NEXT_PUBLIC_ASSET_PREFIX : '';
 
 const withPWA = require('next-pwa')({
+  scope: '/~trashart',
   dest: 'public',
+  sw: '/~trashart/sw.js',
   disable: process.env.NODE_ENV === 'development',
-  // register: true,
-  // scope: '/app',
-  // sw: 'service-worker.js',
-  // ...
+  register: true,
+  skipWaiting: true,
+  runtimeCaching
 });
 
 /** @type {import('next').NextConfig} */
-module.exports = withPWA({
+const nextConfig = withPWA({
   reactStrictMode: false,
   images: {
     domains: ['ezaki-lab.cloud']
@@ -18,3 +21,5 @@ module.exports = withPWA({
   // assetPrefix: urlPrefix,
   // publicRuntimeConfig: { urlPrefix }
 });
+
+module.exports = nextConfig;
