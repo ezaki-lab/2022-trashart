@@ -16,7 +16,7 @@ const ShareToSns = () => {
   }, [sessionId, quote]);
 
   return (
-    <div className="mt-8 px-10 flex flex-row justify-around">
+    <div className="mt-8 pb-36 px-10 flex flex-row justify-around">
       <a href={fbLink}>
         <img
           src={url('/icons/Facebook.svg')}
