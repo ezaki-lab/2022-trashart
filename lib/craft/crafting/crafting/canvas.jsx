@@ -2,9 +2,9 @@ import { useCallback, useRef, useState, memo } from 'react';
 import { Stage, Layer, Line, Image as KonvaImage } from 'react-konva';
 import { BsPencil, BsPencilFill, BsEraser, BsEraserFill } from 'react-icons/bs';
 import useImage from 'use-image';
-import CenterText from '../../../components/centerText';
-import ColorPicker from '../../../components/colorPicker';
-import url from '../../../utils/url';
+import CenterText from '../../../../components/centerText';
+import ColorPicker from '../../../../components/colorPicker';
+import url from '../../../../utils/url';
 
 const Canvas = ({ width, height, canvasRef }) => {
   const [penColor, setPenColor] = useState('#000000');

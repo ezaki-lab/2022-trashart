@@ -1,21 +1,17 @@
-import { useEffect } from 'react';
-import useSession from '../hooks/useSession';
 import Session from '../lib/session';
+import Camera from '../lib/separate/camera';
 
 const title = '分別';
 const description = '分別をしましょう！';
 
 const Separate = () => {
-  const { section, setSection } = useSession();
-
-  useEffect(() => {
-    setSection('camera');
-  }, []);
-
   return (
-    <div>
-      準備中
-    </div>
+    <Session
+      title={title}
+      description={description}
+    >
+      <Camera />
+    </Session>
   );
 };
 

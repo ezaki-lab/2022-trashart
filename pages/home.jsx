@@ -29,10 +29,10 @@ const Home = () => {
       />
 
       <Linking
-        href="/pick"
+        href="/craft"
         className="mt-10 px-20 py-5 text-white text-2xl font-bold bg-sky-400 rounded-2xl shadow-xl"
       >
-        はじめる
+        製作をはじめる
       </Linking>
     </Session>
   );

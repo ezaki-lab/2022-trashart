@@ -24,8 +24,8 @@ const CraftAppBar = () => {
         setBgColor('bg-crafting-500');
         break;
       case '/share':
-        setTextColor('text-sharing-500');
-        setBgColor('bg-sharing-500');
+        setTextColor('text-crafting-500');
+        setBgColor('bg-crafting-500');
         break;
       default:
         setTextColor('text-white');

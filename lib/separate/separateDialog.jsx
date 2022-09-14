@@ -51,7 +51,7 @@ const SeparateDialog = ({ isShow, onClose }) => {
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h1"
-                  className="text-lg text-picking-500 font-medium"
+                  className="text-lg text-crafting-500 font-medium"
                 >
                   プラスチックごみの分別
                 </Dialog.Title>

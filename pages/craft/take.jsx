@@ -8,22 +8,23 @@ const title = '撮影';
 const description = '撮影をしましょう！';
 
 const Take = () => {
-  const { section, setSection } = useSession();
+  const { setSection, mode, setMode } = useSession();
 
   useEffect(() => {
-    setSection('camera');
-  }, []);
+    setSection('take');
+    setMode('camera');
+  }, [setSection, setMode]);
 
   return (
     <Session
       title={title}
       description={description}
     >
-      {section === 'camera' &&
+      {mode === 'camera' &&
         <Camera />
       }
 
-      {section === 'result' &&
+      {mode === 'result' &&
         <Result />
       }
     </Session>

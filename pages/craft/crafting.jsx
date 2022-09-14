@@ -1,29 +1,30 @@
 import { useEffect } from 'react';
 import useSession from '../../hooks/useSession';
 import Session from '../../lib/session';
-import Portal from '../../lib/craft/portal/portal';
-import Crafting from '../../lib/craft/crafting/crafting';
+import Portal from '../../lib/craft/crafting/portal/portal';
+import Crafting from '../../lib/craft/crafting/crafting/crafting';
 
 const title = '製作';
 const description = '製作をしましょう！';
 
 const Craft = () => {
-  const { section, setSection } = useSession();
+  const { setSection, mode, setMode } = useSession();
 
   useEffect(() => {
-    setSection('portal');
-  }, []);
+    setSection('crafting');
+    setMode('portal');
+  }, [setSection, setMode]);
 
   return (
     <Session
       title={title}
       description={description}
     >
-      {section === 'portal' &&
+      {mode === 'portal' &&
         <Portal />
       }
 
-      {section === 'crafting' &&
+      {mode === 'crafting' &&
         <Crafting />
       }
     </Session>

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { IconContext } from 'react-icons';
 
-const ModeButton = ({ label, icon, active, onClick }) => {
+const ModeButton = ({ label, icon, active }) => {
   return (
     <button
       className={
@@ -9,7 +9,6 @@ const ModeButton = ({ label, icon, active, onClick }) => {
           ? 'mb-1 px-8 py-1 bg-sky-100 rounded-full flex flex-row transition-colors'
           : 'mb-1 px-8 py-1 bg-none rounded-full flex flex-row transition-colors'
       }
-      onClick={onClick}
     >
       <IconContext.Provider value={{
         size: '1.2rem',

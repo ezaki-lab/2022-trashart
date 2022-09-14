@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { MdAssistantPhoto } from 'react-icons/md';
-import { Headline1 } from '../../../components/headline';
-import useSession from '../../../hooks/useSession';
+import { Headline1 } from '../../../../components/headline';
+import useSession from '../../../../hooks/useSession';
 import ArtItem from './artItem';
-import { artsAtom, artIdAtom, sessionIdAtom } from '../../../models/stores';
+import { artsAtom, artIdAtom, sessionIdAtom } from '../../../../models/stores';
 
 const Portal = () => {
-  const { setSection } = useSession();
+  const { setMode } = useSession();
 
   const [sessionId, setSessionId] = useAtom(sessionIdAtom);
 
@@ -19,9 +19,9 @@ const Portal = () => {
   const recommenderCtrl = new AbortController();
 
   const handleClick = useCallback((id) => {
-    setSection('crafting');
+    setMode('crafting');
     setArtId(id);
-  }, [setSection, setArtId]);
+  }, [setMode, setArtId]);
 
   const getArtsNotRecommend = () => {
     fetch(process.env.NEXT_PUBLIC_API_URL + '/arts')
@@ -93,30 +93,22 @@ const Portal = () => {
 
 const Loaded = ({ arts, onSelect }) => {
   return (
-    <>
-      <section className="mt-3 pb-32 w-full grid grid-cols-2 gap-3">
-        {arts.length !== 0 && (
-          <>
-            {arts.map((art, index) =>
-              <ArtItem
-                id={art.id}
-                name={art.name}
-                img={art.original_image_url}
-                onClick={onSelect}
-                index={index}
-                key={art.id}
-              />
-            )}
-          </>
-        )}
-      </section>
-
-      <button
-        className="px-10 py-5 text-white text-xl font-bold bg-crafting-500 rounded-2xl shadow-xl fixed bottom-8"
-      >
-        新しい画像からアート製作する
-      </button>
-    </>
+    <section className="mt-3 pb-32 w-full grid grid-cols-2 gap-3">
+      {arts.length !== 0 && (
+        <>
+          {arts.map((art, index) =>
+            <ArtItem
+              id={art.id}
+              name={art.name}
+              img={art.original_image_url}
+              onClick={onSelect}
+              index={index}
+              key={art.id}
+            />
+          )}
+        </>
+      )}
+    </section>
   );
 };
 

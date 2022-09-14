@@ -54,7 +54,10 @@ const BottomAppBar = () => {
 
 const Item = ({ label, href, active, icon, iconActive, bgColor }) => {
   return (
-    <Linking href={href}>
+    <Linking
+      href={href}
+      className="flex flex-col items-center justify-center"
+    >
       <div className={
         active
           ? `w-10 h-10 ${bgColor} rounded-xl`
