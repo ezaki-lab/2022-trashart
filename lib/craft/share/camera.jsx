@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
-import WebCamera from '../webCamera/webCamera';
-import { artIdAtom, sessionIdAtom } from '../../models/stores';
+import WebCamera from '../../webCamera/webCamera';
+import { artIdAtom, sessionIdAtom } from '../../../models/stores';
 
 const Camera = () => {
   const camera = useRef(null);

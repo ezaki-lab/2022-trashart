@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useAtom } from 'jotai';
-import { Headline2 } from '../../components/headline';
-import { quoteAtom } from '../../models/stores';
+import { Headline2 } from '../../../components/headline';
+import { quoteAtom } from '../../../models/stores';
 
 const Description = () => {
   const [quote, setQuote] = useAtom(quoteAtom);
