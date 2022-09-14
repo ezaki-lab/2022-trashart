@@ -51,7 +51,7 @@ const SeparateDialog = ({ isShow, onClose }) => {
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h1"
-                  className="text-lg text-crafting-500 font-medium"
+                  className="text-lg text-separating-500 font-medium"
                 >
                   プラスチックごみの分別
                 </Dialog.Title>
@@ -71,7 +71,7 @@ const SeparateDialog = ({ isShow, onClose }) => {
                     <>
                       <div className="my-2 text-center">
                         <h2 className="mb-5">
-                          <div className="text-blue-500 text-8xl font-bold">
+                          <div className="text-separating-700 text-8xl font-bold">
                             {plasticType}
                           </div>
                           <div className="text-gray-500">

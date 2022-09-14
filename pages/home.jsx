@@ -10,13 +10,13 @@ const Home = () => {
     <Session
       title={title}
       description={description}
-      className="h-screen p-3 flex flex-col items-center"
+      className="h-screen flex flex-col items-center"
       style={{
         background: 'radial-gradient(rgb(234, 241, 246) 0.2rem, transparent 0.2rem)',
         backgroundSize: '3rem 3rem'
       }}
     >
-      <div className="w-full h-16 flex flex-col items-end">
+      <div className="pt-5 pr-5 w-full h-[5.25rem] flex flex-col items-end">
         <button
           className="w-16 h-16 bg-gray-300 rounded-full"
         />
@@ -34,6 +34,39 @@ const Home = () => {
       >
         製作をはじめる
       </Linking>
+
+      <section className="mt-20 pb-36 w-full h-screen text-white bg-sky-700 rounded-t-2xl">
+        <div className="p-5 w-full grid grid-cols-2 gap-4">
+          <div className="w-11/12 h-48 rounded-xl shadow-lg overflow-hidden">
+            <img
+              src="https://ezaki-lab.cloud/~trashart/api/storage/arts/cf66b6f3171748223635a5e5/art.webp"
+              alt="作品"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="w-11/12 h-48 rounded-xl shadow-lg overflow-hidden">
+            <img
+              src="https://ezaki-lab.cloud/~trashart/api/storage/arts/2bb3758df7c1b66c633e7609/art.webp"
+              alt="作品"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="w-11/12 h-48 rounded-xl shadow-lg overflow-hidden">
+            <img
+              src="https://ezaki-lab.cloud/~trashart/api/storage/arts/5b46e3aa305acee647f297ee/art.webp"
+              alt="作品"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="w-11/12 h-48 rounded-xl shadow-lg overflow-hidden">
+            <img
+              src="https://ezaki-lab.cloud/~trashart/api/storage/arts/bfda8bde91dbb8656c534669/art.webp"
+              alt="作品"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
     </Session>
   );
 };
