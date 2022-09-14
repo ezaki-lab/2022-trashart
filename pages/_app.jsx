@@ -6,8 +6,22 @@ import useHttps from '../hooks/useHttps';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
 import SplashScreen from '../lib/splashScreen';
+import BottomAppBar from '../lib/bottomAppBar';
 import url from '../utils/url';
-import { sessionIdAtom, sectionAtom, modeAtom, materialB64Atom, materialsAtom, artIdAtom, artsAtom, quoteAtom } from '../models/stores';
+import {
+  sessionIdAtom,
+  albumSectionAtom,
+  albumModeAtom,
+  craftSectionAtom,
+  craftModeAtom,
+  separateSectionAtom,
+  separateModeAtom,
+  materialB64Atom,
+  materialsAtom,
+  artIdAtom,
+  artsAtom,
+  quoteAtom
+} from '../models/stores';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
@@ -15,7 +29,20 @@ const MyApp = ({ Component, pageProps }) => {
   useHttps();
 
   const { initialState } = pageProps;
-  useHydrateAtoms(initialState ? [[sessionIdAtom, sectionAtom, modeAtom, materialB64Atom, materialsAtom, artIdAtom, artsAtom, quoteAtom, initialState]] : []);
+  useHydrateAtoms(initialState ? [[
+    sessionIdAtom,
+    albumSectionAtom,
+    albumModeAtom,
+    craftSectionAtom,
+    craftModeAtom,
+    separateSectionAtom,
+    separateModeAtom,
+    materialB64Atom,
+    materialsAtom,
+    artIdAtom,
+    artsAtom,
+    quoteAtom
+  ]] : []);
 
   // スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート
   useModern();
@@ -48,9 +75,10 @@ const MyApp = ({ Component, pageProps }) => {
 
       <div className="w-screen h-screen text-black text-lg">
         <Component {...pageProps} />
+        <BottomAppBar route={route} />
       </div>
 
-      <Transition
+      {/* <Transition
         appear
         show={!ready}
         leave="transition-opacity ease-out duration-500"
@@ -58,7 +86,7 @@ const MyApp = ({ Component, pageProps }) => {
         leaveTo="opacity-0"
       >
         <SplashScreen />
-      </Transition>
+      </Transition> */}
     </>
   );
 };

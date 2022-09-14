@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import SessionAppBar from './sessionAppBar';
 import { sessionIdAtom } from '../models/stores';
 
 const Session = ({ children, title, description, className = '', style }) => {
@@ -36,10 +35,8 @@ const Session = ({ children, title, description, className = '', style }) => {
         <meta property="og:description" content={description} />
       </Head>
 
-      <SessionAppBar />
-
       <div
-        className={className !== '' ? className : 'p-5 pt-28'}
+        className={className !== '' ? className : 'p-5'}
         style={style}
       >
         {children}

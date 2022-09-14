@@ -1,33 +1,29 @@
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSession from '../hooks/useSession';
-import Session from '../lib/session';
-import Portal from '../lib/craft/portal/portal';
-import Crafting from '../lib/craft/crafting/crafting';
-
-const title = '製作';
-const description = '製作をしましょう！';
+import url from '../utils/url';
 
 const Craft = () => {
+  const router = useRouter();
   const { section, setSection } = useSession();
 
   useEffect(() => {
-    setSection('portal');
-  }, []);
+    switch (section) {
+      case 'take':
+        router.push('/craft/take', url('/craft/take'));
+        break;
+      case 'crafting':
+        router.push('/craft/crafting', url('/craft/crafting'));
+        break;
+      case 'share':
+        router.push('/craft/share', url('/craft/share'));
+        break;
+      default:
+        router.push('/craft/take', url('/craft/take'));
+    }
+  }, [router, section]);
 
-  return (
-    <Session
-      title={title}
-      description={description}
-    >
-      {section === 'portal' &&
-        <Portal />
-      }
-
-      {section === 'crafting' &&
-        <Crafting />
-      }
-    </Session>
-  );
+  return <>Loading...</>;
 };
 
 export default Craft;

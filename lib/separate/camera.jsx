@@ -1,51 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useAtom } from 'jotai';
-import WebCamera from '../../webCamera/webCamera';
-import useSession from '../../../hooks/useSession';
-import ModeButton from './modeButton';
+import WebCamera from '../webCamera/webCamera';
+import useSession from '../../hooks/useSession';
+import ModeButton from '../modeButton';
 import { MdMemory } from 'react-icons/md';
 import { BsArchiveFill } from 'react-icons/bs';
 import SeparateDialog from './separateDialog';
-import { materialB64Atom } from '../../../models/stores';
 
 const Camera = () => {
-  const { setSection, mode, setMode } = useSession();
   const [isShowSeparate, setIsShowSeparate] = useState(false);
 
   const [message, setMessage] = useState('');
 
   const camera = useRef(null);
 
-  const [materialB64, setMaterialB64] = useAtom(materialB64Atom);
-
-  useEffect(() => {
-    if (mode == 'result') {
-      setMode('store');
-      return;
-    }
-
-    setMode('separate');
-  }, []);
-
-  const changeSeparateMode = useCallback(() => {
-    setMode('separate');
-  }, [setMode]);
-
-  const changeStoreMode = useCallback(() => {
-    setMode('store');
-  }, [setMode]);
-
   const takePhoto = useCallback(() => {
-    if (mode === 'separate') {
-      separate();
-    } else if (mode === 'store') {
-      store();
-    }
-  }, [mode]);
-
-  const separate = () => {
     const b64 = camera.current.takePhoto();
-    // setIsShowSeparate(true);
+    setIsShowSeparate(true);
 
     setMessage('サーバーに送信中…');
 
@@ -64,40 +34,26 @@ const Camera = () => {
           setMessage('');
         }, 3000);
       });
-  };
-
-  const store = () => {
-    const b64 = camera.current.takePhoto();
-    setMaterialB64(b64);
-    setSection('result');
-  };
+  }, []);
 
   const closeSeparateDialog = useCallback(() => {
     setIsShowSeparate(false);
   }, [setIsShowSeparate]);
 
   return (
-    <section className="w-full h-full fixed top-0 left-0">
+    <section className="w-full h-[calc(100%-5rem)] fixed top-0 left-0">
       <WebCamera facingMode="environment" ref={camera} />
 
-      <div className="text-white w-full h-12 bg-[rgba(0,0,0,0.5)] fixed bottom-[15rem]">
+      <div className="text-white w-full h-12 bg-[rgba(0,0,0,0.5)] absolute top-0">
         {message}
       </div>
 
-      <div className="w-full h-52 bg-[rgba(0,0,0,0.5)] flex flex-col items-center justify-evenly fixed bottom-0">
+      <div className="w-full h-44 bg-[rgba(0,0,0,0.5)] flex flex-col items-center justify-evenly absolute bottom-0">
         <div className="mb-1 w-full flex flex-col items-center">
           <ModeButton
             icon={<MdMemory />}
             label="プラスチックごみの分別"
-            active={mode === 'separate'}
-            onClick={changeSeparateMode}
-          />
-
-          <ModeButton
-            icon={<BsArchiveFill />}
-            label="アート素材の撮影"
-            active={mode === 'store'}
-            onClick={changeStoreMode}
+            active={true}
           />
         </div>
 

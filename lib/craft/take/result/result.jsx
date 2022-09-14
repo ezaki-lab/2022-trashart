@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { MdMemory } from 'react-icons/md';
-import { Headline1 } from '../../../components/headline';
-import Linking from '../../../components/linking';
-import useSession from '../../../hooks/useSession';
-import { materialB64Atom, materialsAtom, sessionIdAtom } from '../../../models/stores';
+import { Headline1 } from '../../../../components/headline';
+import Linking from '../../../../components/linking';
+import useSession from '../../../../hooks/useSession';
+import { materialB64Atom, materialsAtom, sessionIdAtom } from '../../../../models/stores';
 
 const Result = () => {
   const { setSection, setMode } = useSession();
@@ -17,8 +17,6 @@ const Result = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setMode('result');
-
     if (materialB64 === '' || sessionId === '') {
       return;
     }
@@ -44,9 +42,9 @@ const Result = () => {
     <section className="text-center">
       <Headline1
         label="アート素材の撮影"
-        textColor="text-picking-500"
+        textColor="text-crafting-500"
         icon={<MdMemory />}
-        iconColor="rgb(12, 203, 232)"
+        iconColor="rgb(253, 167, 69)"
         className="mb-2"
       />
 
@@ -81,7 +79,7 @@ const LoadedSuccessful = () => {
       <div className="px-5 -ml-5 w-screen h-[calc(100vh-20rem)] overflow-scroll">
         {materials.length === 0
           ? (
-            <div className="mt-5 w-32 h-32 bg-picking-700" />
+            <div className="mt-5 w-32 h-32 bg-crafting-700" />
           )
           : (
             <div className="w-full flex flex-wrap">
@@ -101,8 +99,8 @@ const LoadedSuccessful = () => {
       <div className="mt-1 w-full h-28">
         <div className="pt-5">
           <Linking
-            href="/craft"
-            className="px-10 py-5 text-white text-2xl font-bold bg-picking-500 rounded-2xl shadow-xl"
+            href="/craft/crafting"
+            className="px-10 py-5 text-white text-2xl font-bold bg-crafting-500 rounded-2xl shadow-xl"
           >
             製作するアートを選ぶ
           </Linking>
@@ -132,7 +130,7 @@ const LoadedFailure = () => {
         画像中から素材が見つかりませんでした。
 
         <button
-          className="mt-10 px-10 py-5 text-white text-2xl font-bold bg-picking-500 rounded-2xl shadow-xl"
+          className="mt-10 px-10 py-5 text-white text-2xl font-bold bg-crafting-500 rounded-2xl shadow-xl"
           onClick={retake}
         >
           撮り直す
@@ -146,7 +144,7 @@ const Waiting = () => {
   return (
     <div className="h-[calc(100vh-11rem)] text-gray-500 flex flex-col justify-center">
       <div className="flex flex-col items-center">
-        <div className="mb-8 animate-spin h-20 w-20 bg-picking-200 rounded-xl" />
+        <div className="mb-8 animate-spin h-20 w-20 bg-crafting-200 rounded-xl" />
         撮影した画像から素材を確認しています…
       </div>
     </div>

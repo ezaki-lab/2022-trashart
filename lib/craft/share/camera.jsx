@@ -57,7 +57,7 @@ const Camera = () => {
             />
 
             <button
-              className="m-auto w-48 h-12 text-white text-xl text-center font-bold bg-sharing-500 rounded-2xl shadow-xl absolute inset-x-0 bottom-2"
+              className="m-auto w-48 h-12 text-white text-xl text-center font-bold bg-crafting-500 rounded-2xl shadow-xl absolute inset-x-0 bottom-2"
               onClick={reTakeMode}
             >
               撮り直す
