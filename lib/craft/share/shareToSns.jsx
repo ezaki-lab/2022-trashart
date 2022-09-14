@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
-import url from "../../utils/url";
-import { sessionIdAtom, quoteAtom } from '../../models/stores';
+import url from "../../../utils/url";
+import { sessionIdAtom, quoteAtom } from '../../../models/stores';
 
 const ShareToSns = () => {
   const [sessionId, setSessionId] = useAtom(sessionIdAtom);
   const [quote, setQuote] = useAtom(quoteAtom);
-
 
   const [fbLink, setFbLink] = useState('');
   const [twLink, setTwLink] = useState('');

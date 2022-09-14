@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import Session from '../lib/session';
-import useSession from '../hooks/useSession';
-import Camera from '../lib/pick/camera/camera';
-import Result from '../lib/pick/result/result';
+import useSession from '../../hooks/useSession';
+import Session from '../../lib/session';
+import Camera from '../../lib/craft/take/camera/camera';
+import Result from '../../lib/craft/take/result/result';
 
-const title = '回収';
-const description = '回収をしましょう！';
+const title = '撮影';
+const description = '撮影をしましょう！';
 
-const Pick = () => {
+const Take = () => {
   const { section, setSection } = useSession();
 
   useEffect(() => {
@@ -30,4 +30,4 @@ const Pick = () => {
   );
 };
 
-export default Pick;
+export default Take;

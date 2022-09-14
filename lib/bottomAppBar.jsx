@@ -1,55 +1,72 @@
-import { AiFillBuild, AiOutlineBuild } from 'react-icons/ai';
-import { MdOutlineArticle, MdArticle } from 'react-icons/md';
-import CenterText from '../components/centerText';
+import { MdOutlineYard, MdYard } from 'react-icons/md';
+import { BsArchive, BsArchiveFill } from 'react-icons/bs';
+import { HiOutlineShare, HiShare } from 'react-icons/hi';
+import useHeadRoute from '../hooks/useHeadRoute';
+import useHeadColor from '../hooks/useHeadColor';
 import Linking from '../components/linking';
+import CenterText from '../components/centerText';
 
-const BottomAppBar = ({ route }) => {
-  const iconProps = {
-    size: '2rem',
-    color: 'rgb(33, 33, 33)'
-  };
-  const iconActiveProps = {
-    size: '2rem',
-    color: 'rgb(33, 33, 33)'
-  };
+const iconProps = {
+  size: '1.75rem',
+  color: 'rgb(209, 213, 219)'
+};
+
+const iconActiveProps = {
+  size: '1.75rem',
+  color: 'white'
+};
+
+const BottomAppBar = () => {
+  const route = useHeadRoute();
+  const { bgColor } = useHeadColor();
 
   return (
-    <nav className="w-full h-16 bg-sky-100 text-center text-2xl leading-[3rem] flex flex-row justify-around fixed bottom-0">
+    <nav className="w-full h-20 bg-white text-center text-2xl leading-[3rem] shadow-up-md flex flex-row justify-around fixed bottom-0">
       <Item
-        label="投稿"
-        href="/social"
-        active={'/social' === route}
-        icon={<MdOutlineArticle {...iconProps} />}
-        iconActive={<MdArticle {...iconActiveProps} />}
+        label="アルバム"
+        href="/home"
+        active={'/home' === route || '/album' === route}
+        icon={<BsArchive {...iconProps} />}
+        iconActive={<BsArchiveFill {...iconActiveProps} />}
+        bgColor={bgColor}
       />
+
       <Item
         label="製作"
-        href="/separate"
+        href="/craft"
         active={'/craft' === route}
-        icon={<AiOutlineBuild {...iconProps} />}
-        iconActive={<AiFillBuild {...iconActiveProps} />}
+        icon={<MdOutlineYard {...iconProps} />}
+        iconActive={<MdYard {...iconActiveProps} />}
+        bgColor={bgColor}
+      />
+
+      <Item
+        label="分別"
+        href="/separate"
+        active={'/separate' === route}
+        icon={<HiOutlineShare {...iconProps} />}
+        iconActive={<HiShare {...iconActiveProps} />}
+        bgColor={bgColor}
       />
     </nav>
   );
 };
 
-const Item = ({ label, href, active, icon, iconActive }) => {
+const Item = ({ label, href, active, icon, iconActive, bgColor }) => {
   return (
     <Linking href={href}>
-      <button>
-        <div className={
-          active
-            ? 'mt-1 px-3 bg-sky-300 rounded-xl'
-            : 'mt-1 px-3'
-        }>
-          <CenterText>
-            {active ? iconActive : icon}
-          </CenterText>
-        </div>
-        <div className="-mt-1 text-lg">
-          {label}
-        </div>
-      </button>
+      <div className={
+        active
+          ? `w-10 h-10 ${bgColor} rounded-xl`
+          : 'w-10 h-10 rounded-xl'
+      }>
+        <CenterText>
+          {!active ? icon : iconActive}
+        </CenterText>
+      </div>
+      <div className="mt-1 text-sm">
+        {label}
+      </div>
     </Linking>
   );
 };

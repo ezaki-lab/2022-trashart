@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { MdMemory } from 'react-icons/md';
-import { Headline1 } from '../../../components/headline';
-import Linking from '../../../components/linking';
-import useSession from '../../../hooks/useSession';
-import { materialB64Atom, materialsAtom, sessionIdAtom } from '../../../models/stores';
+import { Headline1 } from '../../../../components/headline';
+import Linking from '../../../../components/linking';
+import useSession from '../../../../hooks/useSession';
+import { materialB64Atom, materialsAtom, sessionIdAtom } from '../../../../models/stores';
 
 const Result = () => {
   const { setSection, setMode } = useSession();

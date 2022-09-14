@@ -1,16 +1,13 @@
-import useRedirect from '../hooks/useRedirect';
-import Main from '../components/main';
 import Linking from '../components/linking';
+import Session from '../lib/session';
 import url from '../utils/url';
 
 const title = 'ホーム';
 const description = 'アート製作を通じた海洋ごみ処理';
 
 const Home = () => {
-  useRedirect('/pick');
-
   return (
-    <Main
+    <Session
       title={title}
       description={description}
       className="h-screen p-3 flex flex-col items-center"
@@ -37,7 +34,7 @@ const Home = () => {
       >
         はじめる
       </Linking>
-    </Main>
+    </Session>
   );
 };
 

@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
-import WebCamera from '../../webCamera/webCamera';
-import useSession from '../../../hooks/useSession';
+import WebCamera from '../../../webCamera/webCamera';
+import useSession from '../../../../hooks/useSession';
 import ModeButton from './modeButton';
 import { MdMemory } from 'react-icons/md';
 import { BsArchiveFill } from 'react-icons/bs';
 import SeparateDialog from './separateDialog';
-import { materialB64Atom } from '../../../models/stores';
+import { materialB64Atom } from '../../../../models/stores';
 
 const Camera = () => {
   const { setSection, mode, setMode } = useSession();
