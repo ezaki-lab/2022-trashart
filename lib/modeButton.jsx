@@ -1,18 +1,21 @@
 import { memo } from 'react';
 import { IconContext } from 'react-icons';
+import useHeadColor from '../hooks/useHeadColor';
 
 const ModeButton = ({ label, icon, active }) => {
+  const { bgColorSecondary, iconColorStrong } = useHeadColor();
+
   return (
     <button
       className={
         active
-          ? 'mb-1 px-8 py-1 bg-sky-100 rounded-full flex flex-row transition-colors'
+          ? `mb-1 px-8 py-1 ${bgColorSecondary} rounded-full flex flex-row transition-colors`
           : 'mb-1 px-8 py-1 bg-none rounded-full flex flex-row transition-colors'
       }
     >
       <IconContext.Provider value={{
         size: '1.2rem',
-        color: active ? 'rgb(12, 203, 232)' : 'white',
+        color: active ? iconColorStrong : 'white',
         className: 'mt-1 mr-2'
       }}>
         {icon}

@@ -80,7 +80,7 @@ const Portal = () => {
         label={isRecommended ? 'おすすめ' : 'アート一覧'}
         textColor="text-crafting-500"
         icon={<MdAssistantPhoto />}
-        iconColor="rgb(253, 167, 69)"
+        iconColor="rgb(253, 188, 114)"
       />
 
       {arts.length === 0

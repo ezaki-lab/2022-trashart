@@ -10,12 +10,14 @@ import BottomAppBar from '../lib/bottomAppBar';
 import url from '../utils/url';
 import {
   sessionIdAtom,
-  albumSectionAtom,
-  albumModeAtom,
+  homeSectionAtom,
+  homeModeAtom,
   craftSectionAtom,
   craftModeAtom,
   separateSectionAtom,
   separateModeAtom,
+  albumSectionAtom,
+  albumModeAtom,
   materialB64Atom,
   materialsAtom,
   artIdAtom,
@@ -31,12 +33,14 @@ const MyApp = ({ Component, pageProps }) => {
   const { initialState } = pageProps;
   useHydrateAtoms(initialState ? [[
     sessionIdAtom,
-    albumSectionAtom,
-    albumModeAtom,
+    homeSectionAtom,
+    homeModeAtom,
     craftSectionAtom,
     craftModeAtom,
     separateSectionAtom,
     separateModeAtom,
+    albumSectionAtom,
+    albumModeAtom,
     materialB64Atom,
     materialsAtom,
     artIdAtom,
@@ -78,7 +82,7 @@ const MyApp = ({ Component, pageProps }) => {
         <BottomAppBar route={route} />
       </div>
 
-      {/* <Transition
+      <Transition
         appear
         show={!ready}
         leave="transition-opacity ease-out duration-500"
@@ -86,7 +90,7 @@ const MyApp = ({ Component, pageProps }) => {
         leaveTo="opacity-0"
       >
         <SplashScreen />
-      </Transition> */}
+      </Transition>
     </>
   );
 };

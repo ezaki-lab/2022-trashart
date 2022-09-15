@@ -1,18 +1,20 @@
 import { useAtom } from 'jotai';
 import {
-  albumSectionAtom,
-  albumModeAtom,
+  homeSectionAtom,
+  homeModeAtom,
   craftSectionAtom,
   craftModeAtom,
   separateSectionAtom,
-  separateModeAtom
+  separateModeAtom,
+  albumSectionAtom,
+  albumModeAtom
 } from '../models/stores';
 import useHeadRoute from './useHeadRoute';
 
 // セッションデータ
 const useSession = () => {
-  const [albumSection, setAlbumSection] = useAtom(albumSectionAtom);
-  const [albumMode, setAlbumMode] = useAtom(albumModeAtom);
+  const [homeSection, setHomeSection] = useAtom(homeSectionAtom);
+  const [homeMode, setHomeMode] = useAtom(homeModeAtom);
 
   const [craftSection, setCraftSection] = useAtom(craftSectionAtom);
   const [craftMode, setCraftMode] = useAtom(craftModeAtom);
@@ -20,40 +22,36 @@ const useSession = () => {
   const [separateSection, setSeparateSection] = useAtom(separateSectionAtom);
   const [separateMode, setSeparateMode] = useAtom(separateModeAtom);
 
+  const [albumSection, setAlbumSection] = useAtom(albumSectionAtom);
+  const [albumMode, setAlbumMode] = useAtom(albumModeAtom);
+
   const route = useHeadRoute();
 
-  if (route === '/home' || route === '/album') {
-    const section = albumSection;
-    const setSection = setAlbumSection;
-    const mode = albumMode;
-    const setMode = setAlbumMode;
+  let section = homeSection;
+  let setSection = setHomeSection;
+  let mode = homeMode;
+  let setMode = setHomeMode;
 
-    return { section, setSection, mode, setMode };
-
-  } else if (route === '/craft') {
-    const section = craftSection;
-    const setSection = setCraftSection;
-    const mode = craftMode;
-    const setMode = setCraftMode;
-
-    return { section, setSection, mode, setMode };
+  if (route === '/craft') {
+    section = craftSection;
+    setSection = setCraftSection;
+    mode = craftMode;
+    setMode = setCraftMode;
 
   } else if (route === '/separate') {
-    const section = separateSection;
-    const setSection = setSeparateSection;
-    const mode = separateMode;
-    const setMode = setSeparateMode;
+    section = separateSection;
+    setSection = setSeparateSection;
+    mode = separateMode;
+    setMode = setSeparateMode;
 
-    return { section, setSection, mode, setMode };
-
-  } else {
-    const section = albumSection;
-    const setSection = setAlbumSection;
-    const mode = albumMode;
-    const setMode = setAlbumMode;
-
-    return { section, setSection, mode, setMode };
+  } else if (route === '/album') {
+    section = albumSection;
+    setSection = setAlbumSection;
+    mode = albumMode;
+    setMode = setAlbumMode;
   }
+
+  return { section, setSection, mode, setMode };
 };
 
 export default useSession;

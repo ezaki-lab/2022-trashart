@@ -44,7 +44,7 @@ const Result = () => {
         label="アート素材の撮影"
         textColor="text-crafting-500"
         icon={<MdMemory />}
-        iconColor="rgb(253, 167, 69)"
+        iconColor="rgb(253, 188, 114)"
         className="mb-2"
       />
 
@@ -64,13 +64,13 @@ const Loaded = () => {
 };
 
 const LoadedSuccessful = () => {
-  const { setSection, setMode } = useSession();
+  const { setMode } = useSession();
 
   const [materials, setMaterials] = useAtom(materialsAtom);
 
   const retake = useCallback(() => {
-    setSection('camera');
-  }, []);
+    setMode('camera');
+  }, [setMode]);
 
   return (
     <>
@@ -118,11 +118,11 @@ const LoadedSuccessful = () => {
 };
 
 const LoadedFailure = () => {
-  const { setSection, setMode } = useSession();
+  const { setMode } = useSession();
 
   const retake = useCallback(() => {
-    setSection('camera');
-  }, []);
+    setMode('camera');
+  }, [setMode]);
 
   return (
     <div className="h-[calc(100vh-11rem)] flex flex-col justify-center">
