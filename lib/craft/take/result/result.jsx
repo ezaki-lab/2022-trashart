@@ -44,7 +44,7 @@ const Result = () => {
         label="アート素材の撮影"
         textColor="text-crafting-500"
         icon={<MdMemory />}
-        iconColor="rgb(253, 167, 69)"
+        iconColor="rgb(253, 188, 114)"
         className="mb-2"
       />
 
