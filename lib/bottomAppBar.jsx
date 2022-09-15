@@ -23,11 +23,20 @@ const BottomAppBar = () => {
   return (
     <nav className="w-full h-20 bg-white text-center text-2xl leading-[3rem] shadow-up-md flex flex-row justify-around fixed bottom-0">
       <Item
-        label="アルバム"
+        label="ホーム"
         href="/home"
-        active={'/home' === route || '/album' === route}
+        active={'/home' === route}
         icon={<BsArchive {...iconProps} />}
         iconActive={<BsArchiveFill {...iconActiveProps} />}
+        bgColor={bgColor}
+      />
+
+      <Item
+        label="分別"
+        href="/separate"
+        active={'/separate' === route}
+        icon={<HiOutlineShare {...iconProps} />}
+        iconActive={<HiShare {...iconActiveProps} />}
         bgColor={bgColor}
       />
 
@@ -41,11 +50,11 @@ const BottomAppBar = () => {
       />
 
       <Item
-        label="分別"
-        href="/separate"
-        active={'/separate' === route}
-        icon={<HiOutlineShare {...iconProps} />}
-        iconActive={<HiShare {...iconActiveProps} />}
+        label="アルバム"
+        href="/album"
+        active={'/album' === route}
+        icon={<BsArchive {...iconProps} />}
+        iconActive={<BsArchiveFill {...iconActiveProps} />}
         bgColor={bgColor}
       />
     </nav>

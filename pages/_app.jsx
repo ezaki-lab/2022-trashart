@@ -10,12 +10,14 @@ import BottomAppBar from '../lib/bottomAppBar';
 import url from '../utils/url';
 import {
   sessionIdAtom,
-  albumSectionAtom,
-  albumModeAtom,
+  homeSectionAtom,
+  homeModeAtom,
   craftSectionAtom,
   craftModeAtom,
   separateSectionAtom,
   separateModeAtom,
+  albumSectionAtom,
+  albumModeAtom,
   materialB64Atom,
   materialsAtom,
   artIdAtom,
@@ -31,12 +33,14 @@ const MyApp = ({ Component, pageProps }) => {
   const { initialState } = pageProps;
   useHydrateAtoms(initialState ? [[
     sessionIdAtom,
-    albumSectionAtom,
-    albumModeAtom,
+    homeSectionAtom,
+    homeModeAtom,
     craftSectionAtom,
     craftModeAtom,
     separateSectionAtom,
     separateModeAtom,
+    albumSectionAtom,
+    albumModeAtom,
     materialB64Atom,
     materialsAtom,
     artIdAtom,
