@@ -22,10 +22,10 @@ const borderColor = {
 };
 
 const iconColor = {
-  '/home': 'rgb(12, 203, 232)',
-  '/album': 'rgb(12, 203, 232)',
-  '/craft': 'rgb(253, 167, 69)',
-  '/separating': 'rgb(62, 224, 146)'
+  '/home': 'rgb(77, 255, 243)',
+  '/album': 'rgb(77, 255, 243)',
+  '/craft': 'rgb(253, 188, 114)',
+  '/separating': 'rgb(123, 234, 129)'
 };
 
 const useSessionColor = () => {
