@@ -64,13 +64,13 @@ const Loaded = () => {
 };
 
 const LoadedSuccessful = () => {
-  const { setSection, setMode } = useSession();
+  const { setMode } = useSession();
 
   const [materials, setMaterials] = useAtom(materialsAtom);
 
   const retake = useCallback(() => {
-    setSection('camera');
-  }, []);
+    setMode('camera');
+  }, [setMode]);
 
   return (
     <>
@@ -118,11 +118,11 @@ const LoadedSuccessful = () => {
 };
 
 const LoadedFailure = () => {
-  const { setSection, setMode } = useSession();
+  const { setMode } = useSession();
 
   const retake = useCallback(() => {
-    setSection('camera');
-  }, []);
+    setMode('camera');
+  }, [setMode]);
 
   return (
     <div className="h-[calc(100vh-11rem)] flex flex-col justify-center">
