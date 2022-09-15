@@ -1,6 +1,7 @@
 import { MdOutlineYard, MdYard } from 'react-icons/md';
 import { BsArchive, BsArchiveFill } from 'react-icons/bs';
-import { HiOutlineShare, HiShare } from 'react-icons/hi';
+import { RiRecycleLine, RiRecycleFill } from 'react-icons/ri';
+import { IoShapesOutline, IoShapes } from 'react-icons/io5';
 import useHeadRoute from '../hooks/useHeadRoute';
 import useHeadColor from '../hooks/useHeadColor';
 import Linking from '../components/linking';
@@ -35,8 +36,8 @@ const BottomAppBar = () => {
         label="分別"
         href="/separate"
         active={'/separate' === route}
-        icon={<HiOutlineShare {...iconProps} />}
-        iconActive={<HiShare {...iconActiveProps} />}
+        icon={<RiRecycleLine {...iconProps} />}
+        iconActive={<RiRecycleFill {...iconActiveProps} />}
         bgColor={bgColor}
       />
 
@@ -44,8 +45,8 @@ const BottomAppBar = () => {
         label="製作"
         href="/craft"
         active={'/craft' === route}
-        icon={<MdOutlineYard {...iconProps} />}
-        iconActive={<MdYard {...iconActiveProps} />}
+        icon={<IoShapesOutline {...iconProps} />}
+        iconActive={<IoShapes {...iconActiveProps} />}
         bgColor={bgColor}
       />
 
@@ -53,8 +54,8 @@ const BottomAppBar = () => {
         label="アルバム"
         href="/album"
         active={'/album' === route}
-        icon={<BsArchive {...iconProps} />}
-        iconActive={<BsArchiveFill {...iconActiveProps} />}
+        icon={<MdOutlineYard {...iconProps} />}
+        iconActive={<MdYard {...iconActiveProps} />}
         bgColor={bgColor}
       />
     </nav>
@@ -65,18 +66,22 @@ const Item = ({ label, href, active, icon, iconActive, bgColor }) => {
   return (
     <Linking
       href={href}
-      className="flex flex-col items-center justify-center"
+      className="flex flex-col items-center justify-center transition-colors duration-500"
     >
       <div className={
         active
           ? `w-10 h-10 ${bgColor} rounded-xl`
-          : 'w-10 h-10 rounded-xl'
+          : 'w-10 h-10 bg-white rounded-xl'
       }>
         <CenterText>
           {!active ? icon : iconActive}
         </CenterText>
       </div>
-      <div className="mt-1 text-sm">
+      <div className={
+        !active
+          ? "mt-1 text-sm text-gray-300"
+          : 'mt-1 text-sm text-gray-800'
+      }>
         {label}
       </div>
     </Linking>

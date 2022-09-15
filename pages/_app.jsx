@@ -82,7 +82,7 @@ const MyApp = ({ Component, pageProps }) => {
         <BottomAppBar route={route} />
       </div>
 
-      {/* <Transition
+      <Transition
         appear
         show={!ready}
         leave="transition-opacity ease-out duration-500"
@@ -90,7 +90,7 @@ const MyApp = ({ Component, pageProps }) => {
         leaveTo="opacity-0"
       >
         <SplashScreen />
-      </Transition> */}
+      </Transition>
     </>
   );
 };

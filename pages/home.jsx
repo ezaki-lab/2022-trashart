@@ -16,26 +16,13 @@ const Home = () => {
         backgroundSize: '3rem 3rem'
       }}
     >
-      <div className="pt-5 pr-5 w-full h-[5.25rem] flex flex-col items-end">
-        <button
-          className="w-16 h-16 bg-gray-300 rounded-full"
-        />
-      </div>
-
       <img
         src={url('/logo.svg')}
         alt="ロゴ"
-        className="mt-16 w-5/6"
+        className="my-10 w-2/3"
       />
 
-      <Linking
-        href="/craft"
-        className="mt-10 px-20 py-5 text-white text-2xl font-bold bg-sky-400 rounded-2xl shadow-xl"
-      >
-        製作をはじめる
-      </Linking>
-
-      <section className="mt-20 pb-36 w-full h-screen text-white bg-sky-700 rounded-t-2xl">
+      <section className="pb-36 w-full h-screen text-white bg-album-600 rounded-t-2xl">
         <div className="p-5 w-full grid grid-cols-2 gap-4">
           <div className="w-11/12 h-48 rounded-xl shadow-lg overflow-hidden">
             <img
@@ -61,6 +48,20 @@ const Home = () => {
           <div className="w-11/12 h-48 rounded-xl shadow-lg overflow-hidden">
             <img
               src="https://ezaki-lab.cloud/~trashart/api/storage/arts/bfda8bde91dbb8656c534669/art.webp"
+              alt="作品"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="w-11/12 h-48 rounded-xl shadow-lg overflow-hidden">
+            <img
+              src="https://ezaki-lab.cloud/~trashart/api/storage/arts/cf66b6f3171748223635a5e5/art.webp"
+              alt="作品"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="w-11/12 h-48 rounded-xl shadow-lg overflow-hidden">
+            <img
+              src="https://ezaki-lab.cloud/~trashart/api/storage/arts/2bb3758df7c1b66c633e7609/art.webp"
               alt="作品"
               className="w-full h-full object-cover"
             />
