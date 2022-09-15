@@ -9,7 +9,7 @@ const Social = () => {
   ];
 
   return (
-    <section className="-mt-5 pb-36 w-full h-screen text-white bg-none">
+    <section className="w-full h-screen text-white bg-none">
       <svg
         viewBox="0 0 1440 217"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +20,7 @@ const Social = () => {
         <path d="m1231 103.45c-45.601 0.33423-94.135 2.604-144.84 7.7305-202.44 20.001-439.6 85.702-638.58 101.16-199.24 15.793-360.94-17.817-441.79-34.621l-5.7598-1.1973v40.479h1440v-102.37c-57.863-6.376-128.91-11.767-209.03-11.18z" fill="rgb(0, 214, 200)" strokeWidth="0.99241" />
       </svg>
 
-      <div className="p-5 pt-10 w-full bg-album-500 grid grid-cols-2 gap-8">
+      <div className="p-5 pt-10 pb-20 w-full bg-album-500 grid grid-cols-2 gap-8">
         {imgs.map((img) =>
           <Item key={img} id={img} />
         )}
