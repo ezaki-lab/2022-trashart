@@ -5,7 +5,7 @@ import { sessionIdAtom, quoteAtom } from '../../../models/stores';
 import useSession from '../../../hooks/useSession';
 
 const ShareToSns = () => {
-  const { setSection } = useSession();
+  const { setMode } = useSession();
 
   const [sessionId, setSessionId] = useAtom(sessionIdAtom);
   const [quote, setQuote] = useAtom(quoteAtom);
@@ -26,8 +26,8 @@ const ShareToSns = () => {
 
   const handleFinish = useCallback((e) => {
     e.preventDefault();
-    setSection('take');
-  }, [setSection]);
+    setMode('take');
+  }, [setMode]);
 
   return (
     <div className="mt-8 w-full h-16 grid grid-cols-2 gap-4 justify-around">
