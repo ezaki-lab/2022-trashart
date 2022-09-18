@@ -1,6 +1,6 @@
 import Session from '../lib/session';
 import MyAlbum from '../lib/album/myAlbum';
-import url from '../utils/url';
+import Profile from '../lib/album/profile';
 
 const title = 'アルバム';
 const description = 'アルバムを見ましょう！';
@@ -10,17 +10,13 @@ const Album = () => {
     <Session
       title={title}
       description={description}
-      className="h-[calc(100%-5rem)] flex flex-col items-center overflow-x-hidden overflow-y-auto"
+      className="h-[calc(100%-5rem)] overflow-x-hidden overflow-y-auto"
       style={{
         background: 'radial-gradient(rgb(234, 241, 246) 0.2rem, transparent 0.2rem)',
         backgroundSize: '3rem 3rem'
       }}
     >
-      <img
-        src={url('/logo-wide.svg')}
-        alt="ロゴ"
-        className="my-10 w-1/2"
-      />
+      <Profile />
 
       <MyAlbum />
     </Session>
