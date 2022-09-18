@@ -2,7 +2,7 @@ import Head from 'next/head';
 import useRedirect from '../hooks/useRedirect';
 import Main from '../components/main';
 
-const title = '';
+const title = 'MARINE TRASHART';
 const description = 'アート製作を通じた海洋ごみ処理';
 
 const Home = (props) => {
@@ -14,14 +14,17 @@ const Home = (props) => {
       description={description}
     >
       <Head>
-        {props.twImgUrl !== null && (
+        {props.imgUrl !== null && (
           <>
-            <meta content="summary_large_image" name="twitter:card" />
-            <meta content="MARINE TRASHART で作りました" name="twitter:title" />
-            <meta content="" name="twitter:description" />
-            <meta name="twitter:image" content={props.twImgUrl} />
-            <meta content={props.twImgUrl} property="og:image" />
-            <link as="image" crossOrigin="anonymous" href={props.twImgUrl} rel="preload" />
+            <meta property="og:url" content="https://ezaki-lab.cloud/~trashart" />
+            <meta property="og:title" content="海洋ごみアート - MARINE TRASHART" />
+            <meta property="og:type" content="article" />
+            <meta property="og:description" content="あなたも海洋ごみアートを作りませんか？" />
+            <meta property="og:image" content={props.imgUrl} />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:site" content="@takara2314" />
+            <meta property="og:site_name" content="MARINE TRASHART" />
+            <meta property="og:locale" content="ja_JP" />
           </>
         )}
       </Head>
@@ -32,7 +35,7 @@ const Home = (props) => {
 export const getServerSideProps = async ({ req, res, query }) => {
   return {
     props: {
-      twImgUrl: query.id !== undefined
+      imgUrl: query.id !== undefined
         ? process.env.NEXT_PUBLIC_API_URL + '/storage/works/' + query.id + '.png'
         : null,
     }
