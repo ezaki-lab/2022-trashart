@@ -21,17 +21,15 @@ const SplashScreen = () => {
         />
 
         <div className="mt-10 text-gray-500">
-          <div>
-            <small className="text-lg">
-              © 2022 ezaki-lab.com
-            </small>
-          </div>
-
           {process.env.NEXT_PUBLIC_BUILT_AT && (
             <div className="text-center">
               {process.env.NEXT_PUBLIC_BUILT_AT} Built
             </div>
           )}
+
+          <small className="text-lg">
+            © 2022 ezaki-lab.com
+          </small>
         </div>
       </div>
     </div>

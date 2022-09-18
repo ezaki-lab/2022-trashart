@@ -74,7 +74,7 @@ const MyApp = ({ Component, pageProps }) => {
         <link rel="apple-touch-icon" sizes="384x384" href={url('/icon-384x384.png')} />
         <link rel="apple-touch-icon" sizes="512x512" href={url('/icon-512x512.png')} />
         <meta name="theme-color" content="#fc9114" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
         <meta name="robots" content="noindex" />
       </Head>
 
