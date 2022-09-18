@@ -2,6 +2,7 @@ import { atom } from 'jotai';
 
 // _app.jsx に登録することを忘れずに！
 
+export const userIdAtom = atom('');
 export const sessionIdAtom = atom('');
 
 export const homeSectionAtom = atom('');

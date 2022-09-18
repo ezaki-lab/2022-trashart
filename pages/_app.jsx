@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useHydrateAtoms } from 'jotai/utils';
 import { Transition } from '@headlessui/react';
+import dayjs from 'dayjs';
 import useHttps from '../hooks/useHttps';
 import useModern from '../hooks/useModern';
 import useIdRoute from '../hooks/useIdRoute';
@@ -9,6 +10,7 @@ import SplashScreen from '../lib/splashScreen';
 import BottomAppBar from '../lib/bottomAppBar';
 import url from '../utils/url';
 import {
+  userIdAtom,
   sessionIdAtom,
   homeSectionAtom,
   homeModeAtom,
@@ -32,6 +34,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   const { initialState } = pageProps;
   useHydrateAtoms(initialState ? [[
+    userIdAtom,
     sessionIdAtom,
     homeSectionAtom,
     homeModeAtom,

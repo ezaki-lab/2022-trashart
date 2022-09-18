@@ -1,10 +1,35 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { sessionIdAtom } from '../models/stores';
+import { userIdAtom, sessionIdAtom } from '../models/stores';
 
 const Session = ({ children, title, description, className = '', style }) => {
+  const [userId, setUserId] = useAtom(userIdAtom);
   const [sessionId, setSessionId] = useAtom(sessionIdAtom);
+
+  useEffect(() => {
+    if (userId !== '') {
+      return;
+    }
+
+    if (localStorage.getItem('userId') !== null) {
+      setUserId(localStorage.getItem('userId'));
+      return;
+    }
+
+    fetch(process.env.NEXT_PUBLIC_API_URL + '/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+    })
+      .then(res => res.json())
+      .then((json) => {
+        localStorage.setItem('userId', json['id']);
+        setUserId(json['id']);
+      });
+  }, []);
 
   useEffect(() => {
     if (sessionId !== '') {

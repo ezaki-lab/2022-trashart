@@ -17,7 +17,7 @@ const Home = () => {
       }}
     >
       <img
-        src={url('/logo.svg')}
+        src={url('/logo-wide.svg')}
         alt="ロゴ"
         className="my-10 w-2/3"
       />
