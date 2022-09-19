@@ -22,10 +22,9 @@ const Camera = () => {
 
     api.get(`/arts/${artId}`)
       .then((res) => {
-        setSupportImgUrl(res.data['support_img_url']);
+        setSupportImgUrl(res.data['support_image_url']);
       });
   }, [artId]);
-
 
   return (
     <div className="w-full h-[calc(100%-5rem)] fixed top-0 left-0">

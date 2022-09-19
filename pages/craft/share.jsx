@@ -18,14 +18,20 @@ const Share = () => {
 
   useEffect(() => {
     setSection('share');
+  }, [setSection]);
 
-    api.post('/crafting', {
+  useEffect(() => {
+    if (userId === '') {
+      return;
+    }
+
+    api.post('/craftings', {
       'user_id': userId
     })
       .then((res) => {
         setCraftingId(res.data['id']);
       });
-  }, [setSection]);
+  }, [setCraftingId, userId]);
 
   return (
     <Session

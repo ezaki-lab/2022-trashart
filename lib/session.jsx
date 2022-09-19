@@ -20,10 +20,10 @@ const Session = ({ children, title, description, className = '', style }) => {
 
     api.post('/users', {})
       .then((res) => {
-        setUserId(res.data['user_id']);
-        localStorage.setItem('userId', res.data['user_id']);
+        setUserId(res.data['id']);
+        localStorage.setItem('userId', res.data['id']);
       });
-  }, []);
+  }, [userId, setUserId]);
 
   useEffect(() => {
     if (sessionId !== '') {
