@@ -1,15 +1,26 @@
+import { useAtom } from 'jotai';
+import { useEffect, useState } from 'react';
+import api from '../../models/apiClient';
+import { userIdAtom } from '../../models/stores';
+
 const MyAlbum = () => {
-  const imgs = [
-    'cf66b6f3171748223635a5e5',
-    '2bb3758df7c1b66c633e7609',
-    '5b46e3aa305acee647f297ee',
-    'bfda8bde91dbb8656c534669',
-    'cf66b6f3171748223635a5e5',
-    '2bb3758df7c1b66c633e7609'
-  ];
+  const [userId] = useAtom(userIdAtom);
+
+  const [craftings, setCraftings] = useState([]);
+
+  useEffect(() => {
+    if (userId === '') {
+      return;
+    }
+
+    api.get(`/users/${userId}`)
+      .then((res) => {
+        setCraftings(res.data['craftings']);
+      });
+  }, [userId]);
 
   return (
-    <section className="w-full h-screen text-white bg-none">
+    <section className="w-full h-[calc(100vh-15rem)] text-white bg-none">
       <svg
         viewBox="0 0 1440 217"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,21 +31,32 @@ const MyAlbum = () => {
         <path d="m1231 103.45c-45.601 0.33423-94.135 2.604-144.84 7.7305-202.44 20.001-439.6 85.702-638.58 101.16-199.24 15.793-360.94-17.817-441.79-34.621l-5.7598-1.1973v40.479h1440v-102.37c-57.863-6.376-128.91-11.767-209.03-11.18z" fill="rgb(0, 214, 200)" strokeWidth="0.99241" />
       </svg>
 
-      <div className="p-5 pt-10 pb-20 w-full bg-album-500 grid grid-cols-2 gap-8">
-        {imgs.map((img) =>
-          <Item key={img} id={img} />
-        )}
-      </div>
+      {craftings.length > 0 ? (
+        <div className="p-5 pt-10 pb-20 w-full min-h-[calc(100%-3rem)] bg-album-500 grid grid-cols-2 gap-8">
+          {craftings.map((c) =>
+            <Item
+              id={c['id']}
+              title={c['title']}
+              img={c['image_url']}
+              key={c['id']}
+            />
+          )}
+        </div>
+      ) : (
+        <div className="p-5 pt-10 pb-20 w-full min-h-[calc(100%-3rem)] text-white text-center bg-album-500">
+          まだ作品はありません。「製作」をクリックして作りましょう！
+        </div>
+      )}
     </section>
   );
 };
 
-const Item = ({ id }) => {
+const Item = ({ title, img }) => {
   return (
     <div className="w-full h-48 rounded-xl shadow-lg overflow-hidden">
       <img
-        src={`${process.env.NEXT_PUBLIC_API_URL}/storage/arts/${id}/art.webp`}
-        alt="作品"
+        src={img}
+        alt={title}
         className="w-full h-full object-cover"
       />
     </div>
