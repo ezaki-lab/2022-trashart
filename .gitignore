@@ -3,3 +3,5 @@
 /.vscode/
 /out/
 /public/~trashart/*
+sw.js
+workbox-*.js

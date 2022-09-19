@@ -5,7 +5,7 @@ import url from '../utils/url';
 
 const Craft = () => {
   const router = useRouter();
-  const { section, setSection } = useSession();
+  const { section } = useSession();
 
   useEffect(() => {
     switch (section) {

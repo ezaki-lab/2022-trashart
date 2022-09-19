@@ -9,10 +9,10 @@ import { artsAtom, artIdAtom, sessionIdAtom } from '../../../../models/stores';
 const Portal = () => {
   const { setMode } = useSession();
 
-  const [sessionId, setSessionId] = useAtom(sessionIdAtom);
+  const [sessionId] = useAtom(sessionIdAtom);
 
   const [arts, setArts] = useAtom(artsAtom);
-  const [artId, setArtId] = useAtom(artIdAtom);
+  const [, setArtId] = useAtom(artIdAtom);
 
   const [isRecommended, setIsRecommended] = useState(false);
 
@@ -23,21 +23,21 @@ const Portal = () => {
     setArtId(id);
   }, [setMode, setArtId]);
 
-  const getArtsNotRecommend = () => {
+  const getArtsNotRecommend = useCallback(() => {
     fetch(process.env.NEXT_PUBLIC_API_URL + '/arts')
       .then((res) => res.json())
       .then((json) => {
         setArts(json["arts"]);
         setIsRecommended(false);
       });
-  };
+  }, [setArts]);
 
   const handleSkipped = useCallback(() => {
     // try {
     //   recommenderCtrl.abort();
     // } catch (err) { }
     getArtsNotRecommend();
-  }, []);
+  }, [getArtsNotRecommend]);
 
   useEffect(() => {
     if (sessionId === '') {

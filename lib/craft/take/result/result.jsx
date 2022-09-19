@@ -7,12 +7,10 @@ import useSession from '../../../../hooks/useSession';
 import { materialB64Atom, materialsAtom, sessionIdAtom } from '../../../../models/stores';
 
 const Result = () => {
-  const { setSection, setMode } = useSession();
+  const [sessionId] = useAtom(sessionIdAtom);
 
-  const [sessionId, setSessionId] = useAtom(sessionIdAtom);
-
-  const [materialB64, setMaterialB64] = useAtom(materialB64Atom);
-  const [materials, setMaterials] = useAtom(materialsAtom);
+  const [materialB64] = useAtom(materialB64Atom);
+  const [, setMaterials] = useAtom(materialsAtom);
 
   const [loaded, setLoaded] = useState(false);
 
@@ -36,7 +34,7 @@ const Result = () => {
         setMaterials(json['materials']);
         setLoaded(true);
       });
-  }, []);
+  }, [materialB64, sessionId]);
 
   return (
     <section className="text-center">
@@ -54,7 +52,7 @@ const Result = () => {
 };
 
 const Loaded = () => {
-  const [materials, setMaterials] = useAtom(materialsAtom);
+  const [materials] = useAtom(materialsAtom);
 
   return (
     <>
@@ -66,7 +64,7 @@ const Loaded = () => {
 const LoadedSuccessful = () => {
   const { setMode } = useSession();
 
-  const [materials, setMaterials] = useAtom(materialsAtom);
+  const [materials] = useAtom(materialsAtom);
 
   const retake = useCallback(() => {
     setMode('camera');

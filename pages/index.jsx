@@ -32,11 +32,11 @@ const Home = (props) => {
   );
 };
 
-export const getServerSideProps = async ({ req, res, query }) => {
+export const getServerSideProps = async ({ query }) => {
   return {
     props: {
       imgUrl: query.id !== undefined
-        ? process.env.NEXT_PUBLIC_API_URL + '/storage/works/' + query.id + '.png'
+        ? process.env.NEXT_PUBLIC_API_URL + '/storage/craftings/' + query.id + '.png'
         : null,
     }
   };

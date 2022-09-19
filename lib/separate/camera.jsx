@@ -1,9 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import WebCamera from '../webCamera/webCamera';
-import useSession from '../../hooks/useSession';
 import ModeButton from '../modeButton';
 import { MdMemory } from 'react-icons/md';
-import { BsArchiveFill } from 'react-icons/bs';
 import SeparateDialog from './separateDialog';
 
 const Camera = () => {

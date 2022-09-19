@@ -18,7 +18,7 @@ const Headline1 = ({ label, textColor, icon, iconColor, className }) => {
   );
 };
 
-const Headline2 = ({ label, textColor, className }) => {
+const Headline2 = ({ label, textColor }) => {
   return (
     <h2 className={`${textColor} text-xl font-medium`}>
       {label}

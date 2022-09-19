@@ -7,7 +7,7 @@ import { artIdAtom } from '../../../../models/stores';
 
 const Camera = () => {
   const { setMode } = useSession();
-  const [artId, setArtId] = useAtom(artIdAtom);
+  const [artId] = useAtom(artIdAtom);
   const [supportImgUrl, setSupportImgUrl] = useState(null);
 
   const backPortal = useCallback(() => {
@@ -24,7 +24,7 @@ const Camera = () => {
       .then((json) => {
         setSupportImgUrl(json["support_image_url"]);
       });
-  }, []);
+  }, [artId]);
 
 
   return (

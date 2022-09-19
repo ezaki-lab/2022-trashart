@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import useSession from '../../hooks/useSession';
 import Session from '../../lib/session';
 import Camera from '../../lib/craft/share/camera';
