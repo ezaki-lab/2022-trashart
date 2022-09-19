@@ -5,6 +5,7 @@ import { Headline1 } from '../../../../components/headline';
 import useSession from '../../../../hooks/useSession';
 import ArtItem from './artItem';
 import { artsAtom, artIdAtom, sessionIdAtom } from '../../../../models/stores';
+import api from '../../../../models/apiClient';
 
 const Portal = () => {
   const { setMode } = useSession();
@@ -24,10 +25,9 @@ const Portal = () => {
   }, [setMode, setArtId]);
 
   const getArtsNotRecommend = useCallback(() => {
-    fetch(process.env.NEXT_PUBLIC_API_URL + '/arts')
-      .then((res) => res.json())
-      .then((json) => {
-        setArts(json["arts"]);
+    api.get('/arts')
+      .then((res) => {
+        setArts(res.data["arts"]);
         setIsRecommended(false);
       });
   }, [setArts]);
@@ -50,25 +50,19 @@ const Portal = () => {
     }
 
     try {
-      fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/art-suggestions/' + sessionId,
-        {
-          signal: recommenderCtrl.signal,
-        }
-      )
+      api.get(`/art-suggestions/${sessionId}`, {
+        signal: recommenderCtrl.signal,
+      })
         .then((res) => {
           if (res.status === 400) {
-            console.log('なかったぜ');
             getArtsNotRecommend();
             return;
           }
-          return res.json();
-        })
-        .then((json) => {
-          if (json === undefined) {
+
+          if (res.body === undefined) {
             return;
           }
-          setArts(json["arts"]);
+          setArts(res.body['arts']);
           setIsRecommended(true);
         });
     } catch (err) { }

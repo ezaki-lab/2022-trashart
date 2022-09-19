@@ -2,6 +2,7 @@ import { memo, useCallback, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import WebCamera from '../../webCamera/webCamera';
 import { sessionIdAtom } from '../../../models/stores';
+import api from '../../../models/apiClient';
 
 const Camera = () => {
   const camera = useRef(null);
@@ -15,14 +16,8 @@ const Camera = () => {
     const b64 = camera.current.takePhoto();
     setWorkImg(b64);
 
-    fetch(process.env.NEXT_PUBLIC_API_URL + '/share/' + sessionId + '/photo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'data': b64
-      })
+    api.post(`/share/${sessionId}/photo`, {
+      'data': b64
     })
       .then(() => {
         setIsTakenPhoto(true);

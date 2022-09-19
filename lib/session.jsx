@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { userIdAtom, sessionIdAtom } from '../models/stores';
+import api from '../models/apiClient';
 
 const Session = ({ children, title, description, className = '', style }) => {
   const [userId, setUserId] = useAtom(userIdAtom);
@@ -17,17 +18,10 @@ const Session = ({ children, title, description, className = '', style }) => {
       return;
     }
 
-    fetch(process.env.NEXT_PUBLIC_API_URL + '/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({})
-    })
-      .then(res => res.json())
-      .then((json) => {
-        localStorage.setItem('userId', json['id']);
-        setUserId(json['id']);
+    api.post('/users', {})
+      .then((res) => {
+        setUserId(res.data['user_id']);
+        localStorage.setItem('userId', res.data['user_id']);
       });
   }, []);
 
@@ -36,16 +30,9 @@ const Session = ({ children, title, description, className = '', style }) => {
       return;
     }
 
-    fetch(process.env.NEXT_PUBLIC_API_URL + '/sessions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({})
-    })
-      .then(res => res.json())
-      .then((json) => {
-        setSessionId(json['id']);
+    api.post('/sessions', {})
+      .then((res) => {
+        setSessionId(res.data['id']);
       });
   }, []);
 
