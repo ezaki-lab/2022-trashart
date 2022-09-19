@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { FiShare2 } from 'react-icons/fi';
-import { sessionIdAtom, quoteAtom, craftingIdAtom } from '../../../models/stores';
+import { sessionIdAtom, quoteAtom, craftingIdAtom, userIdAtom } from '../../../models/stores';
 import url from '../../../utils/url';
 import useSession from '../../../hooks/useSession';
 import Dialog from './dialog';
@@ -14,9 +14,23 @@ const ShareToSns = () => {
 
   const [sessionId] = useAtom(sessionIdAtom);
   const [quote] = useAtom(quoteAtom);
-  const [craftingId] = useAtom(craftingIdAtom);
+  const [craftingId, setCraftingId] = useAtom(craftingIdAtom);
+  const [userId] = useAtom(userIdAtom);
 
   const [isShowDialog, setIsShowDialog] = useState(false);
+
+  const [craftingCnt, setCraftingCnt] = useState(0);
+
+  useEffect(() => {
+    if (userId === '') {
+      return;
+    }
+
+    api.get(`/users/${userId}`)
+      .then((res) => {
+        setCraftingCnt(res.data['craftings'].length);
+      });
+  }, [userId]);
 
   const handleShare = useCallback(() => {
     if (window.location.protocol !== 'https:') {
@@ -31,14 +45,16 @@ const ShareToSns = () => {
   }, [quote, sessionId]);
 
   const handleFinish = useCallback(() => {
-    api.post(`/share/${craftingId}`, {
+    setSection('take');
+    setCraftingId('');
+
+    api.patch(`/share/${craftingId}`, {
       'title': quote
     })
       .then(() => {
-        setSection('take');
         setIsShowDialog(true);
       });
-  }, [quote, craftingId, setSection, setIsShowDialog]);
+  }, [quote, craftingId, setSection, setCraftingId, setIsShowDialog]);
 
   const closeDialog = useCallback(() => {
     router.push('/', url('/'));
@@ -72,7 +88,7 @@ const ShareToSns = () => {
       </button>
 
       <Dialog
-        counter={9}
+        counter={craftingCnt}
         isShow={isShowDialog}
         onClose={closeDialog}
       />
