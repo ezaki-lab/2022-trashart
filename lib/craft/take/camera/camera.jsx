@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import WebCamera from '../../../webCamera/webCamera';
 import useSession from '../../../../hooks/useSession';
 import ModeButton from '../../../modeButton';
-import { MdMemory } from 'react-icons/md';
 import { BsArchiveFill } from 'react-icons/bs';
 import SeparateDialog from '../../../separate/separateDialog';
 import { materialB64Atom } from '../../../../models/stores';
@@ -14,10 +13,16 @@ const Camera = () => {
 
   const camera = useRef(null);
 
-  const [materialB64, setMaterialB64] = useAtom(materialB64Atom);
+  const [, setMaterialB64] = useAtom(materialB64Atom);
 
   const takePhoto = useCallback(() => {
-    const b64 = camera.current.takePhoto();
+    let b64 = '';
+    try {
+      b64 = camera.current.takePhoto();
+    } catch (_) {
+      return;
+    }
+
     setMaterialB64(b64);
     setMode('result');
   }, [setMaterialB64, setMode]);

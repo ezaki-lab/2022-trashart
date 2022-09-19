@@ -1,38 +1,35 @@
-import { useCallback, useRef, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import WebCamera from '../../webCamera/webCamera';
-import { artIdAtom, sessionIdAtom } from '../../../models/stores';
+import { craftingIdAtom } from '../../../models/stores';
+import api from '../../../models/apiClient';
 
 const Camera = () => {
   const camera = useRef(null);
 
-  const [sessionId, setSessionId] = useAtom(sessionIdAtom);
+  const [craftingId] = useAtom(craftingIdAtom);
   const [isTakenPhoto, setIsTakenPhoto] = useState(false);
 
   const [workImg, setWorkImg] = useState(null);
 
-  const takePhoto = useCallback((e) => {
-    e.preventDefault();
-
-    const b64 = camera.current.takePhoto();
+  const takePhoto = useCallback(() => {
+    let b64 = '';
+    try {
+      b64 = camera.current.takePhoto();
+    } catch (_) {
+      return;
+    }
     setWorkImg(b64);
 
-    fetch(process.env.NEXT_PUBLIC_API_URL + '/share/' + sessionId + '/photo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'data': b64
-      })
+    api.post(`/share/${craftingId}/photo`, {
+      'data': b64
     })
       .then(() => {
         setIsTakenPhoto(true);
       });
-  }, [sessionId]);
+  }, [craftingId]);
 
-  const reTakeMode = useCallback((e) => {
-    e.preventDefault();
+  const reTakeMode = useCallback(() => {
     setIsTakenPhoto(false);
   }, []);
 
@@ -69,4 +66,4 @@ const Camera = () => {
   );
 };
 
-export default Camera;
+export default memo(Camera);

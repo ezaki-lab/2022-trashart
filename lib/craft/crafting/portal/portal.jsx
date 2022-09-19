@@ -1,43 +1,41 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import { MdAssistantPhoto } from 'react-icons/md';
 import { Headline1 } from '../../../../components/headline';
 import useSession from '../../../../hooks/useSession';
 import ArtItem from './artItem';
 import { artsAtom, artIdAtom, sessionIdAtom } from '../../../../models/stores';
+import api from '../../../../models/apiClient';
 
 const Portal = () => {
   const { setMode } = useSession();
 
-  const [sessionId, setSessionId] = useAtom(sessionIdAtom);
+  const [sessionId] = useAtom(sessionIdAtom);
 
   const [arts, setArts] = useAtom(artsAtom);
-  const [artId, setArtId] = useAtom(artIdAtom);
+  const [, setArtId] = useAtom(artIdAtom);
 
   const [isRecommended, setIsRecommended] = useState(false);
 
-  const recommenderCtrl = new AbortController();
+  const recommenderCtrl = useRef(new AbortController());
 
   const handleClick = useCallback((id) => {
     setMode('crafting');
     setArtId(id);
   }, [setMode, setArtId]);
 
-  const getArtsNotRecommend = () => {
-    fetch(process.env.NEXT_PUBLIC_API_URL + '/arts')
-      .then((res) => res.json())
-      .then((json) => {
-        setArts(json["arts"]);
+  const getArtsNotRecommend = useCallback(() => {
+    api.get('/arts')
+      .then((res) => {
+        setArts(res.data["arts"]);
         setIsRecommended(false);
       });
-  };
+  }, [setArts]);
 
   const handleSkipped = useCallback(() => {
-    // try {
-    //   recommenderCtrl.abort();
-    // } catch (err) { }
+    recommenderCtrl.current.abort();
     getArtsNotRecommend();
-  }, []);
+  }, [recommenderCtrl, getArtsNotRecommend]);
 
   useEffect(() => {
     if (sessionId === '') {
@@ -49,29 +47,19 @@ const Portal = () => {
       return;
     }
 
-    try {
-      fetch(
-        process.env.NEXT_PUBLIC_API_URL + '/art-suggestions/' + sessionId,
-        {
-          signal: recommenderCtrl.signal,
+    api.get(`/art-suggestions/${sessionId}`, {
+      signal: recommenderCtrl.current.signal,
+    })
+      .then((res) => {
+        if (res.data === undefined) {
+          return;
         }
-      )
-        .then((res) => {
-          if (res.status === 400) {
-            console.log('なかったぜ');
-            getArtsNotRecommend();
-            return;
-          }
-          return res.json();
-        })
-        .then((json) => {
-          if (json === undefined) {
-            return;
-          }
-          setArts(json["arts"]);
-          setIsRecommended(true);
-        });
-    } catch (err) { }
+        setArts(res.data['arts']);
+        setIsRecommended(true);
+      })
+      .catch(() => {
+        getArtsNotRecommend();
+      });
   }, []);
 
   return (
@@ -93,7 +81,7 @@ const Portal = () => {
 
 const Loaded = ({ arts, onSelect }) => {
   return (
-    <section className="mt-3 pb-32 w-full grid grid-cols-2 gap-3">
+    <section className="mt-3 w-full grid grid-cols-2 gap-3">
       {arts.length !== 0 && (
         <>
           {arts.map((art, index) =>

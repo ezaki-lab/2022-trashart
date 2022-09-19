@@ -1,12 +1,15 @@
+import { useEffect, useState } from 'react';
+import api from '../../models/apiClient';
+
 const Social = () => {
-  const imgs = [
-    'cf66b6f3171748223635a5e5',
-    '2bb3758df7c1b66c633e7609',
-    '5b46e3aa305acee647f297ee',
-    'bfda8bde91dbb8656c534669',
-    'cf66b6f3171748223635a5e5',
-    '2bb3758df7c1b66c633e7609'
-  ];
+  const [craftings, setCraftings] = useState([]);
+
+  useEffect(() => {
+    api.get(`/craftings`)
+      .then((res) => {
+        setCraftings(res.data['craftings']);
+      });
+  }, []);
 
   return (
     <section className="w-full h-screen text-white bg-none">
@@ -20,21 +23,27 @@ const Social = () => {
         <path d="m1231 103.45c-45.601 0.33423-94.135 2.604-144.84 7.7305-202.44 20.001-439.6 85.702-638.58 101.16-199.24 15.793-360.94-17.817-441.79-34.621l-5.7598-1.1973v40.479h1440v-102.37c-57.863-6.376-128.91-11.767-209.03-11.18z" fill="rgb(0, 214, 200)" strokeWidth="0.99241" />
       </svg>
 
-      <div className="p-5 pt-10 pb-20 w-full bg-album-500 grid grid-cols-2 gap-8">
-        {imgs.map((img) =>
-          <Item key={img} id={img} />
+      <div className="p-5 pt-10 pb-20 w-full min-h-[calc(100%-3rem)] bg-album-500 grid grid-cols-2 gap-8">
+        {craftings.map((c) =>
+          <Item
+            id={c['id']}
+            title={c['title']}
+            userId={c['user_id']}
+            img={c['image_url']}
+            key={c['id']}
+          />
         )}
       </div>
     </section>
   );
 };
 
-const Item = ({ id }) => {
+const Item = ({ img, title }) => {
   return (
     <div className="w-full h-48 rounded-xl shadow-lg overflow-hidden">
       <img
-        src={`${process.env.NEXT_PUBLIC_API_URL}/storage/arts/${id}/art.webp`}
-        alt="作品"
+        src={img}
+        alt={title}
         className="w-full h-full object-cover"
       />
     </div>

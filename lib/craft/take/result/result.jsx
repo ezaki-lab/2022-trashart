@@ -5,14 +5,13 @@ import { Headline1 } from '../../../../components/headline';
 import Linking from '../../../../components/linking';
 import useSession from '../../../../hooks/useSession';
 import { materialB64Atom, materialsAtom, sessionIdAtom } from '../../../../models/stores';
+import api from '../../../../models/apiClient';
 
 const Result = () => {
-  const { setSection, setMode } = useSession();
+  const [sessionId] = useAtom(sessionIdAtom);
 
-  const [sessionId, setSessionId] = useAtom(sessionIdAtom);
-
-  const [materialB64, setMaterialB64] = useAtom(materialB64Atom);
-  const [materials, setMaterials] = useAtom(materialsAtom);
+  const [materialB64] = useAtom(materialB64Atom);
+  const [, setMaterials] = useAtom(materialsAtom);
 
   const [loaded, setLoaded] = useState(false);
 
@@ -21,22 +20,15 @@ const Result = () => {
       return;
     }
 
-    fetch(process.env.NEXT_PUBLIC_API_URL + `/pick/${sessionId}/store`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'data': materialB64
-      })
+    api.post(`/pick/${sessionId}/store`, {
+      'data': materialB64
     })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        setMaterials(json['materials']);
+      .then((res) => {
+        console.log(res.data);
+        setMaterials(res.data['materials']);
         setLoaded(true);
       });
-  }, []);
+  }, [materialB64, sessionId]);
 
   return (
     <section className="text-center">
@@ -54,7 +46,7 @@ const Result = () => {
 };
 
 const Loaded = () => {
-  const [materials, setMaterials] = useAtom(materialsAtom);
+  const [materials] = useAtom(materialsAtom);
 
   return (
     <>
@@ -66,7 +58,7 @@ const Loaded = () => {
 const LoadedSuccessful = () => {
   const { setMode } = useSession();
 
-  const [materials, setMaterials] = useAtom(materialsAtom);
+  const [materials] = useAtom(materialsAtom);
 
   const retake = useCallback(() => {
     setMode('camera');

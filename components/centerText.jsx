@@ -3,7 +3,7 @@ const CenterText = ({ children, className }) => {
     <div className={
       className === undefined
         ? 'h-full flex flex-col justify-center items-center'
-        : `${className} h-full flex flex-col justify-center`
+        : `${className} h-full flex flex-col justify-center items-center`
     }>
       {children}
     </div>

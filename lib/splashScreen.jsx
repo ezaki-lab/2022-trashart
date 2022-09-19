@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Loop from '../components/loop';
 import { pickRandom } from '../utils/random';
+import url from '../utils/url';
 
 const SplashScreen = () => {
   return (
@@ -12,9 +13,25 @@ const SplashScreen = () => {
       </div>
       <div className="w-full h-full border-[1rem] border-white absolute top-0" />
 
-      <h1 className="w-72 h-20 text-white bg-blue-800 text-5xl leading-[4.2rem] text-center tracking-wide border-4 border-white shadow-2xl absolute inset-0 m-auto">
-        TRASHART
-      </h1>
+      <div className="p-8 w-2/3 h-56 bg-white rounded-xl shadow-2xl flex flex-col items-center justify-center absolute inset-0 m-auto">
+        <img
+          src={url('/logo.svg')}
+          alt="ロゴ"
+          className="w-full"
+        />
+
+        <div className="mt-10 text-gray-500">
+          {process.env.NEXT_PUBLIC_BUILT_AT && (
+            <div className="text-center">
+              {process.env.NEXT_PUBLIC_BUILT_AT} Built
+            </div>
+          )}
+
+          <small className="text-lg">
+            © 2022 ezaki-lab.com
+          </small>
+        </div>
+      </div>
     </div>
   );
 };

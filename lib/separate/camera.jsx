@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import WebCamera from '../webCamera/webCamera';
-import useSession from '../../hooks/useSession';
 import ModeButton from '../modeButton';
 import { MdMemory } from 'react-icons/md';
-import { BsArchiveFill } from 'react-icons/bs';
 import SeparateDialog from './separateDialog';
+import api from '../../models/apiClient';
 
 const Camera = () => {
   const [isShowSeparate, setIsShowSeparate] = useState(false);
@@ -14,19 +13,19 @@ const Camera = () => {
   const camera = useRef(null);
 
   const takePhoto = useCallback(() => {
-    const b64 = camera.current.takePhoto();
+    let b64 = '';
+    try {
+      b64 = camera.current.takePhoto();
+    } catch (_) {
+      return;
+    }
+
     setIsShowSeparate(true);
 
     setMessage('サーバーに送信中…');
 
-    fetch(process.env.NEXT_PUBLIC_API_URL + '/pick/separate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'data': b64
-      })
+    api.post('/pick/separate', {
+      'data': b64
     })
       .then(() => {
         setMessage('保存成功');

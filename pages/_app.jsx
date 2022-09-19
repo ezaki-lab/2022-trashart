@@ -9,7 +9,9 @@ import SplashScreen from '../lib/splashScreen';
 import BottomAppBar from '../lib/bottomAppBar';
 import url from '../utils/url';
 import {
+  userIdAtom,
   sessionIdAtom,
+  craftingIdAtom,
   homeSectionAtom,
   homeModeAtom,
   craftSectionAtom,
@@ -32,7 +34,9 @@ const MyApp = ({ Component, pageProps }) => {
 
   const { initialState } = pageProps;
   useHydrateAtoms(initialState ? [[
+    userIdAtom,
     sessionIdAtom,
+    craftingIdAtom,
     homeSectionAtom,
     homeModeAtom,
     craftSectionAtom,
@@ -55,7 +59,13 @@ const MyApp = ({ Component, pageProps }) => {
 
   const [ready, setReady] = useState(false);
 
+  const [isLocalhost, setIsLocalhost] = useState(false);
+
   useEffect(() => {
+    if (window.location.hostname === 'localhost') {
+      setIsLocalhost(true);
+    }
+
     setTimeout(() => {
       setReady(true);
     }, 2000);
@@ -71,10 +81,8 @@ const MyApp = ({ Component, pageProps }) => {
         <link rel="apple-touch-icon" sizes="384x384" href={url('/icon-384x384.png')} />
         <link rel="apple-touch-icon" sizes="512x512" href={url('/icon-512x512.png')} />
         <meta name="theme-color" content="#fc9114" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
         <meta name="robots" content="noindex" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="ja_JP" />
       </Head>
 
       <div className="w-screen h-screen text-black text-lg">
@@ -82,15 +90,17 @@ const MyApp = ({ Component, pageProps }) => {
         <BottomAppBar route={route} />
       </div>
 
-      <Transition
-        appear
-        show={!ready}
-        leave="transition-opacity ease-out duration-500"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <SplashScreen />
-      </Transition>
+      {!isLocalhost && (
+        <Transition
+          appear
+          show={!ready}
+          leave="transition-opacity ease-out duration-500"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <SplashScreen />
+        </Transition>
+      )}
     </>
   );
 };
