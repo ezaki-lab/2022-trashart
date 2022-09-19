@@ -58,7 +58,13 @@ const MyApp = ({ Component, pageProps }) => {
 
   const [ready, setReady] = useState(false);
 
+  const [isLocalhost, setIsLocalhost] = useState(false);
+
   useEffect(() => {
+    if (window.location.hostname === 'localhost') {
+      setIsLocalhost(true);
+    }
+
     setTimeout(() => {
       setReady(true);
     }, 2000);
@@ -83,15 +89,17 @@ const MyApp = ({ Component, pageProps }) => {
         <BottomAppBar route={route} />
       </div>
 
-      <Transition
-        appear
-        show={!ready}
-        leave="transition-opacity ease-out duration-500"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <SplashScreen />
-      </Transition>
+      {!isLocalhost && (
+        <Transition
+          appear
+          show={!ready}
+          leave="transition-opacity ease-out duration-500"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <SplashScreen />
+        </Transition>
+      )}
     </>
   );
 };

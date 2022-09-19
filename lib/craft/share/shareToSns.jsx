@@ -1,18 +1,22 @@
-import { useCallback } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useState } from 'react';
 import { useAtom } from 'jotai';
 import { FiShare2 } from 'react-icons/fi';
 import { sessionIdAtom, quoteAtom } from '../../../models/stores';
+import url from '../../../utils/url';
 import useSession from '../../../hooks/useSession';
+import Dialog from './dialog';
 
 const ShareToSns = () => {
-  const { setMode } = useSession();
+  const { setSection } = useSession();
+  const router = useRouter();
 
-  const [sessionId, setSessionId] = useAtom(sessionIdAtom);
-  const [quote, setQuote] = useAtom(quoteAtom);
+  const [sessionId] = useAtom(sessionIdAtom);
+  const [quote] = useAtom(quoteAtom);
 
-  const handleShare = useCallback((e) => {
-    e.preventDefault();
+  const [isShowDialog, setIsShowDialog] = useState(false);
 
+  const handleShare = useCallback(() => {
     if (window.location.protocol !== 'https:') {
       return;
     }
@@ -24,10 +28,15 @@ const ShareToSns = () => {
     });
   }, [quote, sessionId]);
 
-  const handleFinish = useCallback((e) => {
-    e.preventDefault();
-    setMode('take');
-  }, [setMode]);
+  const handleFinish = useCallback(() => {
+    setSection('take');
+    setIsShowDialog(true);
+  }, [setSection, setIsShowDialog]);
+
+  const closeDialog = useCallback(() => {
+    console.log('closed');
+    router.push('/', url('/'));
+  }, [router]);
 
   return (
     <div className="mt-8 w-full h-16 grid grid-cols-2 gap-4 justify-around">
@@ -51,6 +60,12 @@ const ShareToSns = () => {
       >
         完成
       </button>
+
+      <Dialog
+        counter={9}
+        isShow={isShowDialog}
+        onClose={closeDialog}
+      />
     </div>
   );
 };

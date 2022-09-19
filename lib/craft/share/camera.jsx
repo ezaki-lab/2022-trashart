@@ -1,19 +1,17 @@
-import { useCallback, useRef, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import WebCamera from '../../webCamera/webCamera';
-import { artIdAtom, sessionIdAtom } from '../../../models/stores';
+import { sessionIdAtom } from '../../../models/stores';
 
 const Camera = () => {
   const camera = useRef(null);
 
-  const [sessionId, setSessionId] = useAtom(sessionIdAtom);
+  const [sessionId] = useAtom(sessionIdAtom);
   const [isTakenPhoto, setIsTakenPhoto] = useState(false);
 
   const [workImg, setWorkImg] = useState(null);
 
-  const takePhoto = useCallback((e) => {
-    e.preventDefault();
-
+  const takePhoto = useCallback(() => {
     const b64 = camera.current.takePhoto();
     setWorkImg(b64);
 
@@ -31,8 +29,7 @@ const Camera = () => {
       });
   }, [sessionId]);
 
-  const reTakeMode = useCallback((e) => {
-    e.preventDefault();
+  const reTakeMode = useCallback(() => {
     setIsTakenPhoto(false);
   }, []);
 
@@ -69,4 +66,4 @@ const Camera = () => {
   );
 };
 
-export default Camera;
+export default memo(Camera);

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import useSession from '../../hooks/useSession';
 import Session from '../../lib/session';
 import Camera from '../../lib/craft/share/camera';
@@ -20,11 +20,11 @@ const Share = () => {
       title={title}
       description={description}
     >
-      <form>
+      <div>
         <Camera />
         <Description />
         <ShareToSns />
-      </form>
+      </div>
     </Session>
   );
 };
