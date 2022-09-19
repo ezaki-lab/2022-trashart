@@ -11,6 +11,7 @@ import url from '../utils/url';
 import {
   userIdAtom,
   sessionIdAtom,
+  craftingIdAtom,
   homeSectionAtom,
   homeModeAtom,
   craftSectionAtom,
@@ -35,6 +36,7 @@ const MyApp = ({ Component, pageProps }) => {
   useHydrateAtoms(initialState ? [[
     userIdAtom,
     sessionIdAtom,
+    craftingIdAtom,
     homeSectionAtom,
     homeModeAtom,
     craftSectionAtom,

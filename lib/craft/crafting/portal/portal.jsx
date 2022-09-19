@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import { MdAssistantPhoto } from 'react-icons/md';
 import { Headline1 } from '../../../../components/headline';
@@ -17,7 +17,7 @@ const Portal = () => {
 
   const [isRecommended, setIsRecommended] = useState(false);
 
-  const recommenderCtrl = new AbortController();
+  const recommenderCtrl = useRef(new AbortController());
 
   const handleClick = useCallback((id) => {
     setMode('crafting');
@@ -33,11 +33,9 @@ const Portal = () => {
   }, [setArts]);
 
   const handleSkipped = useCallback(() => {
-    // try {
-    //   recommenderCtrl.abort();
-    // } catch (err) { }
+    recommenderCtrl.current.abort();
     getArtsNotRecommend();
-  }, [getArtsNotRecommend]);
+  }, [recommenderCtrl, getArtsNotRecommend]);
 
   useEffect(() => {
     if (sessionId === '') {
@@ -49,23 +47,19 @@ const Portal = () => {
       return;
     }
 
-    try {
-      api.get(`/art-suggestions/${sessionId}`, {
-        signal: recommenderCtrl.signal,
+    api.get(`/art-suggestions/${sessionId}`, {
+      signal: recommenderCtrl.current.signal,
+    })
+      .then((res) => {
+        if (res.data === undefined) {
+          return;
+        }
+        setArts(res.data['arts']);
+        setIsRecommended(true);
       })
-        .then((res) => {
-          if (res.status === 400) {
-            getArtsNotRecommend();
-            return;
-          }
-
-          if (res.body === undefined) {
-            return;
-          }
-          setArts(res.body['arts']);
-          setIsRecommended(true);
-        });
-    } catch (err) { }
+      .catch(() => {
+        getArtsNotRecommend();
+      });
   }, []);
 
   return (
@@ -87,7 +81,7 @@ const Portal = () => {
 
 const Loaded = ({ arts, onSelect }) => {
   return (
-    <section className="mt-3 pb-32 w-full grid grid-cols-2 gap-3">
+    <section className="mt-3 w-full grid grid-cols-2 gap-3">
       {arts.length !== 0 && (
         <>
           {arts.map((art, index) =>

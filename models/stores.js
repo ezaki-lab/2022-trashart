@@ -4,6 +4,7 @@ import { atom } from 'jotai';
 
 export const userIdAtom = atom('');
 export const sessionIdAtom = atom('');
+export const craftingIdAtom = atom('');
 
 export const homeSectionAtom = atom('');
 export const homeModeAtom = atom('');

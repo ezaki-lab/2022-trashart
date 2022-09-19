@@ -1,13 +1,13 @@
 import { memo, useCallback, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import WebCamera from '../../webCamera/webCamera';
-import { sessionIdAtom } from '../../../models/stores';
+import { craftingIdAtom } from '../../../models/stores';
 import api from '../../../models/apiClient';
 
 const Camera = () => {
   const camera = useRef(null);
 
-  const [sessionId] = useAtom(sessionIdAtom);
+  const [craftingId] = useAtom(craftingIdAtom);
   const [isTakenPhoto, setIsTakenPhoto] = useState(false);
 
   const [workImg, setWorkImg] = useState(null);
@@ -16,13 +16,13 @@ const Camera = () => {
     const b64 = camera.current.takePhoto();
     setWorkImg(b64);
 
-    api.post(`/share/${sessionId}/photo`, {
+    api.post(`/share/${craftingId}/photo`, {
       'data': b64
     })
       .then(() => {
         setIsTakenPhoto(true);
       });
-  }, [sessionId]);
+  }, [craftingId]);
 
   const reTakeMode = useCallback(() => {
     setIsTakenPhoto(false);

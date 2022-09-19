@@ -34,7 +34,6 @@ const ShareToSns = () => {
   }, [setSection, setIsShowDialog]);
 
   const closeDialog = useCallback(() => {
-    console.log('closed');
     router.push('/', url('/'));
   }, [router]);
 
