@@ -13,7 +13,12 @@ const Camera = () => {
   const [workImg, setWorkImg] = useState(null);
 
   const takePhoto = useCallback(() => {
-    const b64 = camera.current.takePhoto();
+    let b64 = '';
+    try {
+      b64 = camera.current.takePhoto();
+    } catch (_) {
+      return;
+    }
     setWorkImg(b64);
 
     api.post(`/share/${craftingId}/photo`, {

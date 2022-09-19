@@ -5,16 +5,20 @@ const Dialog = ({ counter, isShow, onClose }) => {
   const [counterShowing, setCounterShowing] = useState(0);
 
   useEffect(() => {
+    if (!isShow) {
+      return;
+    }
+
     setCounterShowing(counter);
 
     const interval = setInterval(() => {
       setCounterShowing(counter + 1);
-    }, 3000);
+    }, 1000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [counter]);
+  }, [isShow, counter]);
 
   useEffect(() => {
     if (!isShow) {

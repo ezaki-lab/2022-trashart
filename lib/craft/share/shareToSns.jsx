@@ -2,10 +2,11 @@ import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import { useAtom } from 'jotai';
 import { FiShare2 } from 'react-icons/fi';
-import { sessionIdAtom, quoteAtom } from '../../../models/stores';
+import { sessionIdAtom, quoteAtom, craftingIdAtom } from '../../../models/stores';
 import url from '../../../utils/url';
 import useSession from '../../../hooks/useSession';
 import Dialog from './dialog';
+import api from '../../../models/apiClient';
 
 const ShareToSns = () => {
   const { setSection } = useSession();
@@ -13,6 +14,7 @@ const ShareToSns = () => {
 
   const [sessionId] = useAtom(sessionIdAtom);
   const [quote] = useAtom(quoteAtom);
+  const [craftingId] = useAtom(craftingIdAtom);
 
   const [isShowDialog, setIsShowDialog] = useState(false);
 
@@ -29,9 +31,14 @@ const ShareToSns = () => {
   }, [quote, sessionId]);
 
   const handleFinish = useCallback(() => {
-    setSection('take');
-    setIsShowDialog(true);
-  }, [setSection, setIsShowDialog]);
+    api.post(`/share/${craftingId}`, {
+      'title': quote
+    })
+      .then(() => {
+        setSection('take');
+        setIsShowDialog(true);
+      });
+  }, [quote, craftingId, setSection, setIsShowDialog]);
 
   const closeDialog = useCallback(() => {
     router.push('/', url('/'));
@@ -54,10 +61,14 @@ const ShareToSns = () => {
       </button>
 
       <button
-        className="w-full h-full text-white text-2xl text-center font-bold bg-crafting-500 rounded-2xl shadow-xl"
-        onClick={handleFinish}
+        className={
+          quote !== ''
+            ? 'w-full h-20 text-white text-2xl text-center font-bold bg-crafting-500 rounded-2xl shadow-xl'
+            : 'w-full h-20 text-gray-500 text-lg text-center font-bold bg-gray-300 rounded-2xl shadow-xl'
+        }
+        onClick={quote !== '' ? handleFinish : null}
       >
-        完成
+        {quote !== '' ? '完成' : '作品名を入力してください'}
       </button>
 
       <Dialog

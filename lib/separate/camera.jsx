@@ -13,7 +13,13 @@ const Camera = () => {
   const camera = useRef(null);
 
   const takePhoto = useCallback(() => {
-    const b64 = camera.current.takePhoto();
+    let b64 = '';
+    try {
+      b64 = camera.current.takePhoto();
+    } catch (_) {
+      return;
+    }
+
     setIsShowSeparate(true);
 
     setMessage('サーバーに送信中…');

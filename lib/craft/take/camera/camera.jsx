@@ -16,7 +16,13 @@ const Camera = () => {
   const [, setMaterialB64] = useAtom(materialB64Atom);
 
   const takePhoto = useCallback(() => {
-    const b64 = camera.current.takePhoto();
+    let b64 = '';
+    try {
+      b64 = camera.current.takePhoto();
+    } catch (_) {
+      return;
+    }
+
     setMaterialB64(b64);
     setMode('result');
   }, [setMaterialB64, setMode]);
