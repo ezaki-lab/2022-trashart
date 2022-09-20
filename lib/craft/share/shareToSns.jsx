@@ -13,7 +13,7 @@ const ShareToSns = () => {
   const router = useRouter();
 
   const [sessionId] = useAtom(sessionIdAtom);
-  const [quote] = useAtom(quoteAtom);
+  const [quote, setQuote] = useAtom(quoteAtom);
   const [craftingId, setCraftingId] = useAtom(craftingIdAtom);
   const [userId] = useAtom(userIdAtom);
 
@@ -47,6 +47,9 @@ const ShareToSns = () => {
   const handleFinish = useCallback(() => {
     setSection('take');
     setCraftingId('');
+    setQuote('');
+
+    sessionStorage.setItem('crafted', 'true');
 
     api.patch(`/share/${craftingId}`, {
       'title': quote
@@ -54,10 +57,10 @@ const ShareToSns = () => {
       .then(() => {
         setIsShowDialog(true);
       });
-  }, [quote, craftingId, setSection, setCraftingId, setIsShowDialog]);
+  }, [quote, craftingId, setSection, setCraftingId, setQuote, setIsShowDialog]);
 
   const closeDialog = useCallback(() => {
-    router.push('/', url('/'));
+    router.push('/home', url('/home'));
   }, [router]);
 
   return (

@@ -17,7 +17,14 @@ const Craft = () => {
         router.push('/craft/crafting', url('/craft/crafting'));
         break;
       case 'share':
-        router.push('/craft/share', url('/craft/share'));
+        if (sessionStorage.getItem('crafted') === null) {
+          console.log('初回作成');
+          router.push('/craft/share', url('/craft/share'));
+        } else {
+          console.log('2回目以降');
+          sessionStorage.removeItem('crafted');
+          router.push('/craft/take', url('/craft/take'));
+        }
         break;
       default:
         router.push('/craft/take', url('/craft/take'));

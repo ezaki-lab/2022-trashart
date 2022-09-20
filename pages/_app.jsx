@@ -27,6 +27,8 @@ import {
   quoteAtom
 } from '../models/stores';
 import '../styles/globals.css';
+import { useAtom } from 'jotai';
+import api from '../models/apiClient';
 
 const MyApp = ({ Component, pageProps }) => {
   // localhost以外ではHTTPSを強制する
@@ -59,17 +61,29 @@ const MyApp = ({ Component, pageProps }) => {
 
   const [ready, setReady] = useState(false);
 
-  const [isLocalhost, setIsLocalhost] = useState(false);
-
   useEffect(() => {
-    if (window.location.hostname === 'localhost') {
-      setIsLocalhost(true);
-    }
-
     setTimeout(() => {
       setReady(true);
     }, 2000);
   }, []);
+
+  const [userId] = useAtom(userIdAtom);
+
+  useEffect(() => {
+    if (userId === '') {
+      return;
+    }
+
+    api.get(`/users/${userId}`)
+      .then((res) => {
+        console.log('OK');
+      })
+      .catch((err) => {
+        console.log('not found');
+        localStorage.removeItem('userId');
+        location.reload();
+      });
+  }, [userId]);
 
   return (
     <>
@@ -90,17 +104,15 @@ const MyApp = ({ Component, pageProps }) => {
         <BottomAppBar route={route} />
       </div>
 
-      {!isLocalhost && (
-        <Transition
-          appear
-          show={!ready}
-          leave="transition-opacity ease-out duration-500"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <SplashScreen />
-        </Transition>
-      )}
+      <Transition
+        appear
+        show={!ready}
+        leave="transition-opacity ease-out duration-500"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <SplashScreen />
+      </Transition>
     </>
   );
 };

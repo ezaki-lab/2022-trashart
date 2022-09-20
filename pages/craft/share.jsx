@@ -14,14 +14,14 @@ const description = '共有をしましょう！';
 const Share = () => {
   const { setSection } = useSession();
   const [userId] = useAtom(userIdAtom);
-  const [, setCraftingId] = useAtom(craftingIdAtom);
+  const [craftingId, setCraftingId] = useAtom(craftingIdAtom);
 
   useEffect(() => {
     setSection('share');
   }, [setSection]);
 
   useEffect(() => {
-    if (userId === '') {
+    if (userId === '' || craftingId !== '') {
       return;
     }
 
@@ -31,7 +31,7 @@ const Share = () => {
       .then((res) => {
         setCraftingId(res.data['id']);
       });
-  }, [setCraftingId, userId]);
+  }, [craftingId, setCraftingId, userId]);
 
   return (
     <Session
