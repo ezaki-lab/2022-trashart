@@ -1,7 +1,5 @@
 import { atom } from 'jotai';
 
-// _app.jsx に登録することを忘れずに！
-
 export const userIdAtom = atom('');
 export const sessionIdAtom = atom('');
 export const craftingIdAtom = atom('');
@@ -21,4 +19,6 @@ export const materialsAtom = atom([]);
 export const artIdAtom = atom('');
 export const artsAtom = atom([]);
 
-export const quoteAtom = atom('');
+export const titleAtom = atom('');
+export const hashtagsAtom = atom([]);
+export const shareImgAtom = atom('');

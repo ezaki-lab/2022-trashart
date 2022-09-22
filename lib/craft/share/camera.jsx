@@ -1,16 +1,14 @@
 import { memo, useCallback, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import WebCamera from '../../webCamera/webCamera';
-import { craftingIdAtom } from '../../../models/stores';
-import api from '../../../models/apiClient';
+import { shareImgAtom } from '../../../models/stores';
 
 const Camera = () => {
   const camera = useRef(null);
 
-  const [craftingId] = useAtom(craftingIdAtom);
   const [isTakenPhoto, setIsTakenPhoto] = useState(false);
 
-  const [workImg, setWorkImg] = useState(null);
+  const [shareImg, setShareImg] = useAtom(shareImgAtom);
 
   const takePhoto = useCallback(() => {
     let b64 = '';
@@ -19,15 +17,9 @@ const Camera = () => {
     } catch (_) {
       return;
     }
-    setWorkImg(b64);
-
-    api.post(`/share/${craftingId}/photo`, {
-      'data': b64
-    })
-      .then(() => {
-        setIsTakenPhoto(true);
-      });
-  }, [craftingId]);
+    setShareImg(b64);
+    setIsTakenPhoto(true);
+  }, [setShareImg, setIsTakenPhoto]);
 
   const reTakeMode = useCallback(() => {
     setIsTakenPhoto(false);
@@ -48,7 +40,7 @@ const Camera = () => {
         : (
           <>
             <img
-              src={workImg}
+              src={shareImg}
               alt="作品画像"
               className="w-full"
             />

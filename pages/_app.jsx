@@ -8,24 +8,7 @@ import useIdRoute from '../hooks/useIdRoute';
 import SplashScreen from '../lib/splashScreen';
 import BottomAppBar from '../lib/bottomAppBar';
 import url from '../utils/url';
-import {
-  userIdAtom,
-  sessionIdAtom,
-  craftingIdAtom,
-  homeSectionAtom,
-  homeModeAtom,
-  craftSectionAtom,
-  craftModeAtom,
-  separateSectionAtom,
-  separateModeAtom,
-  albumSectionAtom,
-  albumModeAtom,
-  materialB64Atom,
-  materialsAtom,
-  artIdAtom,
-  artsAtom,
-  quoteAtom
-} from '../models/stores';
+import * as atom from '../models/stores';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
@@ -33,24 +16,8 @@ const MyApp = ({ Component, pageProps }) => {
   useHttps();
 
   const { initialState } = pageProps;
-  useHydrateAtoms(initialState ? [[
-    userIdAtom,
-    sessionIdAtom,
-    craftingIdAtom,
-    homeSectionAtom,
-    homeModeAtom,
-    craftSectionAtom,
-    craftModeAtom,
-    separateSectionAtom,
-    separateModeAtom,
-    albumSectionAtom,
-    albumModeAtom,
-    materialB64Atom,
-    materialsAtom,
-    artIdAtom,
-    artsAtom,
-    quoteAtom
-  ]] : []);
+
+  useHydrateAtoms(initialState ? [[Object.values(atom)]] : []);
 
   // スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート
   useModern();
@@ -59,13 +26,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   const [ready, setReady] = useState(false);
 
-  const [isLocalhost, setIsLocalhost] = useState(false);
-
   useEffect(() => {
-    if (window.location.hostname === 'localhost') {
-      setIsLocalhost(true);
-    }
-
     setTimeout(() => {
       setReady(true);
     }, 2000);
@@ -90,17 +51,15 @@ const MyApp = ({ Component, pageProps }) => {
         <BottomAppBar route={route} />
       </div>
 
-      {!isLocalhost && (
-        <Transition
-          appear
-          show={!ready}
-          leave="transition-opacity ease-out duration-500"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <SplashScreen />
-        </Transition>
-      )}
+      <Transition
+        appear
+        show={!ready}
+        leave="transition-opacity ease-out duration-500"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <SplashScreen />
+      </Transition>
     </>
   );
 };

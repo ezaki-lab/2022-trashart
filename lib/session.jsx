@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { userIdAtom, sessionIdAtom } from '../models/stores';
 import api from '../models/apiClient';
@@ -8,22 +8,45 @@ const Session = ({ children, title, description, className = '', style }) => {
   const [userId, setUserId] = useAtom(userIdAtom);
   const [sessionId, setSessionId] = useAtom(sessionIdAtom);
 
-  useEffect(() => {
-    if (userId !== '') {
-      return;
+  const checkValidUser = async (id) => {
+    const res = await api.get(`/users/${id}`).catch(() => {
+      return { data: null };
+    });
+
+    if (res.data === null) {
+      return false;
     }
 
-    if (localStorage.getItem('userId') !== null) {
-      setUserId(localStorage.getItem('userId'));
-      return;
-    }
+    return true;
+  };
 
+  const registerUser = useCallback(() => {
     api.post('/users', {})
       .then((res) => {
         setUserId(res.data['id']);
         localStorage.setItem('userId', res.data['id']);
       });
-  }, [userId, setUserId]);
+  }, [setUserId]);
+
+  useEffect(() => {
+    if (userId !== '') {
+      return;
+    }
+
+    const id = localStorage.getItem('userId');
+    if (id === null) {
+      registerUser();
+      return;
+    }
+
+    (async () => {
+      if (await checkValidUser(id)) {
+        setUserId(id);
+      } else {
+        registerUser();
+      }
+    })();
+  }, [userId, setUserId, registerUser]);
 
   useEffect(() => {
     if (sessionId !== '') {
@@ -34,7 +57,7 @@ const Session = ({ children, title, description, className = '', style }) => {
       .then((res) => {
         setSessionId(res.data['id']);
       });
-  }, []);
+  }, [sessionId, setSessionId]);
 
   return (
     <>

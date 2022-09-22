@@ -21,14 +21,14 @@ const Result = () => {
     }
 
     api.post(`/pick/${sessionId}/store`, {
-      'data': materialB64
+      'image': materialB64
     })
       .then((res) => {
         console.log(res.data);
         setMaterials(res.data['materials']);
         setLoaded(true);
       });
-  }, [materialB64, sessionId]);
+  }, [materialB64, sessionId, setMaterials, setLoaded]);
 
   return (
     <section className="text-center">

@@ -8,7 +8,6 @@ const Craft = () => {
   const { section } = useSession();
 
   useEffect(() => {
-    // TODO: 共有終了後もういちどcraftの画面に戻ると、数ミリ秒共有の画面が表示されるバグを修正する
     switch (section) {
       case 'take':
         router.push('/craft/take', url('/craft/take'));
