@@ -75,11 +75,7 @@ const MyApp = ({ Component, pageProps }) => {
     }
 
     api.get(`/users/${userId}`)
-      .then((res) => {
-        console.log('OK');
-      })
       .catch((err) => {
-        console.log('not found');
         localStorage.removeItem('userId');
         location.reload();
       });
