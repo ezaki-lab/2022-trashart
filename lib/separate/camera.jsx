@@ -25,7 +25,7 @@ const Camera = () => {
     setMessage('サーバーに送信中…');
 
     api.post('/pick/separate', {
-      'data': b64
+      'image': b64
     })
       .then(() => {
         setMessage('保存成功');

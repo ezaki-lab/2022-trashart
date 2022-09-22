@@ -8,51 +8,16 @@ import useIdRoute from '../hooks/useIdRoute';
 import SplashScreen from '../lib/splashScreen';
 import BottomAppBar from '../lib/bottomAppBar';
 import url from '../utils/url';
-import {
-  userIdAtom,
-  sessionIdAtom,
-  craftingIdAtom,
-  homeSectionAtom,
-  homeModeAtom,
-  craftSectionAtom,
-  craftModeAtom,
-  separateSectionAtom,
-  separateModeAtom,
-  albumSectionAtom,
-  albumModeAtom,
-  materialB64Atom,
-  materialsAtom,
-  artIdAtom,
-  artsAtom,
-  quoteAtom
-} from '../models/stores';
+import * as atom from '../models/stores';
 import '../styles/globals.css';
-import { useAtom } from 'jotai';
-import api from '../models/apiClient';
 
 const MyApp = ({ Component, pageProps }) => {
   // localhost以外ではHTTPSを強制する
   useHttps();
 
   const { initialState } = pageProps;
-  useHydrateAtoms(initialState ? [[
-    userIdAtom,
-    sessionIdAtom,
-    craftingIdAtom,
-    homeSectionAtom,
-    homeModeAtom,
-    craftSectionAtom,
-    craftModeAtom,
-    separateSectionAtom,
-    separateModeAtom,
-    albumSectionAtom,
-    albumModeAtom,
-    materialB64Atom,
-    materialsAtom,
-    artIdAtom,
-    artsAtom,
-    quoteAtom
-  ]] : []);
+
+  useHydrateAtoms(initialState ? [[Object.values(atom)]] : []);
 
   // スマホ表示の最適化、ユーザーのカラーテーマの適応をサポート
   useModern();
@@ -66,20 +31,6 @@ const MyApp = ({ Component, pageProps }) => {
       setReady(true);
     }, 2000);
   }, []);
-
-  const [userId] = useAtom(userIdAtom);
-
-  useEffect(() => {
-    if (userId === '') {
-      return;
-    }
-
-    api.get(`/users/${userId}`)
-      .catch((err) => {
-        localStorage.removeItem('userId');
-        location.reload();
-      });
-  }, [userId]);
 
   return (
     <>

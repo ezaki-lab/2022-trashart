@@ -5,7 +5,7 @@ const Social = () => {
   const [craftings, setCraftings] = useState([]);
 
   useEffect(() => {
-    api.get(`/craftings`)
+    api.get(`/shares`)
       .then((res) => {
         setCraftings(res.data['craftings']);
       });

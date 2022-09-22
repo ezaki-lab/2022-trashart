@@ -2,20 +2,21 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { FiShare2 } from 'react-icons/fi';
-import { sessionIdAtom, quoteAtom, craftingIdAtom, userIdAtom } from '../../../models/stores';
+import { sessionIdAtom, userIdAtom, titleAtom, hashtagsAtom, shareImgAtom } from '../../../models/stores';
 import url from '../../../utils/url';
 import useSession from '../../../hooks/useSession';
 import Dialog from './dialog';
 import api from '../../../models/apiClient';
 
 const ShareToSns = () => {
-  const { setSection } = useSession();
+  const { setSection, resetSession } = useSession();
   const router = useRouter();
 
   const [sessionId] = useAtom(sessionIdAtom);
-  const [quote, setQuote] = useAtom(quoteAtom);
-  const [craftingId, setCraftingId] = useAtom(craftingIdAtom);
   const [userId] = useAtom(userIdAtom);
+  const [title] = useAtom(titleAtom);
+  const [hashtags] = useAtom(hashtagsAtom);
+  const [shareImg] = useAtom(shareImgAtom);
 
   const [isShowDialog, setIsShowDialog] = useState(false);
 
@@ -39,25 +40,25 @@ const ShareToSns = () => {
 
     navigator.share({
       title: 'MARINE TRASHART',
-      text: quote,
+      text: title,
       url: `${process.env.NEXT_PUBLIC_URL}?id=${sessionId}`,
     });
-  }, [quote, sessionId]);
+  }, [title, sessionId]);
 
-  const handleFinish = useCallback(() => {
-    setSection('take');
-    setCraftingId('');
-    setQuote('');
-
-    sessionStorage.setItem('crafted', 'true');
-
-    api.patch(`/share/${craftingId}`, {
-      'title': quote
+  const handleShared = useCallback(() => {
+    api.post(`/shares`, {
+      'user_id': userId,
+      'title': title,
+      'hashtags': hashtags,
+      'image': shareImg,
     })
       .then(() => {
         setIsShowDialog(true);
       });
-  }, [quote, craftingId, setSection, setCraftingId, setQuote, setIsShowDialog]);
+
+    setSection('take');
+    resetSession();
+  }, [userId, title, hashtags, shareImg, setIsShowDialog, setSection, resetSession]);
 
   const closeDialog = useCallback(() => {
     router.push('/home', url('/home'));
@@ -81,13 +82,13 @@ const ShareToSns = () => {
 
       <button
         className={
-          quote !== ''
+          title !== ''
             ? 'w-full h-20 text-white text-2xl text-center font-bold bg-crafting-500 rounded-2xl shadow-xl'
             : 'w-full h-20 text-gray-500 text-lg text-center font-bold bg-gray-300 rounded-2xl shadow-xl'
         }
-        onClick={quote !== '' ? handleFinish : null}
+        onClick={title !== '' ? handleShared : null}
       >
-        {quote !== '' ? '完成' : '作品名を入力してください'}
+        {title !== '' ? '完成' : '作品名を入力してください'}
       </button>
 
       <Dialog

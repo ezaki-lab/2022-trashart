@@ -8,7 +8,6 @@ const Craft = () => {
   const { section } = useSession();
 
   useEffect(() => {
-    // TODO: 共有終了後もういちどcraftの画面に戻ると、数ミリ秒共有の画面が表示されるバグを修正する
     switch (section) {
       case 'take':
         router.push('/craft/take', url('/craft/take'));
@@ -17,14 +16,7 @@ const Craft = () => {
         router.push('/craft/crafting', url('/craft/crafting'));
         break;
       case 'share':
-        if (sessionStorage.getItem('crafted') === null) {
-          console.log('初回作成');
-          router.push('/craft/share', url('/craft/share'));
-        } else {
-          console.log('2回目以降');
-          sessionStorage.removeItem('crafted');
-          router.push('/craft/take', url('/craft/take'));
-        }
+        router.push('/craft/share', url('/craft/share'));
         break;
       default:
         router.push('/craft/take', url('/craft/take'));
