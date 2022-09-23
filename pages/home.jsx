@@ -10,7 +10,7 @@ const Home = () => {
     <Session
       title={title}
       description={description}
-      className="size-main flex flex-col items-center overflow-x-hidden overflow-y-auto"
+      className="size-main layout-main flex flex-col items-center overflow-x-hidden overflow-y-auto"
       style={{
         background: 'radial-gradient(rgb(234, 241, 246) 0.2rem, transparent 0.2rem)',
         backgroundSize: '3rem 3rem'
