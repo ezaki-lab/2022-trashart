@@ -30,11 +30,11 @@ body {
 }
 
 .layout-main {
-    @apply pb-16;
+    @apply pb-0;
 }
 
 .layout-main-fixed {
-    @apply pb-16 fixed inset-0;
+    @apply pb-0 fixed inset-0;
 }
 
 @screen sm {
@@ -59,10 +59,10 @@ body {
     }
 
     .layout-main {
-        @apply pb-16;
+        @apply pb-0;
     }
 
     .layout-main-fixed {
-        @apply pb-16 fixed inset-0;
+        @apply pb-0 fixed inset-0;
     }
 }

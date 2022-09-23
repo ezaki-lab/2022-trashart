@@ -33,8 +33,8 @@ const Camera = () => {
     <section className="size-main layout-main-fixed">
       <WebCamera facingMode="environment" ref={camera} />
 
-      <div className="w-full h-44 bg-[rgba(0,0,0,0.5)] flex flex-col items-center justify-evenly absolute bottom-0">
-        <div className="mb-1 w-full flex flex-col items-center">
+      <div className="w-full sm:w-24 lg:w-full h-44 sm:h-full lg:h-44 bg-[rgba(0,0,0,0.5)] flex flex-col items-center justify-evenly absolute bottom-0 right-0">
+        <div className="mb-1 w-full flex sm:hidden lg:flex flex-col items-center">
           <ModeButton
             icon={<MdMemory />}
             label="プラスチックごみの分別"

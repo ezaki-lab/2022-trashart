@@ -12,7 +12,7 @@ const Social = () => {
   }, []);
 
   return (
-    <section className="w-full h-screen text-white bg-none">
+    <section className="mt-0 sm:mt-5 lg:mt-0 w-full h-screen text-white bg-none">
       <svg
         viewBox="0 0 1440 217"
         xmlns="http://www.w3.org/2000/svg"
