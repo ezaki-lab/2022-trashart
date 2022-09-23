@@ -20,7 +20,7 @@ const ShareToSns = () => {
 
   const [isShowDialog, setIsShowDialog] = useState(false);
 
-  const [craftingCnt, setCraftingCnt] = useState(0);
+  const [craftingNum, setCraftingNum] = useState(0);
 
   useEffect(() => {
     if (userId === '') {
@@ -29,7 +29,7 @@ const ShareToSns = () => {
 
     api.get(`/users/${userId}`)
       .then((res) => {
-        setCraftingCnt(res.data['craftings'].length);
+        setCraftingNum(res.data['crafting_num']);
       });
   }, [userId]);
 
@@ -57,12 +57,12 @@ const ShareToSns = () => {
       });
 
     setSection('take');
-    resetSession();
-  }, [userId, title, hashtags, shareImg, setIsShowDialog, setSection, resetSession]);
+  }, [userId, title, hashtags, shareImg, setIsShowDialog, setSection]);
 
   const closeDialog = useCallback(() => {
+    resetSession();
     router.push('/home', url('/home'));
-  }, [router]);
+  }, [resetSession, router]);
 
   return (
     <div className="mt-8 w-full h-16 grid grid-cols-2 gap-4 justify-around">
@@ -92,7 +92,7 @@ const ShareToSns = () => {
       </button>
 
       <Dialog
-        counter={craftingCnt}
+        counter={craftingNum}
         isShow={isShowDialog}
         onClose={closeDialog}
       />
