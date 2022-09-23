@@ -27,7 +27,7 @@ const Camera = () => {
   }, [artId]);
 
   return (
-    <div className="w-full h-[calc(100%-5rem)] fixed top-0 left-0">
+    <div className="size-main layout-main-fixed">
       <WebCamera facingMode="environment" />
 
       {supportImgUrl && (
@@ -35,7 +35,7 @@ const Camera = () => {
           <img
             src={supportImgUrl}
             alt="補助画像"
-            className="w-full opacity-50 pointer-events-none absolute m-auto inset-0"
+            className="w-full sm:w-auto lg:w-full h-auto sm:h-full lg:h-auto opacity-50 pointer-events-none absolute m-auto inset-0"
           />
         </>
       )}
@@ -49,7 +49,7 @@ const Camera = () => {
 
       <Linking
         href="/craft/share"
-        className="m-auto w-48 h-16 text-white text-2xl text-center leading-[4rem] font-bold bg-crafting-500 rounded-2xl shadow-xl absolute inset-x-0 bottom-4"
+        className="m-auto w-48 h-16 text-white text-2xl text-center leading-[4rem] font-bold bg-crafting-500 rounded-2xl shadow-xl absolute inset-x-0 sm:inset-x-auto lg:inset-x-0 right-auto sm:right-4 lg:right-auto bottom-4"
       >
         完成
       </Linking>

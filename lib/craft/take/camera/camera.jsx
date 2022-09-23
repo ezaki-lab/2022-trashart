@@ -25,7 +25,7 @@ const Camera = () => {
   }, [setMaterialB64, setMode]);
 
   return (
-    <section className="w-full h-[calc(100%-5rem)] fixed top-0 left-0">
+    <section className="size-main layout-main-fixed">
       <WebCamera facingMode="environment" ref={camera} />
 
       <div className="w-full h-44 bg-[rgba(0,0,0,0.5)] flex flex-col items-center justify-evenly absolute bottom-0">
