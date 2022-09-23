@@ -10,6 +10,7 @@ body {
     height: calc(var(--vh, 1vh) * 100);
     background-color: rgb(255, 255, 255);
     overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .shadow-up-md {
