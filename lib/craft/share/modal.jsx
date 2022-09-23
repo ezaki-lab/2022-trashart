@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
-import { Dialog as HLDialog, Transition } from '@headlessui/react';
+import { Dialog, Transition } from '@headlessui/react';
 
-const Dialog = ({ counter, isShow, onClose }) => {
+const Modal = ({ counter, isShow, onClose }) => {
   const [counterShowing, setCounterShowing] = useState(0);
 
   useEffect(() => {
@@ -29,11 +29,11 @@ const Dialog = ({ counter, isShow, onClose }) => {
     return () => {
       clearTimeout(id);
     };
-  }, [isShow]);
+  }, [isShow, onClose]);
 
   return (
     <Transition appear show={isShow} as={Fragment}>
-      <HLDialog as="div" className="relative z-10" onClose={onClose}>
+      <Dialog as="div" className="relative z-10" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -57,7 +57,7 @@ const Dialog = ({ counter, isShow, onClose }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <HLDialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-crafting-100 p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-crafting-100 p-6 text-left align-middle shadow-xl transition-all">
                 <div className="my-2 text-center">
                   <h2 className="mb-5">
                     <div className="text-crafting-900">
@@ -79,13 +79,13 @@ const Dialog = ({ counter, isShow, onClose }) => {
                 <div className="text-gray-400 text-center">
                   10秒後にトップ画面に戻ります...
                 </div>
-              </HLDialog.Panel>
+              </Dialog.Panel>
             </Transition.Child>
           </div>
         </div>
-      </HLDialog>
+      </Dialog>
     </Transition>
   );
 };
 
-export default Dialog;
+export default Modal;
