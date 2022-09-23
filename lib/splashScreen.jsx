@@ -17,7 +17,7 @@ const SplashScreen = () => {
         <img
           src={url('/logo.svg')}
           alt="ロゴ"
-          className="w-full"
+          className="w-full sm:w-auto lg:w-full h-auto sm:h-full lg:h-auto"
         />
 
         <div className="mt-10 text-gray-500">

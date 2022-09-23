@@ -23,3 +23,46 @@ body {
 .flip-horizontally {
     transform: scaleX(-1);
 }
+
+.size-main {
+    width: 100%;
+    height: calc(100% - 5rem);
+}
+
+.layout-main {
+    @apply pb-16;
+}
+
+.layout-main-fixed {
+    @apply pb-16 fixed inset-0;
+}
+
+@screen sm {
+    .size-main {
+        width: calc(100% - 5rem);
+        height: 100%;
+    }
+
+    .layout-main {
+        @apply absolute left-20;
+    }
+
+    .layout-main-fixed {
+        @apply fixed left-20;
+    }
+}
+
+@screen lg {
+    .size-main {
+        width: 100%;
+        height: calc(100% - 5rem);
+    }
+
+    .layout-main {
+        @apply pb-16;
+    }
+
+    .layout-main-fixed {
+        @apply pb-16 fixed inset-0;
+    }
+}

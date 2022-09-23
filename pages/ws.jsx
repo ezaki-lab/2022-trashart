@@ -44,6 +44,7 @@ const WsTest = () => {
     <Main
       title={title}
       description={description}
+      className="size-main layout-main p-5 overflow-x-hidden overflow-y-auto bg-white sm:bg-yellow-100 md:bg-green-100 lg:bg-blue-100 xl:bg-red-100 2xl:bg-pink-100"
     >
       <h1 className="text-xl font-medium">
         {count}人が接続中です

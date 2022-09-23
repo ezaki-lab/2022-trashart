@@ -71,7 +71,7 @@ const Session = ({ children, title, description, className = '', style }) => {
       </Head>
 
       <div
-        className={className ? className : 'p-5 pb-16 h-[calc(100%-5rem)] overflow-x-hidden overflow-y-auto'}
+        className={className ? className : 'size-main layout-main p-5 overflow-x-hidden overflow-y-auto'}
         style={style}
       >
         {children}
