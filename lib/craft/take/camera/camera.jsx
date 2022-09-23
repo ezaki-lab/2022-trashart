@@ -1,16 +1,13 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import { useAtom } from 'jotai';
 import WebCamera from '../../../webCamera/webCamera';
 import useSession from '../../../../hooks/useSession';
 import ModeButton from '../../../modeButton';
 import { BsArchiveFill } from 'react-icons/bs';
-import SeparateDialog from '../../../separate/separateDialog';
 import { materialB64Atom } from '../../../../models/stores';
 
 const Camera = () => {
   const { setMode } = useSession();
-  const [isShowSeparate, setIsShowSeparate] = useState(false);
-
   const camera = useRef(null);
 
   const [, setMaterialB64] = useAtom(materialB64Atom);
@@ -26,10 +23,6 @@ const Camera = () => {
     setMaterialB64(b64);
     setMode('result');
   }, [setMaterialB64, setMode]);
-
-  const closeSeparateDialog = useCallback(() => {
-    setIsShowSeparate(false);
-  }, [setIsShowSeparate]);
 
   return (
     <section className="w-full h-[calc(100%-5rem)] fixed top-0 left-0">
@@ -47,11 +40,6 @@ const Camera = () => {
         <button
           className="w-16 h-16 bg-gray-300 border-4 border-white rounded-full opacity-75"
           onClick={takePhoto}
-        />
-
-        <SeparateDialog
-          isShow={isShowSeparate}
-          onClose={closeSeparateDialog}
         />
       </div>
     </section>

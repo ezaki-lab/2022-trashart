@@ -5,7 +5,7 @@ import { FiShare2 } from 'react-icons/fi';
 import { sessionIdAtom, userIdAtom, titleAtom, hashtagsAtom, shareImgAtom } from '../../../models/stores';
 import url from '../../../utils/url';
 import useSession from '../../../hooks/useSession';
-import Dialog from './dialog';
+import Modal from './modal';
 import api from '../../../models/apiClient';
 
 const ShareToSns = () => {
@@ -91,7 +91,7 @@ const ShareToSns = () => {
         {title !== '' ? '完成' : '作品名を入力してください'}
       </button>
 
-      <Dialog
+      <Modal
         counter={craftingNum}
         isShow={isShowDialog}
         onClose={closeDialog}
