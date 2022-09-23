@@ -26,7 +26,7 @@ const Camera = () => {
   }, []);
 
   return (
-    <div className="mt-2 w-full h-96 bg-black rounded-2xl relative overflow-hidden">
+    <div className="mt-2 w-full h-96 sm:h-64 lg:h-96 bg-black rounded-2xl relative overflow-hidden">
       {!isTakenPhoto
         ? (
           <>

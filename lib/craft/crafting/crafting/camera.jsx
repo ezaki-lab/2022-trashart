@@ -49,7 +49,7 @@ const Camera = () => {
 
       <Linking
         href="/craft/share"
-        className="m-auto w-48 h-16 text-white text-2xl text-center leading-[4rem] font-bold bg-crafting-500 rounded-2xl shadow-xl absolute inset-x-0 sm:inset-x-auto lg:inset-x-0 right-auto sm:right-4 lg:right-auto bottom-4"
+        className="m-auto w-48 sm:w-24 lg:w-48 h-16 text-white text-2xl text-center leading-[4rem] font-bold bg-crafting-500 rounded-2xl shadow-xl absolute inset-x-0 sm:inset-x-auto lg:inset-x-0 right-0 sm:right-4 lg:right-0 bottom-4"
       >
         完成
       </Linking>
