@@ -1,26 +1,35 @@
-import { useState, Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { useTimeoutFn } from 'react-use';
 import { MdClose } from 'react-icons/md';
 
-const SeparateDialog = ({ isShow, onClose }) => {
-  const [plasticType, setPlasticType] = useState(null);
+const plasticNameJp = {
+  'PP': 'ポリプロピレン',
+  'PE': 'ポリエチレン',
+  'PET': 'ポリエチレンテレフタレート',
+  'PS': 'ポリスチレン'
+};
 
-  const handleDetected = () => {
-    setPlasticType('PE');
-    setTimeout(onClose, 10000);
-  };
+const colorNameJp = {
+  'white': '白',
+  'gray': '灰',
+  'black': '黒',
+  'red': '赤',
+  'brown': '茶',
+  'yellow': '黄',
+  'green': '緑',
+  'blue': '青'
+};
 
-  useEffect(() => {
-    if (!isShow) {
-      return;
-    }
+const details = {
+  'PP': '身の回りの箱や容器などで使われている樹脂です。再生可能です。',
+  'PE': '海洋ブイやボトルなどで使われている樹脂です。ポリエチレンは高温に熱して化学反応を起こすことで、石油に戻すことも可能です。',
+  'PET': 'ペットボトルや飲料用の容器などで使われている樹脂です。再生可能です。',
+  'PS': '食品トレーで使われている樹脂です。再生可能です。'
+};
 
-    const id = setTimeout(handleDetected, 1500);
-    return () => {
-      setPlasticType(null);
-      clearTimeout(id);
-    };
-  }, [isShow]);
+const SeparateDialog = ({ isShow, onClose, image, color, plastic }) => {
+  const [isReady, cancel, reset] = useTimeoutFn(onClose, 10000);
 
   return (
     <Transition appear show={isShow} as={Fragment}>
@@ -66,22 +75,34 @@ const SeparateDialog = ({ isShow, onClose }) => {
                   />
                 </button>
 
-                {plasticType
+                {plastic
                   ? (
                     <>
                       <div className="my-2 text-center">
-                        <h2 className="mb-5">
+                        <h2 className="mb-5 flex flex-col items-center">
                           <div className="text-separating-700 text-8xl font-bold">
-                            {plasticType}
+                            {plastic}
                           </div>
-                          <div className="text-gray-500">
-                            ポリエチレン
+                          <div className="text-gray-500 flex flex-row">
+                            <div className="pr-8">
+                              {colorNameJp[color]}色
+                            </div>
+                            <div>
+                              {plasticNameJp[plastic]}
+                            </div>
                           </div>
                         </h2>
 
-                        海洋ブイやボトルなどで使われている樹脂です。
-                        ポリエチレンは高温に熱して化学反応を起こすことで、
-                        石油に戻すことも可能です。
+                        <div className="grid grid-cols-3 gap-4">
+                          <img
+                            src={image}
+                            alt="検出画像"
+                            className="w-full rounded-xl"
+                          />
+                          <div className="col-span-2">
+                            {details[plastic]}
+                          </div>
+                        </div>
                       </div>
 
                       <div className="text-gray-400 text-center">
