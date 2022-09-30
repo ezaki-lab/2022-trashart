@@ -12,8 +12,11 @@ const Craft = () => {
 
   useEffect(() => {
     setSection('crafting');
-    setMode('portal');
-  }, [setSection, setMode]);
+
+    if (mode !== 'crafting') {
+      setMode('portal');
+    }
+  }, [setSection, mode, setMode]);
 
   return (
     <Session

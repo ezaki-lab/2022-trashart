@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAtom } from 'jotai';
 import { MdAssistantPhoto } from 'react-icons/md';
@@ -9,6 +10,7 @@ import api from '../../../../models/apiClient';
 
 const Portal = () => {
   const { setMode } = useSession();
+  const router = useRouter();
 
   const [sessionId] = useAtom(sessionIdAtom);
 
@@ -37,6 +39,11 @@ const Portal = () => {
     getArtsNotRecommend();
   }, [recommenderCtrl, getArtsNotRecommend]);
 
+  const backTake = useCallback(() => {
+    router.push('/craft/take');
+    setArts([]);
+  }, [router, setArts]);
+
   useEffect(() => {
     if (sessionId === '') {
       getArtsNotRecommend();
@@ -64,6 +71,13 @@ const Portal = () => {
 
   return (
     <section>
+      <button
+        className="mb-3"
+        onClick={backTake}
+      >
+        ←戻る
+      </button>
+
       <Headline1
         label={isRecommended ? 'おすすめ' : 'アート一覧'}
         textColor="text-crafting-500"
