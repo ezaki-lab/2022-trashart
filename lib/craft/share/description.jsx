@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { Headline2 } from '../../../components/headline';
-import { titleAtom } from '../../../models/stores';
+import { hashtagsAtom, titleAtom } from '../../../models/stores';
 
 const Description = () => {
   const [title, setTitle] = useAtom(titleAtom);
+  const [hashtags] = useAtom(hashtagsAtom);
 
   const handleChange = useCallback((e) => {
     setTitle(e.target.value);
@@ -34,7 +35,14 @@ const Description = () => {
           />
 
           <div className="text-base">
-            #タイ #フォトフレーム
+            {hashtags.map((hashtag) =>
+              <span
+                className="pr-3"
+                key="hashtag"
+              >
+                #{hashtag}
+              </span>
+            )}
           </div>
         </div>
       </div>

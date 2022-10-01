@@ -38,12 +38,14 @@ const ShareToSns = () => {
       return;
     }
 
+    const snsHashtags = hashtags.map((hashtag) => `#${hashtag}`).join(' ');
+
     navigator.share({
       title: 'MARINE TRASHART',
-      text: title,
+      text: `「${title}」を作りました！ ${snsHashtags}`,
       url: `${process.env.NEXT_PUBLIC_URL}?id=${sessionId}`,
     });
-  }, [title, sessionId]);
+  }, [title, sessionId, hashtags]);
 
   const handleShared = useCallback(() => {
     api.post(`/shares`, {

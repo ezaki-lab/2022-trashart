@@ -5,7 +5,7 @@ import { MdAssistantPhoto } from 'react-icons/md';
 import { Headline1 } from '../../../../components/headline';
 import useSession from '../../../../hooks/useSession';
 import ArtItem from './artItem';
-import { artsAtom, artIdAtom, sessionIdAtom } from '../../../../models/stores';
+import { artsAtom, artIdAtom, sessionIdAtom, hashtagsAtom } from '../../../../models/stores';
 import api from '../../../../models/apiClient';
 
 const Portal = () => {
@@ -16,6 +16,7 @@ const Portal = () => {
 
   const [arts, setArts] = useAtom(artsAtom);
   const [, setArtId] = useAtom(artIdAtom);
+  const [, setHashtags] = useAtom(hashtagsAtom);
 
   const [isRecommended, setIsRecommended] = useState(false);
 
@@ -24,7 +25,12 @@ const Portal = () => {
   const handleClick = useCallback((id) => {
     setMode('crafting');
     setArtId(id);
-  }, [setMode, setArtId]);
+
+    api.get(`/arts/${id}/hashtags`)
+      .then((res) => {
+        setHashtags([...res.data['hashtags'], '海洋ごみ', '海洋アート', 'MARINE_TRASHART']);
+      });
+  }, [setMode, setArtId, setHashtags]);
 
   const getArtsNotRecommend = useCallback(() => {
     api.get('/arts')

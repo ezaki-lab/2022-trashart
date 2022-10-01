@@ -36,11 +36,11 @@ const Camera = () => {
 
     const b64Lighted = takePhoto();
     setIsTookLighted(true);
-    await sleep(1500);
+    await sleep(1000);
 
     const b64Led850 = takePhoto();
     setIsTookLed850(true);
-    await sleep(1500);
+    await sleep(1000);
 
     const b64Led940 = takePhoto();
     setIsTookLed940(true);
