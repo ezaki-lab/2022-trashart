@@ -1,5 +1,7 @@
 import { atom } from 'jotai';
 
+export const isDemoModeAtom = atom(false);
+
 export const userIdAtom = atom('');
 export const sessionIdAtom = atom('');
 export const craftingIdAtom = atom('');

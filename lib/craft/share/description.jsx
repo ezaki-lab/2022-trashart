@@ -38,7 +38,7 @@ const Description = () => {
             {hashtags.map((hashtag) =>
               <span
                 className="pr-3"
-                key="hashtag"
+                key={hashtag}
               >
                 #{hashtag}
               </span>

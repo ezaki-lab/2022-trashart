@@ -1,11 +1,28 @@
+import { useCallback, useState } from 'react';
 import Session from '../lib/session';
 import Social from '../lib/home/social';
 import url from '../utils/url';
+import { useAtom } from 'jotai';
+import { isDemoModeAtom } from '../models/stores';
 
 const title = 'ホーム';
 const description = 'アート製作を通じた海洋ごみ処理';
 
 const Home = () => {
+  const [clickCount, setClickCount] = useState(0);
+  const [, setIsDemoMode] = useAtom(isDemoModeAtom);
+
+  const handleClick = useCallback(() => {
+    const value = clickCount + 1;
+    setClickCount(value);
+
+    if (value % 3 == 0) {
+      setIsDemoMode(true);
+    } else {
+      setIsDemoMode(false);
+    }
+  }, [clickCount, setIsDemoMode]);
+
   return (
     <Session
       title={title}
@@ -20,6 +37,7 @@ const Home = () => {
         src={url('/logo-wide.svg')}
         alt="ロゴ"
         className="my-10 w-2/3 block sm:hidden lg:block"
+        onClick={handleClick}
       />
 
       <Social />
