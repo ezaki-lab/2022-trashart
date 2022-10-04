@@ -26,7 +26,7 @@ const Portal = () => {
     setMode('crafting');
     setArtId(id);
 
-    api.get(`/arts/${id}/hashtags`)
+    api.get(`/arts/${id}`)
       .then((res) => {
         setHashtags([...res.data['hashtags'], '海洋ごみ', '海洋アート', 'MARINE_TRASHART']);
       });
