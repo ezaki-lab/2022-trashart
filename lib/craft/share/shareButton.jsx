@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { FiShare2 } from 'react-icons/fi';
-import { sessionIdAtom, userIdAtom, titleAtom, hashtagsAtom, shareImgAtom } from '../../../models/stores';
+import { sessionIdAtom, userIdAtom, titleAtom, hashtagsAtom, sharePhotoIdAtom } from '../../../models/stores';
 import url from '../../../utils/url';
 import useSession from '../../../hooks/useSession';
 import Modal from './modal';
@@ -16,7 +16,7 @@ const ShareToSns = () => {
   const [userId] = useAtom(userIdAtom);
   const [title] = useAtom(titleAtom);
   const [hashtags] = useAtom(hashtagsAtom);
-  const [shareImg] = useAtom(shareImgAtom);
+  const [sharePhotoId] = useAtom(sharePhotoIdAtom);
 
   const [isShowDialog, setIsShowDialog] = useState(false);
 
@@ -43,23 +43,23 @@ const ShareToSns = () => {
     navigator.share({
       title: 'MARINE TRASHART',
       text: `「${title}」を作りました！ ${snsHashtags}`,
-      url: `${process.env.NEXT_PUBLIC_URL}?id=${sessionId}`,
+      url: `${process.env.NEXT_PUBLIC_URL}?id=${sharePhotoId}`,
     });
-  }, [title, sessionId, hashtags]);
+  }, [title, sharePhotoId, hashtags]);
 
   const handleShared = useCallback(() => {
     api.post(`/shares`, {
       'user_id': userId,
       'title': title,
       'hashtags': hashtags,
-      'image': shareImg,
+      'image_id': sharePhotoId,
     })
       .then(() => {
         setIsShowDialog(true);
       });
 
     setSection('take');
-  }, [userId, title, hashtags, shareImg, setIsShowDialog, setSection]);
+  }, [userId, title, hashtags, sharePhotoId, setIsShowDialog, setSection]);
 
   const closeDialog = useCallback(() => {
     resetSession();
