@@ -13,7 +13,8 @@ import {
   artsAtom,
   titleAtom,
   hashtagsAtom,
-  shareImgAtom
+  shareImgAtom,
+  sharePhotoIdAtom
 } from '../models/stores';
 import useHeadRoute from './useHeadRoute';
 
@@ -70,6 +71,7 @@ const useSession = () => {
   const [, setTitle] = useAtom(titleAtom);
   const [, setHashtags] = useAtom(hashtagsAtom);
   const [, setShareImg] = useAtom(shareImgAtom);
+  const [, setSharePhotoId] = useAtom(sharePhotoIdAtom);
 
   const resetSession = useCallback(() => {
     setSessionId('');
@@ -77,7 +79,8 @@ const useSession = () => {
     setTitle('');
     setHashtags([]);
     setShareImg('');
-  }, [setSessionId, setArts, setTitle, setHashtags, setShareImg]);
+    setSharePhotoId('');
+  }, [setSessionId, setArts, setTitle, setHashtags, setShareImg, setSharePhotoId]);
 
   return { section, setSection, mode, setMode, resetSession };
 };

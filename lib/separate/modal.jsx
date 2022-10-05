@@ -1,6 +1,5 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { useTimeoutFn } from 'react-use';
 import { MdClose } from 'react-icons/md';
 
 const plasticNameJp = {
@@ -29,7 +28,16 @@ const details = {
 };
 
 const SeparateDialog = ({ isShow, onClose, image, color, plastic }) => {
-  const [isReady, cancel, reset] = useTimeoutFn(onClose, 10000);
+  useEffect(() => {
+    if (plastic === null) {
+      return;
+    }
+
+    const id = setTimeout(onClose, 10000);
+    return () => {
+      clearTimeout(id);
+    };
+  }, [plastic, onClose]);
 
   return (
     <Transition appear show={isShow} as={Fragment}>
@@ -111,8 +119,11 @@ const SeparateDialog = ({ isShow, onClose, image, color, plastic }) => {
                     </>
                   )
                   : (
-                    <div>
-                      Loading...
+                    <div className="w-full h-full text-gray-500 flex flex-col justify-center">
+                      <div className="mt-10 flex flex-col items-center">
+                        <div className="mb-8 animate-spin h-20 w-20 bg-separating-300 rounded-xl" />
+                        撮影した画像から素材を判定しています...
+                      </div>
                     </div>
                   )
                 }

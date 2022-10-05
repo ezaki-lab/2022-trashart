@@ -22,7 +22,7 @@ const BottomAppBar = () => {
   const { bgColor } = useHeadColor();
 
   return (
-    <nav className="w-full sm:w-20 lg:w-full h-20 sm:h-full lg:h-20 text-center text-2xl leading-[3rem] shadow-up-md flex flex-row sm:flex-col lg:flex-row justify-around fixed bottom-0 sm:left-0">
+    <nav className="w-full sm:w-20 lg:w-full h-20 sm:h-full lg:h-20 text-center text-2xl leading-[3rem] shadow-up-md bg-white flex flex-row sm:flex-col lg:flex-row justify-around fixed bottom-0 sm:left-0">
       <Item
         label="ホーム"
         href="/home"
