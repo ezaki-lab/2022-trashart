@@ -2,17 +2,24 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { FiShare2 } from 'react-icons/fi';
-import { sessionIdAtom, userIdAtom, titleAtom, hashtagsAtom, sharePhotoIdAtom } from '../../../models/stores';
+import { userIdAtom, titleAtom, hashtagsAtom, sharePhotoIdAtom } from '../../../models/stores';
 import url from '../../../utils/url';
+import { pickRandom } from '../../../utils/random';
 import useSession from '../../../hooks/useSession';
 import Modal from './modal';
 import api from '../../../models/apiClient';
+
+const messages = () => [
+  '実は日本の漂着ごみの6割が漁具です。',
+  '2050年には、海洋ごみが魚の数を越えると言われています。',
+  '海のプラスチックを正しく分別すると、処理費用を抑えることができます。',
+  'プラスチックの中でもポリプロピレンは分解されにくいです。'
+];
 
 const ShareToSns = () => {
   const { setSection, resetSession } = useSession();
   const router = useRouter();
 
-  const [sessionId] = useAtom(sessionIdAtom);
   const [userId] = useAtom(userIdAtom);
   const [title] = useAtom(titleAtom);
   const [hashtags] = useAtom(hashtagsAtom);
@@ -42,7 +49,7 @@ const ShareToSns = () => {
 
     navigator.share({
       title: 'MARINE TRASHART',
-      text: `「${title}」を作りました！ ${snsHashtags}`,
+      text: `「${title}」を作りました！ ${snsHashtags} ${pickRandom(messages)}`,
       url: `${process.env.NEXT_PUBLIC_URL}?id=${sharePhotoId}`,
     });
   }, [title, sharePhotoId, hashtags]);
