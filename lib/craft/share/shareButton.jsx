@@ -9,7 +9,7 @@ import useSession from '../../../hooks/useSession';
 import Modal from './modal';
 import api from '../../../models/apiClient';
 
-const messages = () => [
+const messages = [
   '実は日本の漂着ごみの6割が漁具です。',
   '2050年には、海洋ごみが魚の数を越えると言われています。',
   '海のプラスチックを正しく分別すると、処理費用を抑えることができます。',
