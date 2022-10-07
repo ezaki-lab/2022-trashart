@@ -43,12 +43,18 @@ const Social = () => {
 
 const Item = ({ img, title }) => {
   return (
-    <div className="w-full h-48 rounded-xl shadow-lg overflow-hidden">
-      <img
-        src={img}
-        alt={title}
-        className="w-full h-full object-cover"
-      />
+    <div className="w-full h-48 bg-album-100 rounded-xl shadow-lg overflow-hidden">
+      <div className="w-full h-36 relative">
+        <img
+          src={img}
+          alt="アート画像"
+          className="w-full h-36 object-cover"
+        />
+      </div>
+
+      <h2 className="p-2 text-album-900">
+        {title}
+      </h2>
     </div>
   );
 };

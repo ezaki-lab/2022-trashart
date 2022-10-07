@@ -68,42 +68,44 @@ const LoadedSuccessful = () => {
     <>
       これだけの素材が集まりました。
 
-      <div className="px-5 -ml-5 w-screen h-[calc(100vh-20rem)] overflow-scroll">
-        {materials.length === 0
-          ? (
-            <div className="mt-5 w-32 h-32 bg-crafting-700" />
-          )
-          : (
-            <div className="w-full flex flex-wrap">
-              {materials.map((material) =>
-                <img
-                  src={material['image_url']}
-                  alt="素材画像"
-                  className="p-3"
-                  key={material['id']}
-                />
-              )}
-            </div>
-          )
-        }
-      </div>
-
-      <div className="mt-1 w-full h-28">
-        <div className="pt-5">
-          <Linking
-            href="/craft/crafting"
-            className="px-10 py-5 text-white text-2xl font-bold bg-crafting-500 rounded-2xl shadow-xl"
-          >
-            製作するアートを選ぶ
-          </Linking>
+      <div className="mt-2 w-full h-auto sm:h-[calc(100vh-7rem)] lg:h-auto flex flex-col sm:flex-row lg:flex-col overflow-hidden">
+        <div className="px-5 -ml-5 w-screen h-[calc(100vh-20rem)] sm:h-full lg:h-[calc(100vh-20rem)] overflow-scroll">
+          {materials.length === 0
+            ? (
+              <div className="mt-5 w-32 h-32 bg-crafting-700" />
+            )
+            : (
+              <div className="w-full flex flex-wrap">
+                {materials.map((material) =>
+                  <img
+                    src={material['image_url']}
+                    alt="素材画像"
+                    className="p-3"
+                    key={material['id']}
+                  />
+                )}
+              </div>
+            )
+          }
         </div>
 
-        <button
-          className="mt-8 text-gray-500 text-xl font-medium"
-          onClick={retake}
-        >
-          撮り直す
-        </button>
+        <div className="mt-1 w-full sm:w-96 lg:w-full h-28">
+          <div className="pt-5">
+            <Linking
+              href="/craft/crafting"
+              className="px-10 sm:px-2 lg:px-10 py-5 sm:py-2 lg:py-5 text-white text-2xl sm:text-lg lg:text-2xl font-bold bg-crafting-500 rounded-2xl shadow-xl"
+            >
+              製作するアートを選ぶ
+            </Linking>
+          </div>
+
+          <button
+            className="mt-8 text-gray-500 text-xl font-medium"
+            onClick={retake}
+          >
+            撮り直す
+          </button>
+        </div>
       </div>
     </>
   );

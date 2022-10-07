@@ -1,7 +1,9 @@
 import { useAtom } from 'jotai';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import api from '../../models/apiClient';
 import { userIdAtom, isDemoModeAtom } from '../../models/stores';
+import { FiShare2 } from 'react-icons/fi';
+import share from '../share';
 
 const MyAlbum = () => {
   const [userId] = useAtom(userIdAtom);
@@ -38,7 +40,9 @@ const MyAlbum = () => {
             <Item
               id={c['id']}
               title={c['title']}
+              sharePhotoId={c['image_id']}
               img={c['image_url']}
+              hashtags={c['hashtags']}
               key={c['id']}
             />
           )}
@@ -52,14 +56,32 @@ const MyAlbum = () => {
   );
 };
 
-const Item = ({ title, img }) => {
+const Item = ({ title, sharePhotoId, img, hashtags }) => {
+  const handleShare = useCallback(() => {
+    share(title, sharePhotoId, hashtags);
+  }, [title, sharePhotoId, hashtags]);
+
   return (
-    <div className="w-full h-48 rounded-xl shadow-lg overflow-hidden">
-      <img
-        src={img}
-        alt={title}
-        className="w-full h-full object-cover"
-      />
+    <div className="w-full h-48 bg-album-100 rounded-xl shadow-lg overflow-hidden">
+      <div className="w-full h-36 relative">
+        <img
+          src={img}
+          alt="アート画像"
+          className="w-full h-36 object-cover"
+        />
+      </div>
+
+      <div className="p-2 flex flex-row justify-between">
+        <h2 className="text-album-900">
+          {title}
+        </h2>
+        <button
+          className="text-album-900"
+          onClick={handleShare}
+        >
+          <FiShare2 />
+        </button>
+      </div>
     </div>
   );
 };

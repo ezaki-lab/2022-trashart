@@ -22,7 +22,7 @@ const Home = (props) => {
             <meta property="og:description" content="あなたも海洋ごみアートを作りませんか？" />
             <meta property="og:image" content={props.imgUrl} />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:site" content="@takara2314" />
+            <meta name="twitter:site" content="@MARINE_TRASHART" />
             <meta property="og:site_name" content="MARINE TRASHART" />
             <meta property="og:locale" content="ja_JP" />
           </>
