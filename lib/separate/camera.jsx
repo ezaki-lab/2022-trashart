@@ -32,7 +32,7 @@ const Camera = () => {
   const takePhotos = useCallback(async () => {
     setIsTaking(true);
 
-    await sleep(300);
+    await sleep(500);
 
     const b64Lighted = takePhoto();
     setIsTookLighted(true);
