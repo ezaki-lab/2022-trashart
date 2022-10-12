@@ -23,5 +23,5 @@ export const artsAtom = atom([]);
 
 export const titleAtom = atom('');
 export const hashtagsAtom = atom([]);
-export const shareImgAtom = atom('');
+export const shareImgAtom = atom(null);
 export const sharePhotoIdAtom = atom('');
