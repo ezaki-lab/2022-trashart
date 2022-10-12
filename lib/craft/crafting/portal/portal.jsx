@@ -8,6 +8,22 @@ import ArtItem from './artItem';
 import { artsAtom, artIdAtom, sessionIdAtom, hashtagsAtom, isDemoModeAtom } from '../../../../models/stores';
 import api from '../../../../models/apiClient';
 
+const dolphin = {
+  'attentions_num': 3,
+  'cap_area': 661.5,
+  'hashtags': [
+    'イルカ',
+    '青',
+    '海'
+  ],
+  'height': 563,
+  'id': 'a0e8706b566d4ce7c2dcb222',
+  'name': 'イルカ',
+  'original_image_url': 'https://ezaki-lab.cloud/~trashart/api/storage/arts/a0e8706b566d4ce7c2dcb222/art.webp',
+  'support_image_url': 'https://ezaki-lab.cloud/~trashart/api/storage/arts/a0e8706b566d4ce7c2dcb222/art_support.webp',
+  'width': 1000
+};
+
 const Portal = () => {
   const { setMode } = useSession();
   const router = useRouter();
@@ -33,10 +49,16 @@ const Portal = () => {
       });
   }, [setMode, setArtId, setHashtags]);
 
+  const appendAsDemo = (data) => {
+    data.unshift(dolphin);
+    data.pop();
+    return data;
+  };
+
   const getArtsNotRecommend = useCallback(() => {
     api.get('/art-randoms')
       .then((res) => {
-        setArts(res.data["arts"]);
+        setArts(!isDemoMode ? res.data['arts'] : appendAsDemo(res.data['arts']));
         setIsRecommended(!isDemoMode ? false : true);
       });
   }, [setArts, isDemoMode]);

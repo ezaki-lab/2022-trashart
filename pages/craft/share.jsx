@@ -5,7 +5,6 @@ import Session from '../../lib/session';
 import Camera from '../../lib/craft/share/camera';
 import Description from '../../lib/craft/share/description';
 import ShareButton from '../../lib/craft/share/shareButton';
-import Linking from '../../components/linking';
 
 const title = '共有';
 const description = '共有をしましょう！';

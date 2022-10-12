@@ -1,4 +1,4 @@
-import { memo, useCallback, useRef, useState } from 'react';
+import { memo, useCallback, useRef } from 'react';
 import { useAtom } from 'jotai';
 import WebCamera from '../../webCamera/webCamera';
 import { shareImgAtom, sharePhotoIdAtom } from '../../../models/stores';
@@ -6,8 +6,6 @@ import api from '../../../models/apiClient';
 
 const Camera = () => {
   const camera = useRef(null);
-
-  const [isTakenPhoto, setIsTakenPhoto] = useState(false);
 
   const [shareImg, setShareImg] = useAtom(shareImgAtom);
   const [, setSharePhotoId] = useAtom(sharePhotoIdAtom);
@@ -20,7 +18,6 @@ const Camera = () => {
       return;
     }
     setShareImg(b64);
-    setIsTakenPhoto(true);
 
     api.post('/share-photos', {
       'image': b64
@@ -28,15 +25,15 @@ const Camera = () => {
       .then((res) => {
         setSharePhotoId(res.data['id']);
       });
-  }, [setShareImg, setIsTakenPhoto, setSharePhotoId]);
+  }, [setShareImg, setSharePhotoId]);
 
   const reTakeMode = useCallback(() => {
-    setIsTakenPhoto(false);
-  }, []);
+    setShareImg(null);
+  }, [setShareImg]);
 
   return (
     <div className="mt-2 w-full h-96 sm:h-64 lg:h-96 bg-black rounded-2xl relative overflow-hidden">
-      {!isTakenPhoto
+      {shareImg === null
         ? (
           <>
             <WebCamera facingMode="environment" ref={camera} />

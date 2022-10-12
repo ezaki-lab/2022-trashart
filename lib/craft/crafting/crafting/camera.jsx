@@ -1,19 +1,49 @@
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
-import Linking from '../../../../components/linking';
 import useSession from '../../../../hooks/useSession';
 import WebCamera from '../../../webCamera/webCamera';
-import { artIdAtom } from '../../../../models/stores';
+import { artIdAtom, isDemoModeAtom, shareImgAtom, sharePhotoIdAtom } from '../../../../models/stores';
 import api from '../../../../models/apiClient';
 
 const Camera = () => {
+  const router = useRouter();
+
   const { setMode } = useSession();
   const [artId] = useAtom(artIdAtom);
   const [supportImgUrl, setSupportImgUrl] = useState(null);
 
+  const [, setShareImg] = useAtom(shareImgAtom);
+  const [, setSharePhotoId] = useAtom(sharePhotoIdAtom);
+  const [isDemoMode] = useAtom(isDemoModeAtom);
+
+  const takePhoto = useCallback(() => {
+    let b64 = '';
+    try {
+      b64 = camera.current.takePhoto();
+    } catch (_) {
+      return;
+    }
+    setShareImg(b64);
+
+    api.post('/share-photos', {
+      'image': b64
+    })
+      .then((res) => {
+        setSharePhotoId(res.data['id']);
+      });
+  }, [setShareImg, setSharePhotoId]);
+
   const backPortal = useCallback(() => {
     setMode('portal');
   }, [setMode]);
+
+  const handleComplete = useCallback(() => {
+    if (isDemoMode) {
+      takePhoto();
+    }
+    router.push('/craft/share');
+  }, [isDemoMode, takePhoto, router]);
 
   useEffect(() => {
     if (artId === '') {
@@ -47,12 +77,12 @@ const Camera = () => {
         ←戻る
       </button>
 
-      <Linking
-        href="/craft/share"
+      <button
         className="m-auto w-48 sm:w-24 lg:w-48 h-16 text-white text-2xl text-center leading-[4rem] font-bold bg-crafting-500 rounded-2xl shadow-xl absolute inset-x-0 sm:inset-x-auto lg:inset-x-0 right-0 sm:right-4 lg:right-0 bottom-4"
+        onClick={handleComplete}
       >
         完成
-      </Linking>
+      </button>
     </div>
   );
 };
