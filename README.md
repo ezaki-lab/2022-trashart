@@ -5,9 +5,8 @@
 このリポジトリはWebアプリ（フロントエンド）のソースコードを管理しています。
 
 [サーバー（バックエンド）のリポジトリはこちらから](https://github.com/ezaki-lab/2022-trashart-server)
-
-## Webアプリのリンク
-[TRASHART](https://ezaki-lab.cloud/~trashart)
+[プラスチック判別モデル（機械学習）のリポジトリはこちらから](https://github.com/ezaki-lab/2022-trashart-separate-ml)
+[プラスチック判別機（ハードウェア）のリポジトリはこちらから](https://github.com/ezaki-lab/2022-trashart-separate-arduino)
 
 ## システム概要
 「MARINE TRASHART」はアート作品を作るために浜辺のごみを拾うことによって、ごみ問題解決に繋げることを支援します。
